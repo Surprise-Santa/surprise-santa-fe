@@ -81,3 +81,10 @@
         @apply bg-background text-foreground;
     }
 }
+
+.bg-stars {
+    background: url("/images/stars.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
