@@ -16,3 +16,38 @@ export const faqData = [
         answer: "You can invite people to your event by sharing the event link with them. You can find the event link on the event page.",
     },
 ];
+
+export const howItWorksData = [
+    {
+        index: 1,
+        title: "Set up group",
+        description:
+            "Lorem ipsum dolor sit amet consectetur. Sem vulputate vulputate malesuada porttitor quis et commodo leo bibendum. Fringilla consectetur vel aliquam ut a. Mi amet eu eu eu sed a. Neque feugiat quis egestas aliquet.",
+        image: "/images/setup-group.svg",
+        backgroundImage: "/images/setup-group-bg.svg",
+    },
+    {
+        index: 2,
+        title: "Create event",
+        description:
+            "Lorem ipsum dolor sit amet consectetur. Sem vulputate vulputate malesuada porttitor quis et commodo leo bibendum. Fringilla consectetur vel aliquam ut a. Mi amet eu eu eu sed a. Neque feugiat quis egestas aliquet.",
+        image: "/images/create-event.svg",
+        backgroundImage: "/images/create-event-bg.svg",
+    },
+    {
+        index: 3,
+        title: "Share event",
+        description:
+            "Lorem ipsum dolor sit amet consectetur. Sem vulputate vulputate malesuada porttitor quis et commodo leo bibendum. Fringilla consectetur vel aliquam ut a. Mi amet eu eu eu sed a. Neque feugiat quis egestas aliquet.",
+        image: "/images/share-event.svg",
+        backgroundImage: "/images/share-event-bg.svg",
+    },
+    {
+        index: 4,
+        title: "Get paired",
+        description:
+            "Lorem ipsum dolor sit amet consectetur. Sem vulputate vulputate malesuada porttitor quis et commodo leo bibendum. Fringilla consectetur vel aliquam ut a. Mi amet eu eu eu sed a. Neque feugiat quis egestas aliquet.",
+        image: "/images/get-paired.svg",
+        backgroundImage: "/images/get-paired-bg.svg",
+    },
+];
