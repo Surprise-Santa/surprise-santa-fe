@@ -29,7 +29,7 @@
         --destructive-foreground: #f8fafc;
 
         --border: #e1e7ef;
-        --input: #e1e7ef;
+        --input: #5d9c59;
         --ring: #020817;
 
         --radius: 0.5rem;
@@ -40,6 +40,8 @@
         --red: #df2e38;
         --orange: #df632e;
         --purple: #97599c;
+        --gray-foreground: #e7e7e7;
+        --gray: #d9d9d9;
     }
 
     .dark {
@@ -79,6 +81,13 @@
     }
     body {
         @apply bg-background text-foreground;
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+        overflow-y: auto;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 }
 

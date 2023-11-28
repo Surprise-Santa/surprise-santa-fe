@@ -43,10 +43,12 @@ const LandingPage = () => {
                     facilisis leo magna luctus augue ullamcorper.”{" "}
                 </p>
                 <div className="mt-10 sm:mt-4 flex items-end gap-2 ml-0 sm:ml-28 w-[180px]  sm:w-[300px]">
-                    <div className="bg-primary-green font-bold text-white px-6 sm:px-10 py-[12px] rounded-3xl	flex items-center gap-2">
-                        <Link href="/">Get Started</Link>
-                        <Image src={Rocket} alt="icons" height={20} />
-                    </div>
+                    <Link href="/auth/signup">
+                        <div className="bg-primary-green font-bold text-white px-6 sm:px-10 py-[12px] rounded-3xl	flex items-center gap-2">
+                            Get Started
+                            <Image src={Rocket} alt="icons" height={20} />
+                        </div>
+                    </Link>
 
                     <div className="mb-10 hidden sm:block">
                         <Image src={Line} alt="icons" height={40} />

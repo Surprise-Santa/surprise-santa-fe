@@ -29,11 +29,13 @@ module.exports = {
                     red: "var(--red)",
                     orange: "var(--orange)",
                     purple: "var(--purple)",
+                    gray: "var(--gray)",
                 },
                 secondary: {
                     DEFAULT: "var(--secondary)",
                     foreground: "var(--secondary-foreground)",
                     green: "var(--green-foreground)",
+                    gray: "var(--gray-foreground)",
                 },
                 destructive: {
                     DEFAULT: "var(--destructive)",
