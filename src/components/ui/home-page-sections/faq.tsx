@@ -1,7 +1,7 @@
 import Image from "next/image";
 import FaqImage from "public/images/faq.png";
 import ClientWrapper from "./../../wrapper/client";
-import FaqAccordion from "@/components/accordion/faq-accordion";
+import FaqAccordion from "@/components/ui/accordion/faq-accordion";
 
 const Faq = () => {
     return (
