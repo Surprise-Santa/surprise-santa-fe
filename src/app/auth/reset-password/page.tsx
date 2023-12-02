@@ -1,38 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Resolver, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import AuthNavbar from "@/components/ui/shared/auth-navbar";
 import { resetPasswordSchema } from "@/schema";
-import { Input } from "@/components/ui/input";
-import InputEyeIcon from "../../../../public/icons/input-eye-icon";
 import { Button } from "@/components/ui/button";
-import { ResetPasswordFormValues } from "@/types";
+import { ResetPasswordType } from "@/types/auth";
+
+import AppInput from "@/components/ui/app-input";
 
 function ResetPassword() {
-    const [showPassword, setShowPassword] = useState(false);
-
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-
-    const formHook = useForm<ResetPasswordFormValues>({
+    const formHook = useForm<ResetPasswordType>({
         resolver: yupResolver(resetPasswordSchema),
         defaultValues: {
             password: "",
             confirmPassword: "",
         },
-    } as { resolver: Resolver<ResetPasswordFormValues> });
+    } as { resolver: Resolver<ResetPasswordType> });
     const {
         handleSubmit,
         control,
@@ -58,56 +45,22 @@ function ResetPassword() {
                         <p className="text-center mb-8">Create Your New Password</p>
 
                         <div className="mb-4">
-                            <FormField
+                            <AppInput
+                                label="New Password"
+                                type="password"
                                 control={control}
                                 name="password"
-                                render={({ field }) => (
-                                    <FormItem className="mb-6">
-                                        <FormLabel>New Password</FormLabel>
-                                        <FormControl>
-                                            <div className="relative">
-                                                <Input
-                                                    placeholder="Enter new password"
-                                                    type={showPassword ? "text" : "password"}
-                                                    {...field}
-                                                />
-                                                <div className="absolute pr-3 top-2 right-0 flex items-center">
-                                                    <InputEyeIcon
-                                                        onClick={togglePasswordVisibility}
-                                                        fill={showPassword ? "#5d9c59" : "none"}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                placeholder="Enter new password"
+                                isRequired
                             />
 
-                            <FormField
+                            <AppInput
+                                label="Confirm new Password"
+                                type="password"
                                 control={control}
                                 name="confirmPassword"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Confirm Password</FormLabel>
-                                        <FormControl>
-                                            <div className="relative">
-                                                <Input
-                                                    placeholder="Confirm new password"
-                                                    type={showPassword ? "text" : "password"}
-                                                    {...field}
-                                                />
-                                                <div className="absolute pr-3 top-2 right-0 flex items-center">
-                                                    <InputEyeIcon
-                                                        onClick={togglePasswordVisibility}
-                                                        fill={showPassword ? "#5d9c59" : "none"}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                placeholder="Confirm your password"
+                                isRequired
                             />
                         </div>
 
