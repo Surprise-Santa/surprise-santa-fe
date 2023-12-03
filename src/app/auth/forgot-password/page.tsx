@@ -4,19 +4,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import AuthNavbar from "@/components/ui/shared/auth-navbar";
 import { forgotPasswordSchema } from "@/schema";
-import { Input } from "@/components/ui/input";
-import InputEyeIcon from "../../../../public/icons/input-eye-icon";
 import { Button } from "@/components/ui/button";
+import AppInput from "@/components/ui/app-input";
 
 function ForgotPassword() {
     const formHook = useForm({
@@ -29,7 +21,6 @@ function ForgotPassword() {
     const {
         handleSubmit,
         control,
-        reset,
         formState: { isSubmitting },
     } = formHook;
 
@@ -52,22 +43,13 @@ function ForgotPassword() {
                         <p className="text-center mb-8">Request an email reset link</p>
 
                         <div className="mb-4">
-                            <FormField
+                            <AppInput
+                                label="Email"
+                                type="email"
                                 control={control}
                                 name="email"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Email</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Kindly Enter your email"
-                                                type="email"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                placeholder="Kindly Enter your email"
+                                isRequired
                             />
                         </div>
 

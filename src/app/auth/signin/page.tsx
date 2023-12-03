@@ -1,47 +1,35 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { Resolver, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import AuthNavbar from "@/components/ui/shared/auth-navbar";
 import { signInSchema } from "@/schema";
-import { Input } from "@/components/ui/input";
-import InputEyeIcon from "../../../../public/icons/input-eye-icon";
 import { Button } from "@/components/ui/button";
-import { SignInFormValues } from "@/types";
+import { SignInType } from "@/types/auth";
 import GoogleIcon from "../../../../public/icons/google-icon";
+import AppInput from "@/components/ui/app-input";
 
 function SignIn() {
-    const [showPassword, setShowPassword] = useState(false);
-
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-
-    const formHook = useForm<SignInFormValues>({
+    const formHook = useForm<SignInType>({
         resolver: yupResolver(signInSchema),
         defaultValues: {
             email: "",
             password: "",
         },
-    } as { resolver: Resolver<SignInFormValues> });
+    } as { resolver: Resolver<SignInType> });
     const {
         handleSubmit,
         control,
         formState: { isSubmitting },
     } = formHook;
 
-    const submit = async (values: any) => {};
+    const submit = async (values: any) => {
+        console.log("values", values);
+    };
 
     return (
         <div className="min-h-screen bg-secondary-gray">
@@ -65,48 +53,22 @@ function SignIn() {
                         </div>
 
                         <div className="mb-4">
-                            <FormField
+                            <AppInput
+                                label="Email"
+                                type="email"
                                 control={control}
                                 name="email"
-                                render={({ field }) => (
-                                    <FormItem className="mb-6">
-                                        <FormLabel>Email</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Kindly Enter your email"
-                                                type="email"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                placeholder="Kindly Enter your email"
+                                isRequired
                             />
 
-                            <FormField
+                            <AppInput
+                                label="Password"
+                                type="password"
                                 control={control}
                                 name="password"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel> Password</FormLabel>
-                                        <FormControl>
-                                            <div className="relative">
-                                                <Input
-                                                    placeholder="Confirm new password"
-                                                    type={showPassword ? "text" : "password"}
-                                                    {...field}
-                                                />
-                                                <div className="absolute pr-3 top-2 right-0 flex items-center">
-                                                    <InputEyeIcon
-                                                        onClick={togglePasswordVisibility}
-                                                        fill={showPassword ? "#5d9c59" : "none"}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                placeholder="Enter your password"
+                                isRequired
                             />
                         </div>
 

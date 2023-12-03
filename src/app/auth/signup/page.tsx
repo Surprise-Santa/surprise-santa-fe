@@ -1,54 +1,60 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 import AuthNavbar from "@/components/ui/shared/auth-navbar";
 import { Resolver, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "@/schema";
-import { Input } from "@/components/ui/input";
-import InputEyeIcon from "../../../../public/icons/input-eye-icon";
 import { Button } from "@/components/ui/button";
-import { SignUpFormValues } from "@/types";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
+import AppInput from "@/components/ui/app-input";
+import { SignUpType } from "@/types/auth";
+import { useSignupMutation } from "@/services/mutations/auth.mutation";
+import LoadingSpinner from "@/components/ui/spinner";
 
 function SignUp() {
-    const [showPassword, setShowPassword] = useState(false);
+    const [checked, setChecked] = useState(false);
+    const { mutateAsync: signup, isLoading } = useSignupMutation();
+    const router = useRouter();
 
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-
-    const formHook = useForm<SignUpFormValues>({
+    const formHook = useForm<SignUpType>({
         resolver: yupResolver(signUpSchema),
-        defaultValues: {
-            firstName: "",
-            lastName: "",
-            middleName: "",
-            gender: "",
-            email: "",
-            phoneNumber: "",
-            password: "",
-            confirmPassword: "",
-        },
-    } as { resolver: Resolver<SignUpFormValues> });
-    const {
-        handleSubmit,
-        control,
-        formState: { isSubmitting },
-    } = formHook;
+    } as { resolver: Resolver<SignUpType> });
 
-    const submit = async (values: any) => {
-        console.log(values);
+    const { handleSubmit, control } = formHook;
+
+    const submit = async (data: any) => {
+        const { firstName, lastName, email, password, middleName, gender, phone } = data;
+        const result = await signup({
+            firstName,
+            lastName,
+            middleName,
+            email,
+            password,
+            gender,
+            phone,
+        });
+
+        try {
+            if (!result) return;
+
+            if (result.status === 200 || result.status === 201) {
+                toast.success(result.data.message || "Login Successful!");
+                router.push("/dashboard");
+                // console.log(result);
+                // sessionStorage.setItem('user', JSON.stringify(result.data.data));
+            }
+        } catch (error: any) {
+            toast.error(error?.response?.data?.message || "An error occurred");
+            throw new Error(error);
+        }
+
+        console.log(data);
     };
 
     return (
@@ -68,175 +74,89 @@ function SignUp() {
                         </p>
 
                         <div className="mb-2 flex flex-col md:flex-row items-center justify-between gap-4">
-                            <FormField
+                            <AppInput
+                                label="First Name"
+                                type="text"
                                 control={control}
                                 name="firstName"
-                                render={({ field }) => (
-                                    <FormItem className="mb-6 w-full">
-                                        <FormLabel>First Name</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Kindly Enter your firstName"
-                                                type="text"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                placeholder="Kindly Enter your firstName"
+                                isRequired
                             />
 
-                            <FormField
+                            <AppInput
+                                label="Last Name"
+                                type="text"
                                 control={control}
                                 name="lastName"
-                                render={({ field }) => (
-                                    <FormItem className="mb-6 w-full">
-                                        <FormLabel>Last Name</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Kindly Enter your lastName"
-                                                type="text"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                placeholder="Kindly Enter your lastName"
+                                isRequired
                             />
                         </div>
 
                         <div className="mb-2 flex flex-col md:flex-row items-center justify-between gap-4">
-                            <FormField
+                            <AppInput
+                                label="Middle Name"
+                                type="text"
                                 control={control}
                                 name="middleName"
-                                render={({ field }) => (
-                                    <FormItem className="mb-6 w-full">
-                                        <FormLabel>Middle Name</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Kindly Enter your middleName"
-                                                type="text"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                placeholder="Kindly Enter your middleName"
                             />
 
-                            <FormField
+                            <AppInput
+                                label="Gender"
+                                type="text"
                                 control={control}
                                 name="gender"
-                                render={({ field }) => (
-                                    <FormItem className="mb-6 w-full">
-                                        <FormLabel>Gender</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Kindly Enter your gender"
-                                                type="text"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                placeholder="Kindly Enter your gender"
+                                isRequired
                             />
                         </div>
 
                         <div className="mb-2 flex flex-col md:flex-row items-center justify-between gap-4">
-                            <FormField
+                            <AppInput
+                                label="Email"
+                                type="email"
                                 control={control}
                                 name="email"
-                                render={({ field }) => (
-                                    <FormItem className="mb-6 w-full">
-                                        <FormLabel>Email</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Kindly Enter your email"
-                                                type="email"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                placeholder="Kindly Enter your email"
+                                isRequired
                             />
 
-                            <FormField
+                            <AppInput
+                                label="Phone Number"
+                                type="text"
                                 control={control}
-                                name="phoneNumber"
-                                render={({ field }) => (
-                                    <FormItem className="mb-6 w-full">
-                                        <FormLabel>Phone Number</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="Kindly Enter your Phone Number"
-                                                type="text"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                name="phone"
+                                placeholder="Kindly Enter your phoneNumber"
                             />
                         </div>
 
                         <div className="mb-2 flex flex-col md:flex-row items-center justify-between gap-4">
-                            <FormField
+                            <AppInput
+                                label="New Password"
+                                type="password"
                                 control={control}
                                 name="password"
-                                render={({ field }) => (
-                                    <FormItem className="mb-6 w-full">
-                                        <FormLabel>New Password</FormLabel>
-                                        <FormControl>
-                                            <div className="relative">
-                                                <Input
-                                                    placeholder="Enter new password"
-                                                    type={showPassword ? "text" : "password"}
-                                                    {...field}
-                                                />
-                                                <div className="absolute pr-3 top-2 right-0 flex items-center">
-                                                    <InputEyeIcon
-                                                        onClick={togglePasswordVisibility}
-                                                        fill={showPassword ? "#5d9c59" : "none"}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                placeholder="Enter your password"
+                                isRequired
                             />
 
-                            <FormField
+                            <AppInput
+                                label="Confirm Password"
+                                type="password"
                                 control={control}
                                 name="confirmPassword"
-                                render={({ field }) => (
-                                    <FormItem className="mb-6 w-full">
-                                        <FormLabel>Confirm Password</FormLabel>
-                                        <FormControl>
-                                            <div className="relative">
-                                                <Input
-                                                    placeholder="Confirm new password"
-                                                    type={showPassword ? "text" : "password"}
-                                                    {...field}
-                                                />
-                                                <div className="absolute pr-3 top-2 right-0 flex items-center">
-                                                    <InputEyeIcon
-                                                        onClick={togglePasswordVisibility}
-                                                        fill={showPassword ? "#5d9c59" : "none"}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                placeholder="Confirm your password"
+                                isRequired
                             />
                         </div>
 
-                        <div className="flex items-center space-x-1 mb-6 gap-2 text-xs">
-                            <Checkbox id="terms" />
+                        <div className="flex items-center space-x-1 mb-8 gap-2 text-xs">
+                            <Checkbox
+                                id="terms"
+                                checked={checked}
+                                onCheckedChange={setChecked as any}
+                            />
                             <label htmlFor="terms">
                                 By clicking this box, I agree and acknowledge to the terms of{" "}
                                 <Link href={"/"} className="text-primary-green">
@@ -246,8 +166,8 @@ function SignUp() {
                         </div>
 
                         <div className="flex justify-center w-full">
-                            <Button type="submit" disabled={isSubmitting} size={"formMd"}>
-                                {isSubmitting ? "Signin Up..." : "Sign Up"}
+                            <Button type="submit" disabled={isLoading || !checked} size={"formMd"}>
+                                {isLoading ? <LoadingSpinner /> : "Sign Up"}
                             </Button>
                         </div>
                     </form>

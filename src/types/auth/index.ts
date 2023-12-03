@@ -1,20 +1,21 @@
-export interface ResetPasswordFormValues {
+export interface ResetPasswordType {
     password: string;
     confirmPassword: string;
 }
 
-export interface SignInFormValues {
+export interface SignInType {
     email: string;
     password: string;
 }
 
-export interface SignUpFormValues {
+export interface SignUpType {
     firstName: string;
     lastName: string;
     middleName?: string;
     gender: string;
     email: string;
-    phoneNumber: string;
+    phone?: string;
     password: string;
-    confirmPassword: string;
+    confirmPassword?: string;
+    profileImgUrl?: string;
 }
