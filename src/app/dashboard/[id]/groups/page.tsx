@@ -26,7 +26,9 @@ const Groups = () => {
                             <h2 className=" font-bold text-[1.4rem]">{item.title} </h2>
                             <div className="flex flex-col items-center justify-center mt-10 sm:mt-16 mb-14 sm:mb-20">
                                 <Image src={NoDataImage} alt="no data" />
-                                <p className="opacity-50 text-[1rem] font-bold mt-2">No active group</p>
+                                <p className="opacity-50 text-[1rem] font-bold mt-2">
+                                    No active group
+                                </p>
                             </div>
                         </div>
                     );

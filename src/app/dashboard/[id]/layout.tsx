@@ -10,9 +10,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             </div>
             <div className="absolute right-0 min-h-100vh left-0 md:left-[13rem] lg:left-[17rem] transition-all duration-150 ease-in-out">
                 <Header />
-                <div className="px-6 lg:px-8 py-4">       
-                {children}
-                </div>
+                <div className="px-6 lg:px-8 py-4">{children}</div>
             </div>
         </main>
     );
