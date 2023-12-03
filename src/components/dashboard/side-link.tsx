@@ -13,7 +13,7 @@ type SideLinkPropType = {
 const SideLink = ({ name, icon, href }: SideLinkPropType) => {
     const pathname = usePathname();
     const hrefModule = href.split("/").pop();
-    const isActive = (pathname.includes(href) && hrefModule !== "");
+    const isActive = pathname.includes(href) && hrefModule !== "";
 
     return (
         <Link
