@@ -10,7 +10,8 @@ export default function SideNav() {
     const id = 2; // TODO: get id from useRouter
     const modifiedNavLinks = sideNavLinks.map((link) => ({
         ...link,
-        href: `/dashboard/${id}/${link.href}`,
+         href: `/dashboard/${id}/${link.href}`,
+
     }));
 
     return (
