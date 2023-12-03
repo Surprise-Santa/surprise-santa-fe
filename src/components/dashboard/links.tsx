@@ -9,7 +9,7 @@ export const sideNavLinks = [
     {
         name: "Groups",
         icon: <Users />,
-        href: "groups",
+        href: "/groups",
     },
     {
         name: "Events",
