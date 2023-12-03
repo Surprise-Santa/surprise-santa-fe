@@ -9,7 +9,7 @@ const Navbar = () => {
                     <Link href="/">LOGO</Link>
                 </p>
                 <Link href="/auth/signup">
-                    <div className="bg-primary-green font-bold text-white px-4 sm:px-6 py-[8px] rounded-2xl	flex items-center">
+                    <div className="bg-primary-green font-bold text-white px-4 sm:px-6 py-[8px] rounded-2xl	flex items-center mr-4">
                         Get Started
                     </div>
                 </Link>
