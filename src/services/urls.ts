@@ -4,4 +4,5 @@ export const urls = {
     signUpUrl: `${baseUrl}/auth/signup`,
     loginUrl: `${baseUrl}/auth/login`,
     getAllEventsUrl: `${baseUrl}/event`,
+    getEventByIdUrl: (id: string) => `${baseUrl}/event/${id}`,
 };

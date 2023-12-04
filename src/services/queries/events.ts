@@ -8,3 +8,10 @@ export const useGetAllEvents = () => {
         return res.data.data;
     });
 };
+
+export const useGetEventById = (id: string) => {
+    return useQuery(["getEventById", id], async () => {
+        const res = await axios.get(urls.getEventByIdUrl(id));
+        return res.data.data.event;
+    });
+};

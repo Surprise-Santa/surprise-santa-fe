@@ -6,3 +6,11 @@ export interface EventType {
     endDate: string;
     createdBy: string;
 }
+
+export interface ParticipantType {
+    id: string;
+    name: string;
+    email: string;
+    group: string;
+    status: boolean;
+}
