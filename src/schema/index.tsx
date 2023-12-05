@@ -50,3 +50,11 @@ export const updatePasswordSchema = Yup.object({
     currentPassword: Yup.string().trim().required("Your current password is required"),
     newPassword: Yup.string().trim().required("You must confirm your new password!"),
 });
+
+export const createEventSchema = Yup.object().shape({
+    title: Yup.string().trim().required("Event title is required"),
+    description: Yup.string().trim().required("Event description is required"),
+    startDate: Yup.string().required("Event start date is required"),
+    endDate: Yup.string().required("Event end date is required"),
+    groupId: Yup.string().trim().required("Event group is required"),
+});
