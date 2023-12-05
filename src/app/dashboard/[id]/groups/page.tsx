@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import NoDataImage from "public/images/no-data-icon.png";
+import ProtectedPage from "@/services/guard/ProtectedPage";
 
 const Groups = () => {
     const data = [
@@ -37,4 +40,4 @@ const Groups = () => {
     );
 };
 
-export default Groups;
+export default ProtectedPage(Groups);

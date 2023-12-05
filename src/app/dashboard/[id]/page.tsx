@@ -1,10 +1,13 @@
-import Image from "next/image";
-import Link from "next/link";
+"use client";
 
-export default function Page() {
+import ProtectedPage from "@/services/guard/ProtectedPage";
+
+const Page = () => {
     return (
         <main>
             <h1>DashBoard Contents</h1>
         </main>
     );
-}
+};
+
+export default ProtectedPage(Page);

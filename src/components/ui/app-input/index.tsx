@@ -6,6 +6,15 @@ import { FieldValues, FieldPath } from "react-hook-form";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "../input";
 import InputEyeIcon from "../../../../public/icons/input-eye-icon";
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 interface AppInputProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: string;
@@ -14,6 +23,13 @@ interface AppInputProps extends InputHTMLAttributes<HTMLInputElement> {
     name: FieldPath<FieldValues>;
     placeholder?: string;
     isRequired?: boolean;
+    isSelect?: boolean;
+    options?: OptionType[];
+}
+
+interface OptionType {
+    value: string;
+    label: string;
 }
 
 function AppInput({
@@ -23,6 +39,8 @@ function AppInput({
     name,
     placeholder,
     isRequired,
+    isSelect,
+    options,
     ...inputProps
 }: AppInputProps) {
     const [showPassword, setShowPassword] = useState(false);
@@ -44,24 +62,43 @@ function AppInput({
                                 {isRequired && <span className="text-destructive text-sm">*</span>}
                             </FormLabel>
                         )}
-                        <FormControl>
-                            <div className="relative">
-                                <Input
-                                    type={showPassword && type === "password" ? "text" : type}
-                                    placeholder={placeholder}
-                                    {...field}
-                                    {...inputProps}
-                                />
 
-                                {type === "password" && (
-                                    <div className="absolute pr-3 top-2 right-0 flex items-center">
-                                        <InputEyeIcon
-                                            onClick={togglePasswordVisibility}
-                                            fill={showPassword ? "#5d9c59" : "none"}
-                                        />
-                                    </div>
-                                )}
-                            </div>
+                        <FormControl>
+                            {isSelect ? (
+                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder={placeholder} />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectGroup>
+                                            <SelectLabel>{label}</SelectLabel>
+                                            {options?.map((option) => (
+                                                <SelectItem key={option.value} value={option.value}>
+                                                    {option.label}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectGroup>
+                                    </SelectContent>
+                                </Select>
+                            ) : (
+                                <div className="relative">
+                                    <Input
+                                        type={showPassword && type === "password" ? "text" : type}
+                                        placeholder={placeholder}
+                                        {...field}
+                                        {...inputProps}
+                                    />
+
+                                    {type === "password" && (
+                                        <div className="absolute pr-3 top-2 right-0 flex items-center">
+                                            <InputEyeIcon
+                                                onClick={togglePasswordVisibility}
+                                                fill={showPassword ? "#5d9c59" : "none"}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            )}
                         </FormControl>
                         <FormMessage />
                     </FormItem>

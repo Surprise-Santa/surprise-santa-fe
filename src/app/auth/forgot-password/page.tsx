@@ -9,6 +9,7 @@ import AuthNavbar from "@/components/ui/shared/auth-navbar";
 import { forgotPasswordSchema } from "@/schema";
 import { Button } from "@/components/ui/button";
 import AppInput from "@/components/ui/app-input";
+import ProtectedPage from "@/services/guard/ProtectedPage";
 
 function ForgotPassword() {
     const formHook = useForm({
@@ -24,9 +25,7 @@ function ForgotPassword() {
         formState: { isSubmitting },
     } = formHook;
 
-    const submit = async (values: any) => {
-        console.log(values);
-    };
+    const submit = async (values: any) => {};
 
     return (
         <div className="min-h-screen bg-secondary-gray">
@@ -63,4 +62,4 @@ function ForgotPassword() {
     );
 }
 
-export default ForgotPassword;
+export default ProtectedPage(ForgotPassword);
