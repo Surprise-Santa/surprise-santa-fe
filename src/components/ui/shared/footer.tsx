@@ -3,9 +3,11 @@ import { FacebookIcon, TwitterIcon, LinkedinIcon } from "lucide-react";
 
 const Footer = () => {
     return (
-        <footer className="bg-primary-green ">
-            <div className="max-w-[1280px] mx-auto py-8 flex flex-col sm:flex-row gap-8 sm:gap-12 items-center justify-between">
-                <p className="text-white font-semiBold text-2xl">Stay in touch with us</p>
+        <footer className="bg-primary-green">
+            <div className="w-[90%] mx-auto py-6 flex flex-col sm:flex-row gap-6 sm:gap-12 items-center justify-between">
+                <p className="text-white font-semiBold text-2xl text-center sm:text-left">
+                    Stay in touch with us
+                </p>
                 <div className="flex items-center gap-6">
                     <Link
                         href="#"

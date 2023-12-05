@@ -31,6 +31,9 @@ module.exports = {
                     orange: "var(--orange)",
                     purple: "var(--purple)",
                     gray: "var(--gray)",
+                    gray1: "var(--gray1)",
+                    opaque: "var(--opaque)",
+                    "light-opaque": "var(--light-opaque)",
                 },
                 secondary: {
                     DEFAULT: "var(--secondary)",
