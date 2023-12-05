@@ -17,7 +17,7 @@ import { SignUpType } from "@/types/auth";
 import { useSignupMutation } from "@/services/mutations/auth.mutation";
 import LoadingSpinner from "@/components/ui/spinner";
 import ProtectedPage from "@/services/guard/ProtectedPage";
-import { genderList } from "@/lib/dummy-data";
+import { genderList } from "@/lib/dummyData";
 
 function SignUp() {
     const [checked, setChecked] = useState(false);

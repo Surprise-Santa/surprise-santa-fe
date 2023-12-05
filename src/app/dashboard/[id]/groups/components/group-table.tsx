@@ -1,15 +1,16 @@
-"use client";
+"use client"
+
+
 import { Button } from "@/components/ui/button";
-import { groupTableData } from "@/lib/dummy-data";
-import DataTable, { TableColumn } from "react-data-table-component";
-import { Search, Plus } from "lucide-react";
-import EyeIcon from "../../../../../../public/icons/eye";
-import EditIcon from "../../../../../../public/icons/edit";
-import { customStyles } from "@/lib/customTableStyles";
-import InviteMembers from "./invite-members";
-import { Dialog } from "@radix-ui/react-dialog";
 import { DialogTrigger } from "@/components/ui/dialog";
-import CreateEvent from "@/components/events/create-event-popup";
+import { customStyles } from "@/lib/customTableStyles";
+import { groupTableData } from "@/lib/dummyData";
+import { Dialog } from "@radix-ui/react-dialog";
+import { Plus, Search } from "lucide-react";
+import DataTable, { TableColumn } from "react-data-table-component";
+import EditIcon from "../../../../../../public/icons/edit";
+import EyeIcon from "../../../../../../public/icons/eye";
+import InviteMembers from "./invite-members";
 
 const GroupTable = () => {
     const columns: TableColumn<any>[] = [

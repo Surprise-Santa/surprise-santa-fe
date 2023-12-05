@@ -1,6 +1,6 @@
 import Image from "next/image";
 import HowItWorksCard from "@/components/how-it-works-text-card/how-it-works-card";
-import { howItWorksData } from "@/lib/dummy-data";
+import { howItWorksData } from "@/lib/dummyData";
 
 const HowItWorks = () => {
     return (

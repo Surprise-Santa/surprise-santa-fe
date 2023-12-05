@@ -13,6 +13,7 @@ const Groups = () => {
             initials: "EM",
             name: "Mark James",
             status: "Team work",
+            participants: "10",
         },
         {
             id: "2",
@@ -20,6 +21,8 @@ const Groups = () => {
             initials: "OM",
             name: "Henry James",
             status: "Great work",
+            participants: "20",
+
         },
         {
             id: "2",
@@ -27,6 +30,8 @@ const Groups = () => {
             initials: "OM",
             name: "Henry James",
             status: "Great work",
+            participants: "10",
+
         },
     ];
 
@@ -48,6 +53,7 @@ const Groups = () => {
                                     initials={list.initials}
                                     name={list.name}
                                     status={list.status}
+                                    participants={list.participants}
                                 />
                             </div>
                         );

@@ -7,9 +7,10 @@ interface PropType {
     initials?: string;
     name?: string;
     status?: string;
+    participants?: string | number
 }
 
-const GroupCard = ({ src, initials, name, status }: PropType) => {
+const GroupCard = ({ src, initials, name, status, participants }: PropType) => {
     return (
         <Link href={`/dashboard/2/groups/2`}>
             <div className="shadow-custom p-4 w-[100%] xl:w-[80%] flex flex-col items-center justify-center mt-6 border-l-4 border-l-primary-red">
@@ -26,7 +27,7 @@ const GroupCard = ({ src, initials, name, status }: PropType) => {
                 <div className="mt-2 ml-[-5.5rem]">
                     <div className="flex gap-2">
                         <p className="opacity-50 text-[1rem]">Participants:</p>
-                        <p className="opacity-75 text-[1rem] font-semibold">24</p>
+                        <p className="opacity-75 text-[1rem] font-semibold">{participants}</p>
                     </div>
                     <div className="flex mt-2">
                         <Avatar className="h-10 w-10" style={{ margin: "-3px" }}>
