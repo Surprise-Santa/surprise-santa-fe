@@ -9,6 +9,7 @@ import AuthNavbar from "@/components/ui/shared/auth-navbar";
 import { resetPasswordSchema } from "@/schema";
 import { Button } from "@/components/ui/button";
 import { ResetPasswordType } from "@/types/auth";
+import ProtectedPage from "@/services/guard/ProtectedPage";
 
 import AppInput from "@/components/ui/app-input";
 
@@ -26,9 +27,7 @@ function ResetPassword() {
         formState: { isSubmitting },
     } = formHook;
 
-    const submit = async (values: any) => {
-        console.log(values);
-    };
+    const submit = async (values: any) => {};
 
     return (
         <div className="min-h-screen bg-secondary-gray">
@@ -74,4 +73,4 @@ function ResetPassword() {
     );
 }
 
-export default ResetPassword;
+export default ProtectedPage(ResetPassword);

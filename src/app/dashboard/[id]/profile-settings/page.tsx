@@ -2,15 +2,17 @@
 
 import { MoveLeft, Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Resolver, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Button } from "@/components/ui/button";
 import AppInput from "@/components/ui/app-input";
 import { editProfileSchema, updatePasswordSchema } from "@/schema";
 import { EditProfileType, UpdatePasswordType } from "@/types/auth";
 import { Form } from "@/components/ui/form";
-import { Resolver, useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import LoadingSpinner from "@/components/ui/spinner";
+import ProtectedPage from "@/services/guard/ProtectedPage";
+import { genderList } from "@/lib/dummyData";
 
 const ProfileSettings = () => {
     const router = useRouter();
@@ -44,12 +46,10 @@ const ProfileSettings = () => {
             }
         });
 
-        console.log(data);
         reset();
     };
 
     const passwordSubmit = (data: UpdatePasswordType) => {
-        console.log(data);
         passReset();
     };
 
@@ -93,23 +93,17 @@ const ProfileSettings = () => {
                         </div>
 
                         <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-12">
-                            <div className="flex flex-col gap-2 w-full">
-                                <label htmlFor="gender">Gender</label>
-                                <Controller
-                                    name="gender"
-                                    control={control}
-                                    render={({ field }) => (
-                                        <select
-                                            {...field}
-                                            className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:ring-primary-green focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-                                        >
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                            <option value="others">Others</option>
-                                        </select>
-                                    )}
-                                />
-                            </div>
+                            <AppInput
+                                label="Gender"
+                                type="text"
+                                control={control}
+                                name="gender"
+                                placeholder="Enter your gender"
+                                isRequired
+                                isSelect
+                                options={genderList}
+                            />
+
                             <AppInput
                                 label="Phone Number"
                                 type="tel"
@@ -168,4 +162,4 @@ const ProfileSettings = () => {
     );
 };
 
-export default ProfileSettings;
+export default ProtectedPage(ProfileSettings);

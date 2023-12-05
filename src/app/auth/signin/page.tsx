@@ -4,7 +4,9 @@ import React from "react";
 import Link from "next/link";
 import { Resolver, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import toast from "react-hot-toast";
 
+import { useRouter } from "next/navigation";
 import { Form } from "@/components/ui/form";
 import AuthNavbar from "@/components/ui/shared/auth-navbar";
 import { signInSchema } from "@/schema";
@@ -12,8 +14,14 @@ import { Button } from "@/components/ui/button";
 import { SignInType } from "@/types/auth";
 import GoogleIcon from "../../../../public/icons/google-icon";
 import AppInput from "@/components/ui/app-input";
+import { useSigninMutation } from "@/services/mutations/auth.mutation";
+import LoadingSpinner from "@/components/ui/spinner";
+import ProtectedPage from "@/services/guard/ProtectedPage";
 
 function SignIn() {
+    const { mutateAsync: signin, isError } = useSigninMutation();
+    const router = useRouter();
+
     const formHook = useForm<SignInType>({
         resolver: yupResolver(signInSchema),
         defaultValues: {
@@ -27,8 +35,26 @@ function SignIn() {
         formState: { isSubmitting },
     } = formHook;
 
-    const submit = async (values: any) => {
-        console.log("values", values);
+    const userId =
+        typeof window !== "undefined" &&
+        JSON.parse(window.sessionStorage.getItem("user") as string)?.user.id;
+
+    const submit = async (data: any) => {
+        const result = await signin(data);
+
+        try {
+            if (!result) return;
+
+            if (result.status === 200 || result.status === 201) {
+                toast.success("Sign In Successful!" || result.data.message);
+                sessionStorage.setItem("user", JSON.stringify(result.data.data));
+
+                return router.push(`/dashboard/${userId}`);
+            }
+        } catch (error: any) {
+            toast.error(error?.response?.data?.message || "An error occurred");
+            throw new Error(error);
+        }
     };
 
     return (
@@ -72,8 +98,8 @@ function SignIn() {
                             />
                         </div>
 
-                        <Button type="submit" disabled={isSubmitting} size={"formLg"}>
-                            {isSubmitting ? "Logging In..." : "Log In"}
+                        <Button type="submit" disabled={isSubmitting && !isError} size={"formLg"}>
+                            {isSubmitting && !isError ? <LoadingSpinner /> : "Log In"}
                         </Button>
 
                         <p className="text-right mt-4">
@@ -86,4 +112,4 @@ function SignIn() {
     );
 }
 
-export default SignIn;
+export default ProtectedPage(SignIn);

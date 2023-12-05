@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import ChristianImage from "/public/images/christian.jpg";
 import { CalendarDays } from "lucide-react";
+import ChristianImage from "/public/images/christian.jpg";
+import ProtectedPage from "@/services/guard/ProtectedPage";
 
 const groupData = [
     {
@@ -60,7 +63,7 @@ const eventData = [
     },
 ];
 
-export default function Page() {
+const Page = () => {
     return (
         <main className="space-y-12">
             <h1>DashBoard Contents</h1>
@@ -157,4 +160,6 @@ export default function Page() {
             </section>
         </main>
     );
-}
+};
+
+export default ProtectedPage(Page);
