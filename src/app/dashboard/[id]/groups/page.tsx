@@ -4,8 +4,11 @@ import Image from "next/image";
 import NoDataImage from "public/images/no-data-icon.png";
 import ProtectedPage from "@/services/guard/ProtectedPage";
 import GroupCard from "./components/group-card";
+import { useState } from "react";
 
 const Groups = () => {
+    const [displayScrollbar, setDisplayScrollbar] = useState(false);
+
     const cardData = [
         {
             id: "1",
@@ -34,8 +37,14 @@ const Groups = () => {
     ];
 
     return (
-        <div className="flex flex-col lg:flex-row gap-2 justify-between ">
-            <div className="w-[100%] lg:w-[47%] h-[33rem]  relative border-2 border-primary-gray mt-4 rounded-xl p-6 overflow-y-auto scrollBar">
+        <div className="flex flex-col lg:flex-row gap-2 justify-between transition-all duration-300 ease-in-out">
+            <div
+                className={`w-[100%] lg:w-[47%] h-[33rem] relative border-2 border-primary-gray mt-4 rounded-xl p-6 overflow-y-auto ${
+                    displayScrollbar ? "scrollBar" : "scroll"
+                }`}
+                onMouseEnter={() => setDisplayScrollbar(true)}
+                onMouseLeave={() => setDisplayScrollbar(false)}
+            >
                 <h2 className="font-bold text-[1.4rem] ">My Groups</h2>
                 {!cardData.length ? (
                     <div className="flex flex-col items-center justify-center mt-10 sm:mt-16">
