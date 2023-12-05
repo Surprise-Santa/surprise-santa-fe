@@ -5,4 +5,6 @@ export const urls = {
     loginUrl: `${baseUrl}/auth/login`,
     getAllEventsUrl: `${baseUrl}/event`,
     getEventByIdUrl: (id: string) => `${baseUrl}/event/${id}`,
+    getAllGroupsUrl: `${baseUrl}/group/my-groups`,
+    createEventUrl: `${baseUrl}/event/create`,
 };

@@ -36,3 +36,11 @@ export const signUpSchema = Yup.object().shape({
             return value === password;
         }),
 });
+
+export const createEventSchema = Yup.object().shape({
+    title: Yup.string().trim().required("Event title is required"),
+    description: Yup.string().trim().required("Event description is required"),
+    startDate: Yup.string().required("Event start date is required"),
+    endDate: Yup.string().required("Event end date is required"),
+    groupId: Yup.string().trim().required("Event group is required"),
+});

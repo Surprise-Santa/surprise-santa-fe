@@ -14,3 +14,11 @@ export interface ParticipantType {
     group: string;
     status: boolean;
 }
+
+export interface CreateEventType {
+    title: string;
+    description: string;
+    startDate: string;
+    endDate: string;
+    groupId: string;
+}

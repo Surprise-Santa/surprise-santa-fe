@@ -10,6 +10,9 @@ import NoEventImg from "../../../../../public/images/no-event.png";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import CreateEvent from "@/components/events/create-event-popup";
 
 const Events = () => {
     const { data, isLoading } = useGetAllEvents();
@@ -24,8 +27,14 @@ const Events = () => {
 
     return (
         <main className="flex flex-col ">
-            <div className="w-1/4">
-                <Input type="text" placeholder="Search events" />
+            <div className="flex items-center justify-between">
+                <Input className="w-1/4" type="text" placeholder="Search events" />
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <Button className="mr-4">Create Event</Button>
+                    </DialogTrigger>
+                    <CreateEvent />
+                </Dialog>
             </div>
 
             {data.length ? (
