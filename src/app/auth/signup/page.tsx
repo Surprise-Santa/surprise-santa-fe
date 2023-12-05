@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
@@ -16,17 +16,23 @@ import AppInput from "@/components/ui/app-input";
 import { SignUpType } from "@/types/auth";
 import { useSignupMutation } from "@/services/mutations/auth.mutation";
 import LoadingSpinner from "@/components/ui/spinner";
+import ProtectedPage from "@/services/guard/ProtectedPage";
+import { genderList } from "@/lib/dummy-data";
 
 function SignUp() {
     const [checked, setChecked] = useState(false);
-    const { mutateAsync: signup, isLoading } = useSignupMutation();
+    const { mutateAsync: signup, isError } = useSignupMutation();
     const router = useRouter();
 
     const formHook = useForm<SignUpType>({
         resolver: yupResolver(signUpSchema),
     } as { resolver: Resolver<SignUpType> });
 
-    const { handleSubmit, control } = formHook;
+    const {
+        handleSubmit,
+        control,
+        formState: { isSubmitting },
+    } = formHook;
 
     const submit = async (data: any) => {
         const { firstName, lastName, email, password, middleName, gender, phone } = data;
@@ -44,17 +50,14 @@ function SignUp() {
             if (!result) return;
 
             if (result.status === 200 || result.status === 201) {
-                toast.success(result.data.message || "Login Successful!");
-                router.push("/dashboard");
-                // console.log(result);
-                // sessionStorage.setItem('user', JSON.stringify(result.data.data));
+                toast.success("Sign Up Successful!" || result.data.message);
+                router.push("/auth/signin");
+                return;
             }
         } catch (error: any) {
             toast.error(error?.response?.data?.message || "An error occurred");
             throw new Error(error);
         }
-
-        console.log(data);
     };
 
     return (
@@ -79,7 +82,7 @@ function SignUp() {
                                 type="text"
                                 control={control}
                                 name="firstName"
-                                placeholder="Kindly Enter your firstName"
+                                placeholder="Enter your firstName"
                                 isRequired
                             />
 
@@ -88,7 +91,7 @@ function SignUp() {
                                 type="text"
                                 control={control}
                                 name="lastName"
-                                placeholder="Kindly Enter your lastName"
+                                placeholder="Enter your lastName"
                                 isRequired
                             />
                         </div>
@@ -99,7 +102,7 @@ function SignUp() {
                                 type="text"
                                 control={control}
                                 name="middleName"
-                                placeholder="Kindly Enter your middleName"
+                                placeholder="Enter your middleName"
                             />
 
                             <AppInput
@@ -107,8 +110,10 @@ function SignUp() {
                                 type="text"
                                 control={control}
                                 name="gender"
-                                placeholder="Kindly Enter your gender"
+                                placeholder="Enter your gender"
                                 isRequired
+                                isSelect
+                                options={genderList}
                             />
                         </div>
 
@@ -118,7 +123,7 @@ function SignUp() {
                                 type="email"
                                 control={control}
                                 name="email"
-                                placeholder="Kindly Enter your email"
+                                placeholder="Enter your email"
                                 isRequired
                             />
 
@@ -127,7 +132,7 @@ function SignUp() {
                                 type="text"
                                 control={control}
                                 name="phone"
-                                placeholder="Kindly Enter your phoneNumber"
+                                placeholder="Enter your phoneNumber"
                             />
                         </div>
 
@@ -166,8 +171,12 @@ function SignUp() {
                         </div>
 
                         <div className="flex justify-center w-full">
-                            <Button type="submit" disabled={isLoading || !checked} size={"formMd"}>
-                                {isLoading ? <LoadingSpinner /> : "Sign Up"}
+                            <Button
+                                type="submit"
+                                disabled={(isSubmitting && !isError) || !checked}
+                                size={"formMd"}
+                            >
+                                {isSubmitting && !isError ? <LoadingSpinner /> : "Sign Up"}
                             </Button>
                         </div>
                     </form>
@@ -177,4 +186,4 @@ function SignUp() {
     );
 }
 
-export default SignUp;
+export default ProtectedPage(SignUp);

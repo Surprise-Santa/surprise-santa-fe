@@ -1,5 +1,4 @@
 import Axios, { AxiosError, AxiosRequestConfig } from "axios";
-
 import toast from "react-hot-toast";
 
 const axios = Axios.create({

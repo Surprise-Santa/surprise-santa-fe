@@ -86,5 +86,15 @@ export const groupTableData = [
         gender: "male",
         email: "mark@gmail.com",
         date: "25-6-2023",
+    }]
+    
+export const genderList = [
+    {
+        label: "Male",
+        value: "Male",
+    },
+    {
+        label: "Female",
+        value: "Female",
     },
 ];
