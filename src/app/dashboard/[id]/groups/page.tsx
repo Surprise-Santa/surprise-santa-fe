@@ -22,7 +22,6 @@ const Groups = () => {
             name: "Henry James",
             status: "Great work",
             participants: "20",
-
         },
         {
             id: "2",
@@ -31,7 +30,6 @@ const Groups = () => {
             name: "Henry James",
             status: "Great work",
             participants: "10",
-
         },
     ];
 

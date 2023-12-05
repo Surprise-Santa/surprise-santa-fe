@@ -7,7 +7,7 @@ interface PropType {
     initials?: string;
     name?: string;
     status?: string;
-    participants?: string | number
+    participants?: string | number;
 }
 
 const GroupCard = ({ src, initials, name, status, participants }: PropType) => {
