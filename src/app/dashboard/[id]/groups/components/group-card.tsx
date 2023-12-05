@@ -1,13 +1,13 @@
+import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
-import React from "react";
 
 interface PropType {
     src?: string;
     initials?: string;
     name?: string;
     status?: string;
-    participants?: string | number;
+    participants?: string;
 }
 
 const GroupCard = ({ src, initials, name, status, participants }: PropType) => {
