@@ -51,3 +51,14 @@ export const howItWorksData = [
         backgroundImage: "/images/get-paired-bg.svg",
     },
 ];
+
+export const genderList = [
+    {
+        label: "Male",
+        value: "Male",
+    },
+    {
+        label: "Female",
+        value: "Female",
+    },
+];

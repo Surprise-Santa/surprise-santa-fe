@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { CalendarClock, ListChecks, User, Users } from "lucide-react";
+import ProtectedPage from "@/services/guard/ProtectedPage";
 
 const settingsData = [
     {
@@ -43,4 +46,4 @@ const Settings = () => {
     );
 };
 
-export default Settings;
+export default ProtectedPage(Settings);
