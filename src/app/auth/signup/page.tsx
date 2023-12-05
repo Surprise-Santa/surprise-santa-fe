@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
@@ -45,7 +45,7 @@ function SignUp() {
 
             if (result.status === 200 || result.status === 201) {
                 toast.success(result.data.message || "Login Successful!");
-                router.push("/dashboard");
+                router.push("/dashboard"); //TODO: redirect to personal dashboard, it should include the user id
                 // console.log(result);
                 // sessionStorage.setItem('user', JSON.stringify(result.data.data));
             }
