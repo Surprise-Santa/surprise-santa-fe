@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import NoDataImage from "public/images/no-data-icon.png";
 

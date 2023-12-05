@@ -37,6 +37,20 @@ export const signUpSchema = Yup.object().shape({
         }),
 });
 
+export const editProfileSchema = Yup.object({
+    firstName: Yup.string().trim().notRequired(),
+    lastName: Yup.string().trim().notRequired(),
+    middleName: Yup.string().trim().notRequired(),
+    gender: Yup.string().trim().notRequired(),
+    email: Yup.string().email("Invalid email").notRequired(),
+    phone: Yup.string().trim().notRequired(),
+});
+
+export const updatePasswordSchema = Yup.object({
+    currentPassword: Yup.string().trim().required("Your current password is required"),
+    newPassword: Yup.string().trim().required("You must confirm your new password!"),
+});
+
 export const createEventSchema = Yup.object().shape({
     title: Yup.string().trim().required("Event title is required"),
     description: Yup.string().trim().required("Event description is required"),
