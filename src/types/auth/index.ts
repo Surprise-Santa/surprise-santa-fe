@@ -19,3 +19,5 @@ export interface SignUpType {
     confirmPassword?: string;
     profileImgUrl?: string;
 }
+
+

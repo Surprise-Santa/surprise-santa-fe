@@ -51,3 +51,46 @@ export const howItWorksData = [
         backgroundImage: "/images/get-paired-bg.svg",
     },
 ];
+export const groupTableData = [
+    {
+        id: "1",
+        name: "Mark Smith",
+        gender:
+            "female",
+        email: "markdaniel@gmail.com",
+        date: "25-6-2023",
+    },
+    {
+        id: "2",
+        name: "Mark Smith",
+        gender:
+            "female",
+        email: "mark@gmail.com",
+        date: "25-6-2023",
+    },
+    {
+        id: "3",
+        name: "Mark Smith",
+        gender:
+            "male",
+        email: "markpedro@gmail.com",
+        date: "25-6-2023",
+    },
+    {
+        id: "4",
+        name: "Mark Smith",
+        gender:
+            "female",
+        email: "mark@gmail.com",
+        date: "25-6-2023",
+    },
+    {
+        id: "5",
+        name: "Ali Smith",
+        gender:
+            "male",
+        email: "mark@gmail.com",
+        date: "25-6-2023",
+    },
+   
+];

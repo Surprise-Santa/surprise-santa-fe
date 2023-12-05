@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { faqData } from "@/lib/dummyData";
+import { faqData } from "@/lib/dummy-data";
 
 const FaqAccordion = () => {
     const [active, setActive] = useState<number | null>(0);
