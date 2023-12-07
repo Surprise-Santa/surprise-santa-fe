@@ -5,31 +5,28 @@ import Link from "next/link";
 import { CalendarDays } from "lucide-react";
 import ChristianImage from "/public/images/christian.jpg";
 import ProtectedPage from "@/services/guard/ProtectedPage";
+import { getRandomChristmasColors } from "@/lib/colors";
 
 const groupData = [
     {
         name: "Homeboyz",
         description: "Groove n vibes",
         participants: 24,
-        participantsImages: [ChristianImage, ChristianImage, ChristianImage],
     },
     {
         name: "Homeboyz",
         description: "Groove n vibes",
         participants: 24,
-        participantsImages: [ChristianImage, ChristianImage, ChristianImage],
     },
     {
         name: "Homeboyz",
         description: "Groove n vibes",
         participants: 24,
-        participantsImages: [ChristianImage, ChristianImage, ChristianImage],
     },
     {
         name: "Homeboyz",
         description: "Groove n vibes",
         participants: 24,
-        participantsImages: [ChristianImage, ChristianImage, ChristianImage],
     },
 ];
 
@@ -41,7 +38,6 @@ const eventData = [
         startDate: "23 Nov,2023",
         endDate: "24 Dec,2023",
         eventCount: 24,
-        participantsImages: [ChristianImage, ChristianImage, ChristianImage],
     },
     {
         name: "Santa Party",
@@ -50,7 +46,6 @@ const eventData = [
         startDate: "23 Nov,2023",
         endDate: "24 Dec,2023",
         eventCount: 24,
-        participantsImages: [ChristianImage, ChristianImage, ChristianImage],
     },
     {
         name: "Thanksgiving Cruise",
@@ -59,11 +54,12 @@ const eventData = [
         startDate: "23 Nov,2023",
         endDate: "24 Dec,2023",
         eventCount: 24,
-        participantsImages: [ChristianImage, ChristianImage, ChristianImage],
     },
 ];
 
 const Page = () => {
+    const randomChristmasColors = getRandomChristmasColors(eventData.length);
+
     return (
         <main className="space-y-12">
             <h1>DashBoard Contents</h1>
@@ -94,15 +90,16 @@ const Page = () => {
                                 Participants:{" "}
                                 <span className="text-black">{group.participants}</span>
                             </p>
-                            <div className="flex items-center gap-4 pl-6">
-                                {group.participantsImages.map((image, i) => (
-                                    <Image
-                                        key={i}
-                                        src={image}
-                                        alt="Christian Enyia"
-                                        className="rounded-full h-10 w-10 -ml-6"
-                                    />
-                                ))}
+                            <div className="h-max relative flex">
+                                <span className="h-10 w-10 bg-sky-500 bg-opacity-50 rounded-full flex items-center justify-center text-sky-700 font-semibold z-10">
+                                    LW
+                                </span>
+                                <span className="h-10 w-10 bg-rose-500 bg-opacity-50 rounded-full flex items-center justify-center text-rose-700 font-semibold z-20 -ml-2">
+                                    EH
+                                </span>
+                                <span className="h-10 w-10 bg-emerald-500 bg-opacity-50 rounded-full flex items-center justify-center text-emerald-700 font-semibold z-30 -ml-2">
+                                    GW
+                                </span>
                             </div>
                         </div>
                     ))}
@@ -119,7 +116,7 @@ const Page = () => {
                     {eventData.map((event, i) => (
                         <div
                             key={i}
-                            className="bg-white py-4 px-6 rounded-lg rounded-l-none shadow-md space-y-4  border-l-4 border-l-primary-red w-[24rem]"
+                            className={`bg-white py-4 px-6 rounded-lg rounded-l-none shadow-md space-y-4 border-l-4 border-l-[${randomChristmasColors[i]}] w-[24rem]`}
                         >
                             <p className="font-semibold text-2xl">{event.name}</p>
                             <div className="flex items-center gap-4">
@@ -135,7 +132,7 @@ const Page = () => {
                                     </span>
                                 </p>
                             </div>
-                            <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-gray1 flex items-center gap-4 max-w-fit w-full">
+                            <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4 max-w-fit w-full">
                                 <CalendarDays size={24} color="#000" />
                                 <div className="flex items-center gap-2">
                                     <p className="whitespace-nowrap">{event?.startDate}</p>
@@ -143,15 +140,18 @@ const Page = () => {
                                     <p className="whitespace-nowrap">{event?.endDate}</p>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-4 pl-6">
-                                {event.participantsImages.map((image, i) => (
-                                    <Image
-                                        key={i}
-                                        src={image}
-                                        alt="Christian Enyia"
-                                        className="rounded-full h-8 w-8 -ml-6"
-                                    />
-                                ))}
+                            <div className="flex items-center gap-2">
+                                <div className="flex">
+                                    <span className="h-10 w-10 bg-sky-500 bg-opacity-50 rounded-full flex items-center justify-center text-sky-700 font-semibold z-10">
+                                        LW
+                                    </span>
+                                    <span className="h-10 w-10 bg-rose-500 bg-opacity-50 rounded-full flex items-center justify-center text-rose-700 font-semibold z-20 -ml-2">
+                                        EH
+                                    </span>
+                                    <span className="h-10 w-10 bg-emerald-500 bg-opacity-50 rounded-full flex items-center justify-center text-emerald-700 font-semibold z-30 -ml-2">
+                                        GW
+                                    </span>
+                                </div>
                                 <p>+{event?.eventCount}</p>
                             </div>
                         </div>

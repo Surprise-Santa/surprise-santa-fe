@@ -62,6 +62,9 @@ module.exports = {
                     foreground: "var(--card-foreground)",
                 },
             },
+            boxShadow: {
+                custom: '0px 2px 15px 1px rgba(0, 0, 0, 0.1)',
+              },
             borderRadius: {
                 lg: "var(--radius)",
                 md: "calc(var(--radius) - 2px)",
