@@ -64,8 +64,8 @@ const Page = () => {
 
     return (
         <main className="space-y-12">
-            <section className="rounded-md bg-white p-4 shadow-lg flex flex-col md:flex-row gap-8 md:divide-x-2">
-                <div className="p-4 order-2 md:order-1 justify-self-center self-center">
+            <section className="rounded-md bg-white py-4 shadow-lg flex flex-col md:flex-row gap-8 md:divide-x-2 w-full">
+                <div className="p-4 order-2 md:order-1 justify-self-center self-center w-full h-full max-w-fit">
                     <AppCalendar />
                 </div>
                 <div className="space-y-8 p-4 order-1 md:order-2">
@@ -74,7 +74,7 @@ const Page = () => {
                         <Checkbox />
                         <div className="-mt-1">
                             <p>Secret Santa</p>
-                            <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4 max-w-fit w-full">
+                            <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4">
                                 <CalendarDays size={24} color="#000" />
                                 <div className="flex items-center gap-2">
                                     <p className="whitespace-nowrap">23 Nov 2023</p>
@@ -88,7 +88,7 @@ const Page = () => {
                         <Checkbox />
                         <div className="-mt-1">
                             <p>Lola’s 27th birthday bash</p>
-                            <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4 max-w-fit w-full">
+                            <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4">
                                 <CalendarDays size={24} color="#000" />
                                 <div className="flex items-center gap-2">
                                     <p className="whitespace-nowrap">23 Nov 2023</p>

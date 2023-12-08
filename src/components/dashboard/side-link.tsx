@@ -7,23 +7,24 @@ type SideLinkPropType = {
     name: string | null;
     icon: React.ReactNode;
     href: string;
+    isNavOpen?: boolean;
 };
 
-const SideLink = ({ name, icon, href }: SideLinkPropType) => {
+const SideLink = ({ name, icon, href, isNavOpen }: SideLinkPropType) => {
     const params = useParams();
     const pathname = usePathname();
     const id = params.id;
     const hrefModule = href.split("/").pop();
-    const isActive = pathname.includes(href) && hrefModule !== "";
+    const isActive = pathname.includes(hrefModule as string) && hrefModule !== "";
 
     const modifiedHref = `/dashboard/${id}/${href}`;
 
     return (
         <Link
             href={modifiedHref}
-            className={`flex items-center gap-4 text-lg hover:bg-primary-light ${
+            className={`w-full self-start flex items-center gap-4 p-2 text-lg hover:bg-primary-light rounded ${
                 isActive ? "bg-primary-light" : ""
-            } p-2`}
+            } ${isNavOpen ? "justify-start" : "justify-center"}`}
         >
             {icon}
             {name && <span>{name}</span>}
