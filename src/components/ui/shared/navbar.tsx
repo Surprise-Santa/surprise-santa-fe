@@ -15,9 +15,9 @@ const Navbar = () => {
         JSON.parse(window.sessionStorage.getItem("user") as string);
 
     return (
-        <header className="bg-gradient-to-r from-[#fdf4f5] to-[#fbfdfb] fixed top-0 z-50 w-screen py-1 ">
+        <header className="bg-gradient-to-r from-[#fdf4f5] to-[#fbfdfb] fixed top-0 z-50 w-screen p-1">
             {isClient && (
-                <div className="max-w-[1280px] mx-auto py-2 flex items-center justify-between">
+                <div className="max-w-[1280px] w-[98%] mx-auto py-2 flex items-center justify-between">
                     <div className="text-center px-4 text-primary-red font-bold text-[1.25rem]">
                         <Link href="/">LOGO</Link>
                     </div>

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
-import ChristianImage from "public/images/christian.jpg";
+import ChristianImage from "../../../../public/images/christian.jpg";
 import ProtectedPage from "@/services/guard/ProtectedPage";
 import { getRandomChristmasColors } from "@/lib/colors";
 import { AppCalendar } from "@/components/ui/calendar/calendar";
