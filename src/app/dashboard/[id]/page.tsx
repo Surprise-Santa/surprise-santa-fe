@@ -3,9 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays } from "lucide-react";
-import ChristianImage from "/public/images/christian.jpg";
+import { Checkbox } from "@/components/ui/checkbox";
+import ChristianImage from "public/images/christian.jpg";
 import ProtectedPage from "@/services/guard/ProtectedPage";
 import { getRandomChristmasColors } from "@/lib/colors";
+import { AppCalendar } from "@/components/ui/calendar/calendar";
 
 const groupData = [
     {
@@ -62,14 +64,50 @@ const Page = () => {
 
     return (
         <main className="space-y-12">
-            <h1>DashBoard Contents</h1>
-            <section className="">
+            <section className="rounded-md bg-white p-4 shadow-lg flex flex-col md:flex-row gap-8 md:divide-x-2">
+                <div className="p-4 order-2 md:order-1 justify-self-center self-center">
+                    <AppCalendar />
+                </div>
+                <div className="space-y-8 p-4 order-1 md:order-2">
+                    <p>Coming Events</p>
+                    <div className="flex gap-2">
+                        <Checkbox />
+                        <div className="-mt-1">
+                            <p>Secret Santa</p>
+                            <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4 max-w-fit w-full">
+                                <CalendarDays size={24} color="#000" />
+                                <div className="flex items-center gap-2">
+                                    <p className="whitespace-nowrap">23 Nov 2023</p>
+                                    <span> - </span>
+                                    <p className="whitespace-nowrap">23, Dev 2023</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex gap-2">
+                        <Checkbox />
+                        <div className="-mt-1">
+                            <p>Lola’s 27th birthday bash</p>
+                            <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4 max-w-fit w-full">
+                                <CalendarDays size={24} color="#000" />
+                                <div className="flex items-center gap-2">
+                                    <p className="whitespace-nowrap">23 Nov 2023</p>
+                                    <span> - </span>
+                                    <p className="whitespace-nowrap">23, Dev 2023</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
                 <div className="flex items-center gap-12 justify-between mb-8">
                     <h2 className="font-bold text-2xl">My Groups</h2>
                     <Link href="#">View all</Link>
                 </div>
 
-                <div className="flex items-center justify-between gap-8 flex-wrap">
+                <div className="flex items-center justify-center md:justify-between gap-8 flex-wrap">
                     {groupData.map((group, i) => (
                         <div
                             key={i}
@@ -106,13 +144,13 @@ const Page = () => {
                 </div>
             </section>
 
-            <section className="">
+            <section>
                 <div className="flex items-center gap-12 justify-between mb-8">
                     <h2 className="font-bold text-2xl">My Events</h2>
                     <Link href="#">View all</Link>
                 </div>
 
-                <div className="flex items-center justify-between gap-8 flex-wrap">
+                <div className="flex items-center justify-center md:justify-between gap-8 flex-wrap">
                     {eventData.map((event, i) => (
                         <div
                             key={i}

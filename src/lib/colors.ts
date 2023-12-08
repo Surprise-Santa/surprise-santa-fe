@@ -8,11 +8,10 @@ export const christmasColors = [
     "#FF914D", // Orange
     "#871C15", // Maroon
     "#FFE156", // Yellow
-    "#4C4C4C"  // Silver
+    "#4C4C4C", // Silver
 ];
 
 export const getRandomChristmasColors = (count: number) => {
-
     const randomColors = [];
 
     for (let i = 0; i < count; i++) {
@@ -21,4 +20,4 @@ export const getRandomChristmasColors = (count: number) => {
     }
 
     return randomColors;
-}
+};
