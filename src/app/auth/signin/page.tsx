@@ -35,15 +35,15 @@ function SignIn() {
         formState: { isSubmitting },
     } = formHook;
 
-    const userId =
-        typeof window !== "undefined" &&
-        JSON.parse(window.sessionStorage.getItem("user") as string)?.user.id;
-
     const submit = async (data: any) => {
         const result = await signin(data);
 
+        console.log(result.data);
+
         try {
             if (!result) return;
+
+            const userId = result?.data?.data?.user?.id;
 
             if (result.status === 200 || result.status === 201) {
                 toast.success("Sign In Successful!" || result.data.message);

@@ -4,7 +4,11 @@ import { LogOut } from "lucide-react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-const SignOutBtn = () => {
+type PropType = {
+    isNavOpen?: boolean;
+};
+
+const SignOutBtn = ({ isNavOpen }: PropType) => {
     const router = useRouter();
 
     const handleSignOut = () => {
@@ -15,7 +19,7 @@ const SignOutBtn = () => {
     return (
         <button className="flex items-center gap-2 text-lg" onClick={handleSignOut}>
             <LogOut />
-            Sign Out
+            {isNavOpen && <span>Sign Out</span>}
         </button>
     );
 };

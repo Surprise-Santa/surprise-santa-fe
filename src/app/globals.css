@@ -43,6 +43,9 @@
         --purple: #97599c;
         --gray-foreground: #e7e7e7;
         --gray: #d9d9d9;
+        --opaque: #000000B3;
+        --light-opaque: #00000080;
+        --gray1: #D9D9D9;
     }
 
     .dark {

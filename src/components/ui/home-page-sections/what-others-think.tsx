@@ -40,7 +40,7 @@ export default function Index() {
                     </div>
                 </div>
 
-                <div className="mt-0 md: mt-16">
+                <div className="mt-0 md:mt-16">
                     <div className="bg-primary-red text-background w-[300px] sm:w-[350px] lg:w-[400px] xl:w-[537px] my-16 py-8 px-4 rounded-lg relative cursor-pointer hover:scale-105 transition-transform duration-300 active:scale-100">
                         <div className="flex justify-center absolute left-0 right-0 top-[-40px]">
                             <Avatar>
