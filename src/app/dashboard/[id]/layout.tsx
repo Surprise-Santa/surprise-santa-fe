@@ -20,12 +20,12 @@ const Layout = ({ children }: { children: ReactNode }) => {
                 <SideNav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
             </div>
             <div
-                className={`absolute grow right-0 min-h-[100vh] transition-all duration-300 ease-in-out ${
-                    isNavOpen ? "left-[13rem]" : "left-[5rem]"
+                className={`grow min-h-[100vh] transition-all duration-300 ease-in-out ${
+                    isNavOpen ? "ml-[13rem] max-w-[calc(100% - 13rem)]" : "ml-[5rem] max-w-[calc(100% - 5rem)]"
                 }`}
             >
                 <Header />
-                <div className="px-4 lg:px-8 py-4 m-0">{children}</div>
+                <div className="px-4 lg:px-8 py-4 m-0 w-full overflow-x-auto">{children}</div>
             </div>
         </main>
     );
