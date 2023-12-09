@@ -29,7 +29,7 @@ const settingsData = [
 
 const Settings = () => {
     return (
-        <main className="flex flex-wrap items-center gap-12 justify-center md:justify-between">
+        <main className="flex flex-wrap items-center gap-12 justify-center md:justify-between -mt-6">
             {settingsData.map((item) => {
                 return (
                     <Link
