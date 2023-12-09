@@ -118,6 +118,7 @@ const Page = () => {
                                     alt="Christian Enyia"
                                     className="rounded-full h-16 w-16"
                                     width={64}
+                                    height={64}
                                 />
                                 <div>
                                     <p className="font-semibold text-xl">{group.name}</p>
@@ -163,6 +164,7 @@ const Page = () => {
                                     alt="Christian Enyia"
                                     className="rounded-full h-12 w-12"
                                     width={48}
+                                    height={48}
                                 />
                                 <p className="text-black flex flex-nowrap gap-1 items-center text-xl">
                                     {event?.creator}{" "}

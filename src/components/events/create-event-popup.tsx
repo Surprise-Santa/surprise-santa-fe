@@ -56,7 +56,6 @@ const CreateEvent = () => {
     const { mutateAsync: createEvent, isLoading } = useCreateEventMutation();
 
     const submit = async (data: any) => {
-        console.log(data);
         const { title, description, startDate, endDate, groupId } = data;
         const result = await createEvent({
             title,

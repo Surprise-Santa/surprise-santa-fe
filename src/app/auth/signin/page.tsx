@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Resolver, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import toast from "react-hot-toast";
-
+import { useGoogleLogin } from "@react-oauth/google";
 import { useRouter } from "next/navigation";
+
 import { Form } from "@/components/ui/form";
 import AuthNavbar from "@/components/ui/shared/auth-navbar";
 import { signInSchema } from "@/schema";
@@ -14,12 +15,18 @@ import { Button } from "@/components/ui/button";
 import { SignInType } from "@/types/auth";
 import GoogleIcon from "../../../../public/icons/google-icon";
 import AppInput from "@/components/ui/app-input";
-import { useSigninMutation } from "@/services/mutations/auth.mutation";
+import { useSigninMutation, useSignInWithGoogleMutation } from "@/services/mutations/auth.mutation";
 import LoadingSpinner from "@/components/ui/spinner";
 import ProtectedPage from "@/services/guard/ProtectedPage";
 
 function SignIn() {
     const { mutateAsync: signin, isError } = useSigninMutation();
+    const [googleAuthToken, setGoogleAuthToken] = useState<string | null>(null);
+    const {
+        mutateAsync: signInWithGoogle,
+        isLoading: googleLoginLoading,
+        isError: googleLoginError,
+    } = useSignInWithGoogleMutation(googleAuthToken as string);
     const router = useRouter();
 
     const formHook = useForm<SignInType>({
@@ -35,11 +42,7 @@ function SignIn() {
         formState: { isSubmitting },
     } = formHook;
 
-    const submit = async (data: any) => {
-        const result = await signin(data);
-
-        console.log(result.data);
-
+    const handleSignIn = async (result: any) => {
         try {
             if (!result) return;
 
@@ -55,6 +58,30 @@ function SignIn() {
             toast.error(error?.response?.data?.message || "An error occurred");
             throw new Error(error);
         }
+    };
+
+    const googleLoginHandler = useGoogleLogin({
+        onSuccess: (tokenResponse: any) => setGoogleAuthToken(tokenResponse?.access_token),
+    });
+
+    const submitGoogleSignin = async () => {
+        if (!googleAuthToken) return;
+
+        const result = await signInWithGoogle({
+            accessToken: googleAuthToken,
+        });
+
+        handleSignIn(result);
+    };
+    useEffect(() => {
+        submitGoogleSignin();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [googleAuthToken]);
+
+    const submit = async (data: any) => {
+        const result = await signin(data);
+
+        handleSignIn(result);
     };
 
     return (
@@ -73,9 +100,26 @@ function SignIn() {
 
                         <p className="text-center mb-8">Login into your account below</p>
 
-                        <div className=" mb-8 flex items-center justify-center rounded-lg shadow-md py-4 px-4 cursor-pointer">
-                            <GoogleIcon />
-                            <p className="ml-4">Continue with Google</p>
+                        <div
+                            className={`mb-8 flex items-center justify-center rounded-lg shadow-md py-4 px-4 cursor-pointer ${
+                                googleLoginLoading &&
+                                !googleLoginError &&
+                                "bg-gray-300 cursor-not-allowed opacity-50"
+                            }`}
+                            style={{
+                                pointerEvents:
+                                    googleLoginLoading && !googleLoginError ? "none" : "auto",
+                            }}
+                            onClick={() => googleLoginHandler()}
+                        >
+                            {googleLoginLoading && !googleLoginError ? (
+                                <LoadingSpinner />
+                            ) : (
+                                <>
+                                    <GoogleIcon />
+                                    <p className="ml-4">Continue with Google</p>
+                                </>
+                            )}
                         </div>
 
                         <div className="mb-4">

@@ -3,6 +3,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import toast from "react-hot-toast";
 
 import { Form } from "@/components/ui/form";
 import AuthNavbar from "@/components/ui/shared/auth-navbar";
@@ -10,8 +11,12 @@ import { forgotPasswordSchema } from "@/schema";
 import { Button } from "@/components/ui/button";
 import AppInput from "@/components/ui/app-input";
 import ProtectedPage from "@/services/guard/ProtectedPage";
+import { useForgotPasswordMutation } from "@/services/mutations/auth.mutation";
+import LoadingSpinner from "@/components/ui/spinner";
 
 function ForgotPassword() {
+    const { mutateAsync: forgotPassword, isError } = useForgotPasswordMutation();
+
     const formHook = useForm({
         resolver: yupResolver(forgotPasswordSchema),
         defaultValues: {
@@ -22,10 +27,31 @@ function ForgotPassword() {
     const {
         handleSubmit,
         control,
+        reset,
         formState: { isSubmitting },
     } = formHook;
 
-    const submit = async (values: any) => {};
+    const submit = async (values: { email: string }) => {
+        const result = await forgotPassword(values);
+
+        try {
+            if (!result) return;
+
+            if (result.status === 200 || result.status === 201) {
+                reset();
+                toast.success(
+                    "Please check your email for further instructions on resetting your password." ||
+                        result.data.message,
+                    {
+                        duration: 10000,
+                    },
+                );
+            }
+        } catch (error: any) {
+            toast.error(error?.response?.data?.message || "An error occurred");
+            throw new Error(error);
+        }
+    };
 
     return (
         <div className="min-h-screen bg-secondary-gray">
@@ -52,8 +78,8 @@ function ForgotPassword() {
                             />
                         </div>
 
-                        <Button type="submit" disabled={isSubmitting} size={"formLg"}>
-                            {isSubmitting ? "Requesting..." : "Request Link"}
+                        <Button type="submit" disabled={isSubmitting && !isError} size={"formLg"}>
+                            {isSubmitting && !isError ? <LoadingSpinner /> : "Request Link"}
                         </Button>
                     </form>
                 </Form>
