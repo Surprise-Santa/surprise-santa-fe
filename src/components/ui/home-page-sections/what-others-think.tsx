@@ -10,7 +10,7 @@ export default function Index() {
                     <div className="bg-primary-green text-background mx-auto w-[300px] sm:w-[350px] lg:w-[400px] xl:w-[537px]  py-8 px-4 rounded-lg relative cursor-pointer hover:scale-105 transition-transform duration-300 active:scale-100">
                         <div className="flex justify-center absolute left-0 right-0 top-[-40px]">
                             <Avatar>
-                                <AvatarImage src="./images/tunji.jpg" />
+                                <AvatarImage src="./images/Tunji.jpg" />
                                 <AvatarFallback>AI</AvatarFallback>
                             </Avatar>
                         </div>
@@ -26,7 +26,7 @@ export default function Index() {
                     <div className="bg-primary-orange text-background w-[300px] sm:w-[350px] lg:w-[400px] xl:w-[537px] mt-16 py-8 px-4 rounded-lg relative cursor-pointer hover:scale-105 transition-transform duration-300 active:scale-100">
                         <div className="flex justify-center absolute left-0 right-0 top-[-40px]">
                             <Avatar>
-                                <AvatarImage src="./images/talade.jpg" />
+                                <AvatarImage src="./images/Talade.jpg" />
                                 <AvatarFallback>TA</AvatarFallback>
                             </Avatar>
                         </div>
@@ -44,7 +44,7 @@ export default function Index() {
                     <div className="bg-primary-red text-background w-[300px] sm:w-[350px] lg:w-[400px] xl:w-[537px] my-16 py-8 px-4 rounded-lg relative cursor-pointer hover:scale-105 transition-transform duration-300 active:scale-100">
                         <div className="flex justify-center absolute left-0 right-0 top-[-40px]">
                             <Avatar>
-                                <AvatarImage src="./images/emelder.jpg" />
+                                <AvatarImage src="./images/Emelder.jpg" />
                                 <AvatarFallback>EO</AvatarFallback>
                             </Avatar>
                         </div>
@@ -60,7 +60,7 @@ export default function Index() {
                     <div className="bg-primary-purple text-background w-[300px] sm:w-[350px] lg:w-[400px] xl:w-[537px] mt-16 py-8 px-4 rounded-lg relative cursor-pointer hover:scale-105 transition-transform duration-300 active:scale-100">
                         <div className="flex justify-center absolute left-0 right-0 top-[-40px]">
                             <Avatar>
-                                <AvatarImage src="./images/christian.jpg" />
+                                <AvatarImage src="./images/Christian.jpg" />
                                 <AvatarFallback>AI</AvatarFallback>
                             </Avatar>
                         </div>
