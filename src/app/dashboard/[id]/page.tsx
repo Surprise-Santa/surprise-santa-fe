@@ -7,6 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import ProtectedPage from "@/services/guard/ProtectedPage";
 import { getRandomChristmasColors } from "@/lib/colors";
 import { AppCalendar } from "@/components/ui/calendar/calendar";
+// import ChristianImage from "public/images/christian.jpg";
 
 const groupData = [
     {
@@ -114,10 +115,11 @@ const Page = () => {
                         >
                             <div className="flex items-center gap-4">
                                 <Image
-                                    src="/images/christian.jpg"
+                                    src="./images/christian.jpg"
                                     alt="Christian Enyia"
                                     className="rounded-full h-16 w-16"
                                     width={64}
+                                    height={64}
                                 />
                                 <div>
                                     <p className="font-semibold text-xl">{group.name}</p>
@@ -159,10 +161,11 @@ const Page = () => {
                             <p className="font-semibold text-2xl">{event.name}</p>
                             <div className="flex items-center gap-4">
                                 <Image
-                                    src="/images/christian.jpg"
+                                    src="./images/christian.jpg"
                                     alt="Christian Enyia"
                                     className="rounded-full h-12 w-12"
                                     width={48}
+                                    height={48}
                                 />
                                 <p className="text-black flex flex-nowrap gap-1 items-center text-xl">
                                     {event?.creator}{" "}
