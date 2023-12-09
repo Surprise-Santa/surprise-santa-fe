@@ -46,7 +46,7 @@ const Events = () => {
                                     <h2 className="font-semibold text-xl">{title}</h2>
                                     <div className="flex items-center gap-2">
                                         <Avatar className="h-10 w-10">
-                                            <AvatarImage src="../../../../../public/images/Christian.jpg" />
+                                            <AvatarImage src="./images/Christian.jpg" />
                                             <AvatarFallback>AI</AvatarFallback>
                                         </Avatar>
                                         <p className="text-lg font-medium">
