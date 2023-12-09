@@ -3,6 +3,9 @@
 import React from "react";
 import { Resolver, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useSearchParams } from "next/navigation";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 import { Form } from "@/components/ui/form";
 import AuthNavbar from "@/components/ui/shared/auth-navbar";
@@ -10,10 +13,16 @@ import { resetPasswordSchema } from "@/schema";
 import { Button } from "@/components/ui/button";
 import { ResetPasswordType } from "@/types/auth";
 import ProtectedPage from "@/services/guard/ProtectedPage";
-
 import AppInput from "@/components/ui/app-input";
+import { useResetPasswordMutation } from "@/services/mutations/auth.mutation";
+import LoadingSpinner from "@/components/ui/spinner";
 
 function ResetPassword() {
+    const params = useSearchParams();
+    const token = params.get("token");
+    const { mutateAsync: resetPassword, isError } = useResetPasswordMutation(token as string);
+    const router = useRouter();
+
     const formHook = useForm<ResetPasswordType>({
         resolver: yupResolver(resetPasswordSchema),
         defaultValues: {
@@ -27,7 +36,26 @@ function ResetPassword() {
         formState: { isSubmitting },
     } = formHook;
 
-    const submit = async (values: any) => {};
+    const submit = async (values: ResetPasswordType) => {
+        const { confirmPassword } = values;
+
+        const result = await resetPassword({
+            newPassword: confirmPassword,
+        });
+
+        try {
+            if (!result) return;
+
+            if (result.status === 200 || result.status === 201) {
+                toast.success("Password reset successful!" || result.data.message);
+                router.push("/auth/signin");
+                return;
+            }
+        } catch (error: any) {
+            toast.error(error?.response?.data?.message || "An error occurred");
+            throw new Error(error);
+        }
+    };
 
     return (
         <div className="min-h-screen bg-secondary-gray">
@@ -58,13 +86,13 @@ function ResetPassword() {
                                 type="password"
                                 control={control}
                                 name="confirmPassword"
-                                placeholder="Confirm your password"
+                                placeholder="Confirm your new password"
                                 isRequired
                             />
                         </div>
 
-                        <Button type="submit" disabled={isSubmitting} size={"formLg"}>
-                            {isSubmitting ? "Logging In..." : "Log In"}
+                        <Button type="submit" disabled={isSubmitting && !isError} size={"formLg"}>
+                            {isSubmitting && !isError ? <LoadingSpinner /> : "Reset Password"}
                         </Button>
                     </form>
                 </Form>

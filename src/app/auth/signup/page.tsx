@@ -34,7 +34,7 @@ function SignUp() {
         formState: { isSubmitting },
     } = formHook;
 
-    const submit = async (data: any) => {
+    const submit = async (data: SignUpType) => {
         const { firstName, lastName, email, password, middleName, gender, phone } = data;
         const result = await signup({
             firstName,

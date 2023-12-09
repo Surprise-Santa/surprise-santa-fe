@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 
+import { GoogleAuthProvider } from "@/components/ui/shared/google-oauth-provider";
 import { ReactQueryProvider } from "@/components/ui/shared/react-query-provider";
 import "./globals.css";
 
@@ -33,7 +34,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         },
                     }}
                 />
-                <ReactQueryProvider>{children}</ReactQueryProvider>
+                <GoogleAuthProvider>
+                    <ReactQueryProvider>{children}</ReactQueryProvider>
+                </GoogleAuthProvider>
             </body>
         </html>
     );
