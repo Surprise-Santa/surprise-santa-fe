@@ -21,7 +21,9 @@ const Layout = ({ children }: { children: ReactNode }) => {
             </div>
             <div
                 className={`grow min-h-[100vh] transition-all duration-300 ease-in-out ${
-                    isNavOpen ? "ml-[13rem] max-w-[calc(100% - 13rem)]" : "ml-[5rem] max-w-[calc(100% - 5rem)]"
+                    isNavOpen
+                        ? "ml-[13rem] max-w-[calc(100% - 13rem)]"
+                        : "ml-[5rem] max-w-[calc(100% - 5rem)]"
                 }`}
             >
                 <Header />
