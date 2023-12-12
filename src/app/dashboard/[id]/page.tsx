@@ -115,7 +115,7 @@ const Page = () => {
                         >
                             <div className="flex items-center gap-4">
                                 <Image
-                                    src="./images/christian.jpg"
+                                    src="/images/Christian.jpg"
                                     alt="Christian Enyia"
                                     className="rounded-full h-16 w-16"
                                     width={64}
@@ -161,7 +161,7 @@ const Page = () => {
                             <p className="font-semibold text-2xl">{event.name}</p>
                             <div className="flex items-center gap-4">
                                 <Image
-                                    src="./images/christian.jpg"
+                                    src="/images/Christian.jpg"
                                     alt="Christian Enyia"
                                     className="rounded-full h-12 w-12"
                                     width={48}

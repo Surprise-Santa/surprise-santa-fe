@@ -11,18 +11,12 @@ export default function protectedPage(WrappedComponent: React.ComponentType) {
         useEffect(() => {
             const checkAuth = async () => {
                 const authenticated = await isAuthenticated();
-
-                if (!authenticated && pathname?.startsWith("/auth")) {
-                    return;
-                }
-
                 if (!authenticated) {
                     router.push("/auth/signin");
                     return;
                 }
 
-                if (authenticated && pathname?.startsWith("/auth")) {
-                    router.push("/");
+                if (!authenticated && pathname?.startsWith("/auth")) {
                     return;
                 }
             };
