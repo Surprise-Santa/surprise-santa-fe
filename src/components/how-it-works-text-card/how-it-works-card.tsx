@@ -9,7 +9,7 @@ interface HowItWorksCardProps {
 const HowItWorksCard: FC<HowItWorksCardProps> = ({ title, description, backgroundImage }) => {
     return (
         <div
-            className="w-4/5 md:w-2/5 my-auto"
+            className="w-5/5 md:w-2/5 my-auto px-1 sm:px-2 md:px-0"
             style={{
                 backgroundImage: `url(${backgroundImage})`,
                 backgroundRepeat: "no-repeat",
