@@ -15,3 +15,10 @@ export const useGetEventById = (id: string) => {
         return res.data.data.event;
     });
 };
+
+export const useGetMatch = (id: string) => {
+    return useQuery(["getMatch", id], async () => {
+        const res = await axios.get(urls.getMatchUrl(id));
+        return res.data.data;
+    });
+};

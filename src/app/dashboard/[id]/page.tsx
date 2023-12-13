@@ -7,7 +7,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import ProtectedPage from "@/services/guard/ProtectedPage";
 import { getRandomChristmasColors } from "@/lib/colors";
 import { AppCalendar } from "@/components/ui/calendar/calendar";
-// import ChristianImage from "public/images/christian.jpg";
+import { useGetAllEvents } from "@/services/queries/events";
+import { isFuture, isPast } from "date-fns";
+import { EventType } from "@/types/events";
+import { convertDateFormat } from "@/lib/utils";
+import LoadingSpinner from "@/components/ui/spinner";
+import { useParams } from "next/navigation";
 
 const groupData = [
     {
@@ -61,42 +66,103 @@ const eventData = [
 
 const Page = () => {
     const randomChristmasColors = getRandomChristmasColors(eventData.length);
+    const { data: events, isLoading } = useGetAllEvents();
+    const { id: groupId } = useParams();
+    if (isLoading)
+        return (
+            <div className="flex items-center justify-center h-[calc(100vh-10rem)]">
+                <LoadingSpinner />
+            </div>
+        );
+
+    let upcomingEvents: EventType[] = [];
+    let activeEvents: EventType[] = [];
+
+    events.forEach((event: EventType) => {
+        let startDate = new Date(event.startDate);
+        let endDate = new Date(event.endDate);
+
+        if (isFuture(startDate)) {
+            upcomingEvents.push(event);
+        } else if (isPast(startDate) && isFuture(endDate)) {
+            activeEvents.push(event);
+        }
+    });
+    upcomingEvents = upcomingEvents.slice(0, 2);
+    activeEvents = activeEvents.slice(0, 2);
 
     return (
         <main className="space-y-12">
-            <section className="rounded-md bg-white py-4 shadow-lg flex flex-col md:flex-row gap-8 md:divide-x-2 w-full">
-                <div className="p-4 order-2 md:order-1 justify-self-center self-center w-full h-full max-w-fit">
+            <section className="rounded-md bg-white py-4 shadow-lg flex flex-col md:flex-row gap-8 md:divide-x-2 w-[80vw]">
+                <div className="p-4 order-2 md:order-1 justify-self-center self-center max-w-[28%] h-full">
                     <AppCalendar />
                 </div>
-                <div className="space-y-8 p-4 order-1 md:order-2">
-                    <p>Coming Events</p>
-                    <div className="flex gap-2">
-                        <Checkbox />
-                        <div className="-mt-1">
-                            <p>Secret Santa</p>
-                            <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4">
-                                <CalendarDays size={24} color="#000" />
-                                <div className="flex items-center gap-2">
-                                    <p className="whitespace-nowrap">23 Nov 2023</p>
-                                    <span> - </span>
-                                    <p className="whitespace-nowrap">23, Dev 2023</p>
-                                </div>
-                            </div>
-                        </div>
+                <div className="space-y-8 p-4 order-1 md:order-2 max-w-[35%] ">
+                    <p>Upcoming Events</p>
+                    <div>
+                        {upcomingEvents.length > 0 ? (
+                            upcomingEvents.map((event) => (
+                                <Link
+                                    href={`/dashboard/${groupId}/events/${event.id}`}
+                                    key={event.id}
+                                >
+                                    <div className="flex gap-2">
+                                        <Checkbox />
+                                        <div className="-mt-1">
+                                            <p className="text-sm">{event.title}</p>
+                                            <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4">
+                                                <CalendarDays size={20} color="#000" />
+                                                <div className="flex items-center gap-2">
+                                                    <p className="whitespace-nowrap">
+                                                        {convertDateFormat(event.startDate)}
+                                                    </p>
+                                                    <span> - </span>
+                                                    <p className="whitespace-nowrap">
+                                                        {convertDateFormat(event.endDate)}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))
+                        ) : (
+                            <p>No Upcoming Events</p>
+                        )}
                     </div>
-                    <div className="flex gap-2">
-                        <Checkbox />
-                        <div className="-mt-1">
-                            <p>Lola’s 27th birthday bash</p>
-                            <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4">
-                                <CalendarDays size={24} color="#000" />
-                                <div className="flex items-center gap-2">
-                                    <p className="whitespace-nowrap">23 Nov 2023</p>
-                                    <span> - </span>
-                                    <p className="whitespace-nowrap">23, Dev 2023</p>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                <div className="space-y-8 p-4 order-1 md:order-2 max-w-[35%] ">
+                    <p>Active Events</p>
+                    <div>
+                        {activeEvents.length > 0 ? (
+                            activeEvents.map((event) => (
+                                <Link
+                                    href={`/dashboard/${groupId}/events/${event.id}`}
+                                    key={event.id}
+                                >
+                                    <div className="flex gap-2">
+                                        <Checkbox />
+                                        <div className="-mt-1">
+                                            <p className="text-sm">{event.title}</p>
+                                            <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4">
+                                                <CalendarDays size={24} color="#000" />
+                                                <div className="flex items-center gap-2">
+                                                    <p className="whitespace-nowrap">
+                                                        {convertDateFormat(event.startDate)}
+                                                    </p>
+                                                    <span> - </span>
+                                                    <p className="whitespace-nowrap">
+                                                        {convertDateFormat(event.endDate)}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))
+                        ) : (
+                            <p>No Upcoming Events</p>
+                        )}
                     </div>
                 </div>
             </section>

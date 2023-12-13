@@ -9,3 +9,9 @@ export const useCreateEventMutation = () =>
         return res;
     });
 // to do: invalidate query cache after mutation
+
+export const useUpdateMatchMutation = (id: string) =>
+    useMutation(["updateMatch", id], async () => {
+        const res = await axios.post(urls.getMatchUrl(id));
+        return res;
+    });
