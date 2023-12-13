@@ -9,7 +9,7 @@ const Header = () => {
             </p>
 
             <Avatar className="h-12 w-12">
-                <AvatarImage src="./images/tunji.jpg" />
+                <AvatarImage src="./images/Tunji.jpg" />
                 <AvatarFallback>AI</AvatarFallback>
             </Avatar>
         </header>

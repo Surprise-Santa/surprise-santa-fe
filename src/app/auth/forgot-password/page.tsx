@@ -10,7 +10,6 @@ import AuthNavbar from "@/components/ui/shared/auth-navbar";
 import { forgotPasswordSchema } from "@/schema";
 import { Button } from "@/components/ui/button";
 import AppInput from "@/components/ui/app-input";
-import ProtectedPage from "@/services/guard/ProtectedPage";
 import { useForgotPasswordMutation } from "@/services/mutations/auth.mutation";
 import LoadingSpinner from "@/components/ui/spinner";
 
@@ -88,4 +87,4 @@ function ForgotPassword() {
     );
 }
 
-export default ProtectedPage(ForgotPassword);
+export default ForgotPassword;
