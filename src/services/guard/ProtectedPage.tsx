@@ -16,7 +16,8 @@ export default function protectedPage(WrappedComponent: React.ComponentType) {
                     return;
                 }
 
-                if (!authenticated && pathname?.startsWith("/auth")) {
+                if (authenticated && pathname?.startsWith("/auth")) {
+                    router.push("/");
                     return;
                 }
             };
