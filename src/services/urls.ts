@@ -6,8 +6,9 @@ export const urls = {
     googleLoginUrl: `${baseUrl}/auth/login/social-auth`,
     forgotPasswordUrl: `${baseUrl}/auth/request-password-reset`,
     resetPasswordUrl: (token: string) => `${baseUrl}/auth/password-reset?token=${token}`,
-    getAllEventsUrl: `${baseUrl}/event`,
-    getEventByIdUrl: (id: string) => `${baseUrl}/event/${id}`,
-    getAllGroupsUrl: `${baseUrl}/group/my-groups`,
-    createEventUrl: `${baseUrl}/event/create`,
+    getAllEventsUrl: `${baseUrl}/events`,
+    getEventByIdUrl: (id: string) => `${baseUrl}/events/${id}`,
+    getAllGroupsUrl: `${baseUrl}/groups/my-groups`,
+    createEventUrl: `${baseUrl}/events/create`,
+    getMatchUrl: (id: string) => `${baseUrl}/events/${id}/get-match`,
 };
