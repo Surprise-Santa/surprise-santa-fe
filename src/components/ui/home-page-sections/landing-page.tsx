@@ -54,7 +54,7 @@ const LandingPage = () => {
                         <Image src={Line} alt="icons" height={40} />
                     </div>
                 </div>
-                </div>
+            </div>
         </section>
     );
 };
