@@ -14,15 +14,21 @@ const Layout = ({ children }: { children: ReactNode }) => {
             setIsNavOpen(true);
         }
     }, []);
+
     return (
         <main className="flex">
-            <div className="h-full w-full fixed p-0 m-0 transition-all duration-300 ease-in-out">
+            <div
+                className={`h-full fixed p-0 m-0 transition-all duration-300 ease-in-out ${
+                    isNavOpen ? "w-[15rem]" : "w-[5rem]"
+                }`}
+            >
                 <SideNav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
             </div>
+
             <div
                 className={`grow min-h-[100vh] transition-all duration-300 ease-in-out ${
                     isNavOpen
-                        ? "ml-[13rem] max-w-[calc(100% - 13rem)]"
+                        ? "ml-[15rem] max-w-[calc(100% - 15rem)]"
                         : "ml-[5rem] max-w-[calc(100% - 5rem)]"
                 }`}
             >

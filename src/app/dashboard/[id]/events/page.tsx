@@ -37,7 +37,7 @@ const Events = () => {
                 </Dialog>
             </div>
 
-            {data.length ? (
+            {data?.length ? (
                 <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-8">
                     {data?.map(({ id, title, startDate, endDate }: EventType) => {
                         return (

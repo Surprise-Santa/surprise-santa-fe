@@ -15,7 +15,7 @@ export default function SideNav({ isNavOpen, setIsNavOpen }: SideNavPropType) {
     return (
         <aside
             className={`w-full font-light py-6 shadow-lg relative h-full z-50 transition-all duration-300 ease-in-out bg-primary-green text-white ${
-                isNavOpen ? "max-w-[13rem] px-2" : "max-w-[5rem] px-2"
+                isNavOpen ? "w-[15rem] px-2" : "w-[5rem] px-2"
             }`}
         >
             <button
