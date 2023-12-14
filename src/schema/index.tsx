@@ -64,5 +64,5 @@ export const createGroupSchema = Yup.object().shape({
     description: Yup.string().trim().required("Group description is required"),
 });
 export const inviteMemberSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email").required("Email is required"),
+    email: Yup.string().email("Invalid email"),
 });

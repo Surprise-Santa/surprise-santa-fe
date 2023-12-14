@@ -5,8 +5,8 @@ export interface GroupType {
     description?: string;
 }
 export interface MemberType {
-    id?: string;
-    email?: any;
+    id?: any;
+    email?: string;
 }
 
 export interface User {
