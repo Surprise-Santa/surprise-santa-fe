@@ -12,7 +12,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { Label } from "../ui/label";
-import { useGetMyGroups } from "@/services/queries/groups";
+import { useGetAllGroups } from "@/services/queries/groups";
 import {
     Select,
     SelectContent,
@@ -28,7 +28,7 @@ import toast from "react-hot-toast";
 import LoadingSpinner from "../ui/spinner";
 
 const CreateEvent = () => {
-    const { data: groups } = useGetMyGroups();
+    const { data: groups } = useGetAllGroups();
     const formHook = useForm<CreateEventType>({
         resolver: yupResolver(createEventSchema),
     } as { resolver: Resolver<CreateEventType> });
@@ -106,7 +106,7 @@ const CreateEvent = () => {
                                     <SelectGroup>
                                         <SelectLabel>Groups</SelectLabel>
                                         {groups?.map((group: GroupType) => (
-                                            <SelectItem key={group.id} value={group.id}>
+                                            <SelectItem key={group?.id} value={group?.id}>
                                                 {group.name}
                                             </SelectItem>
                                         ))}

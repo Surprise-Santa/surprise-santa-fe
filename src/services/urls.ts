@@ -10,7 +10,8 @@ export const urls = {
     getEventByIdUrl: (id: string) => `${baseUrl}/events/${id}`,
     createEventUrl: `${baseUrl}/events/create`,
     createGroupsUrl: `${baseUrl}/groups/create`,
-    getMyGroupsUrl: `${baseUrl}/groups/my-groups`,
+    getAllGroupsUrl: `${baseUrl}/groups/my-groups`,
     getOtherGroupsUrl: `${baseUrl}/groups/own-groups`,
     getGroupByIdUrl: (id: string) => `${baseUrl}/groups/${id}`,
+    inviteGroupMembesrUrl: (id: string) => `${baseUrl}/groups/${id}/email-invite`,
 };
