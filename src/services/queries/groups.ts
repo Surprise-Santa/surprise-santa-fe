@@ -6,13 +6,13 @@ import { GroupTypes } from "@/types/groups";
 export const useGetAllGroups = () => {
     return useQuery(["getAllGroups"], async () => {
         const res = await axios.get(urls.getAllGroupsUrl);
-        return res.data.data as GroupTypes[];
+        return res.data.data;
     });
 };
 export const useGetOwnGroups = () => {
     return useQuery(["getOwnGroups"], async () => {
         const res = await axios.get(urls.getOwnGroupsUrl);
-        return res.data.data;
+        return res.data.data as GroupTypes[];
     });
 };
 
