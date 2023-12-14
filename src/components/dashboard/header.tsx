@@ -1,17 +1,40 @@
+import { extractInitials } from "@/lib/utils";
+import { AlignJustify } from "lucide-react";
+import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import MobileSideNav from "./mobile-sidenav";
 
 const Header = () => {
-    return (
-        <header className="flex justify-end items-center gap-4 font-bold mb-8 border-b-2 border-primary-gray pl-2 pr-6 lg:pr-8 py-2">
-            <p>
-                Hello,
-                <span className="text-xl ml-2">Ayotunde</span>
-            </p>
+    const [openMenu, setOpenMenu] = useState(false);
+    const userDetails = JSON.parse(sessionStorage.getItem("user") as string).user;
+    const fullName = userDetails?.firstName + " " + userDetails?.lastName;
 
-            <Avatar className="h-12 w-12">
-                <AvatarImage src="./images/Tunji.jpg" />
-                <AvatarFallback>AI</AvatarFallback>
-            </Avatar>
+    const handleOpenMenu = () => {
+        setOpenMenu(!openMenu);
+    };
+
+    return (
+        <header className="flex justify-between md:justify-end items-center gap-4 mb-8 border-b-2 border-primary-gray px-4 lg:pr-8 py-2 ">
+            <button
+                className="outline-none border-none block md:hidden"
+                onClick={() => {
+                    handleOpenMenu();
+                }}
+            >
+                <AlignJustify />
+            </button>
+            <div className="flex  items-center gap-4 font-bold ">
+                <p>
+                    Hello,
+                    <span className="text-xl ml-2">{userDetails?.firstName}</span>
+                </p>
+
+                <Avatar className="h-12 w-12">
+                    <AvatarImage src={userDetails?.profileImgUrl} />
+                    <AvatarFallback>{extractInitials(fullName)}</AvatarFallback>
+                </Avatar>
+            </div>
+            {openMenu && <MobileSideNav setOpenMenu={setOpenMenu} />}
         </header>
     );
 };

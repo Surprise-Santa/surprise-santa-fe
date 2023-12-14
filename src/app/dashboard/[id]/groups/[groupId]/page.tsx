@@ -1,11 +1,10 @@
 "use client";
-import React from "react";
-import GroupTable from "../../../../../components/groups/group-table";
+import LoadingSpinner from "@/components/ui/spinner";
+import { convertDateFormat } from "@/lib/utils";
+import { useGetGroupById } from "@/services/queries/groups";
 import { MoveLeft } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { useGetGroupById } from "@/services/queries/groups";
-import { convertDateFormat } from "@/lib/utils";
-import LoadingSpinner from "@/components/ui/spinner";
+import GroupTable from "../../../../../components/groups/group-table";
 
 const GroupDetails = () => {
     const router = useRouter();
@@ -26,7 +25,7 @@ const GroupDetails = () => {
 
         {
             id: "3",
-            title: "Group Link:",
+            title: "Group Code:",
             value: data?.groupLink,
         },
     ];
