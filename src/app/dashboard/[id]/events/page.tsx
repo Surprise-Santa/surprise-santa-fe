@@ -43,7 +43,7 @@ const Events = () => {
                     {data?.map(({ id, title, startDate, endDate }: EventType) => {
                         return (
                             <Link href={`/dashboard/${groupId}/events/${id}`} key={id}>
-                                <div className="w-[100%] border-l-4 border-l-red-500 rounded px-8 py-4 shadow-md flex flex-col gap-2">
+                                <div className="w-[100%] border-l-4 border-l-red-500 rounded px-8 py-4 shadow-md flex flex-col gap-2 hover:shadow-lg">
                                     <h2 className="font-semibold text-xl">{title}</h2>
                                     <div className="flex items-center gap-2">
                                         <Avatar className="h-10 w-10">

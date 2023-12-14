@@ -48,11 +48,11 @@ const Page = () => {
 
     return (
         <main className="space-y-12">
-            <section className="rounded-md bg-white py-4 shadow-lg flex flex-col md:flex-row gap-8 md:divide-x-2 w-[80vw]">
-                <div className="p-4 order-2 md:order-1 max-w-[30%] w-full h-full flex items-center justify-center ">
+            <section className="rounded-md w-full bg-white py-4 shadow-lg flex flex-col md:flex-row gap-8 md:divide-x-2 w-[80vw]">
+                <div className="p-4 order-2 md:order-1 w-full h-full flex items-center justify-center ">
                     <AppCalendar />
                 </div>
-                <div className="space-y-8 p-4 order-1 md:order-2 max-w-[35%]">
+                <div className="space-y-8 p-4 order-1 md:order-2 w-full">
                     <p>Upcoming Events</p>
                     <div>
                         {upcomingEvents.length > 0 ? (
@@ -61,7 +61,7 @@ const Page = () => {
                                     href={`/dashboard/${groupId}/events/${event.id}`}
                                     key={event.id}
                                 >
-                                    <div className="flex gap-2">
+                                    <div className="flex gap-2 mb-6">
                                         <Checkbox />
                                         <div className="-mt-1">
                                             <p className="text-sm">{event.title}</p>
@@ -86,7 +86,7 @@ const Page = () => {
                         )}
                     </div>
                 </div>
-                <div className="space-y-8 p-4 order-1 md:order-2 max-w-[35%] ">
+                <div className="space-y-8 p-4 order-1 md:order-2 w-full">
                     <p>Active Events</p>
                     <div>
                         {activeEvents.length > 0 ? (
