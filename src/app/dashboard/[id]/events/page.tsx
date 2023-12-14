@@ -1,4 +1,5 @@
 "use client";
+
 import { Input } from "@/components/ui/input";
 import { useGetAllEvents } from "@/services/queries/events";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -15,8 +16,8 @@ import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import CreateEvent from "@/components/events/create-event-popup";
 
 const Events = () => {
-    const { data, isLoading } = useGetAllEvents();
     const { id: groupId } = useParams();
+    const { data, isLoading } = useGetAllEvents();
 
     if (isLoading)
         return (

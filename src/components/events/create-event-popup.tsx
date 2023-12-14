@@ -96,7 +96,7 @@ const CreateEvent = () => {
                                 Group <span className="text-destructive text-sm ">*</span>
                             </Label>
                             <Select
-                                value={groupIdField.value}
+                                value={groupIdField.value || ''}
                                 onValueChange={(value) => groupIdField.onChange(value)}
                             >
                                 <SelectTrigger>
