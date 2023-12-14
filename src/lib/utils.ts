@@ -1,4 +1,4 @@
-import { type ClassValue, clsx } from "clsx";
+import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -18,7 +18,11 @@ export function convertDateFormat(inputDate: string): string {
     return formattedDate;
 }
 
-export const extractInitials = (inputString: string) => {
+export const extractInitials = (inputString: string | undefined) => {
+    if (!inputString || typeof inputString !== "string") {
+        return;
+    }
+
     return inputString
         .split(" ")
         .map((word) => word.charAt(0))

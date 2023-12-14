@@ -1,29 +1,28 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { DialogTrigger } from "@/components/ui/dialog";
 import LoadingSpinner from "@/components/ui/spinner";
 import { extractInitials } from "@/lib/utils";
 import ProtectedPage from "@/services/guard/ProtectedPage";
-import { useGetAllGroups, useGetOtherGroups } from "@/services/queries/groups";
+import { useGetAllGroups, useGetOwnGroups } from "@/services/queries/groups";
+import { Dialog } from "@radix-ui/react-dialog";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import NoDataImage from "public/images/no-data-icon.png";
 import { useState } from "react";
-import GroupCard from "../../../../components/groups/group-card";
-import { useParams } from "next/navigation";
-import { Dialog } from "@radix-ui/react-dialog";
-import { DialogTrigger } from "@/components/ui/dialog";
-import InviteMembers from "../../../../components/groups/invite-members";
-import { Button } from "@/components/ui/button";
 import CreateGroup from "../../../../components/groups/create-group";
+import GroupCard from "../../../../components/groups/group-card";
 
 const Groups = () => {
     const [displayAllGroupScrollbar, setDisplayAllGroupScrollbar] = useState(false);
     const [displayOtherGroupScrollbar, setDisplayOtherGroupScrollbar] = useState(false);
     const [open, setOpen] = useState(false);
-    const { data: myGroups, isLoading: myGroupsLoading } = useGetAllGroups();
-    const { data: otherGroups, isLoading: otherGroupsLoading } = useGetOtherGroups();
+    const { data: allGroups, isLoading: allGroupsLoading } = useGetAllGroups();
+    const { data: ownGroups, isLoading: ownGroupsLoading } = useGetOwnGroups();
     const { id } = useParams();
 
-    if (myGroupsLoading || otherGroupsLoading)
+    if (allGroupsLoading || ownGroupsLoading)
         return (
             <div className="flex items-center justify-center h-[calc(100vh-10rem)]">
                 <LoadingSpinner />
@@ -43,14 +42,14 @@ const Groups = () => {
             <div className="flex flex-col lg:flex-row gap-2 justify-between transition-all duration-300 ease-in-out">
                 <div
                     className={`w-[100%] lg:w-[47%] h-[28rem] relative border-2 border-primary-gray mt-4 rounded-xl p-6 overflow-y-auto ${
-                        displayAllGroupScrollbar ? "scrollBar" : "scroll"
+                        displayOtherGroupScrollbar ? "scrollBar" : "scroll"
                     }`}
-                    onMouseEnter={() => setDisplayAllGroupScrollbar(true)}
-                    onMouseLeave={() => setDisplayAllGroupScrollbar(false)}
+                    onMouseEnter={() => setDisplayOtherGroupScrollbar(true)}
+                    onMouseLeave={() => setDisplayOtherGroupScrollbar(false)}
                 >
-                    <h2 className="font-bold text-[1.4rem] ">My Groups</h2>
-                    {myGroups?.length ? (
-                        myGroups?.map((list: any) => {
+                    <h2 className="font-bold text-[1.4rem]">My Groups</h2>
+                    {ownGroups?.length ? (
+                        ownGroups?.map((list: any) => {
                             return (
                                 <div key={list.id} className="mt-8 ">
                                     <GroupCard
@@ -80,14 +79,14 @@ const Groups = () => {
                 </div>
                 <div
                     className={`w-[100%] lg:w-[47%] h-[28rem] relative border-2 border-primary-gray mt-4 rounded-xl p-6 overflow-y-auto ${
-                        displayOtherGroupScrollbar ? "scrollBar" : "scroll"
+                        displayAllGroupScrollbar ? "scrollBar" : "scroll"
                     }`}
-                    onMouseEnter={() => setDisplayOtherGroupScrollbar(true)}
-                    onMouseLeave={() => setDisplayOtherGroupScrollbar(false)}
+                    onMouseEnter={() => setDisplayAllGroupScrollbar(true)}
+                    onMouseLeave={() => setDisplayAllGroupScrollbar(false)}
                 >
-                    <h2 className="font-bold text-[1.4rem]">Other Groups</h2>
-                    {otherGroups?.length ? (
-                        otherGroups?.map((list: any) => {
+                    <h2 className="font-bold text-[1.4rem] ">Other Groups</h2>
+                    {allGroups?.length ? (
+                        allGroups?.map((list: any) => {
                             return (
                                 <div key={list.id} className="mt-8 ">
                                     <GroupCard

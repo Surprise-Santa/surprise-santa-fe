@@ -1,12 +1,12 @@
-import { Dispatch } from "react";
+import { ChevronsLeft, ChevronsRight } from "lucide-react";
 import Link from "next/link";
-import SideLink from "./side-link";
-import ClientWrapper from "../wrapper/client";
+import { Dispatch } from "react";
 import SignOutBtn from "../ui/shared/signOutBtn";
+import ClientWrapper from "../wrapper/client";
 import { sideNavLinks } from "./links";
-import { AlignJustify } from "lucide-react";
+import SideLink from "./side-link";
 
-type SideNavPropType = {
+export type SideNavPropType = {
     isNavOpen: boolean;
     setIsNavOpen: Dispatch<React.SetStateAction<boolean>>;
 };
@@ -14,8 +14,8 @@ type SideNavPropType = {
 export default function SideNav({ isNavOpen, setIsNavOpen }: SideNavPropType) {
     return (
         <aside
-            className={`w-full font-light py-6 shadow-lg relative h-full z-50 transition-all duration-300 ease-in-out bg-primary-green text-white ${
-                isNavOpen ? "w-[15rem] px-2" : "w-[5rem] px-2"
+            className={`w-full hidden md:block font-light py-6 shadow-lg relative h-full z-50 transition-all duration-300 ease-in-out bg-primary-green text-white ${
+                isNavOpen ? "w-[15rem] px-2" : "w-[0rem] md:w-[5rem] px-2"
             }`}
         >
             <button
@@ -24,18 +24,19 @@ export default function SideNav({ isNavOpen, setIsNavOpen }: SideNavPropType) {
                     setIsNavOpen(!isNavOpen);
                 }}
             >
-                <AlignJustify />
+                {isNavOpen ? <ChevronsLeft /> : <ChevronsRight />}
             </button>
             <div className="text-primary-red font-bold text-[1.3rem] mb-14 mt-2">
                 <Link href="/">LOGO</Link>
             </div>
-            <nav className="flex flex-col gap-6">
+            <nav className="flex flex-col gap-6 text-center">
                 {sideNavLinks.map((link) => (
                     <SideLink
                         key={link.name}
                         href={link.href}
                         icon={link.icon}
                         name={isNavOpen ? link.name : null}
+                        isNavOpenStyle="justify-center"
                         isNavOpen={isNavOpen}
                     />
                 ))}

@@ -14,7 +14,8 @@ export const useCreateGroupMutation = () => {
         },
         {
             onSuccess: () => {
-                queryClient.invalidateQueries(["getMyGroups"]);
+                queryClient.invalidateQueries(["getAllGroups"]);
+                queryClient.invalidateQueries(["getOwnGroups"]);
             },
         },
     );

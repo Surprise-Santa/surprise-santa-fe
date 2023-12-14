@@ -4,14 +4,14 @@ import { urls } from "../urls";
 import { GroupTypes } from "@/types/groups";
 
 export const useGetAllGroups = () => {
-    return useQuery(["getMyGroups"], async () => {
+    return useQuery(["getAllGroups"], async () => {
         const res = await axios.get(urls.getAllGroupsUrl);
         return res.data.data as GroupTypes[];
     });
 };
-export const useGetOtherGroups = () => {
-    return useQuery(["getOtherGroups"], async () => {
-        const res = await axios.get(urls.getOtherGroupsUrl);
+export const useGetOwnGroups = () => {
+    return useQuery(["getOwnGroups"], async () => {
+        const res = await axios.get(urls.getOwnGroupsUrl);
         return res.data.data;
     });
 };
