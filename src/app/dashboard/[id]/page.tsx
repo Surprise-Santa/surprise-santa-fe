@@ -11,17 +11,15 @@ import { getRandomChristmasColors } from "@/lib/colors";
 import { AppCalendar } from "@/components/ui/calendar/calendar";
 import { useGetAllEvents } from "@/services/queries/events";
 import { EventType } from "@/types/events";
-import { convertDateFormat } from "@/lib/utils";
+import { convertDateFormat, extractInitials } from "@/lib/utils";
 import LoadingSpinner from "@/components/ui/spinner";
-import { useGetAllGroups } from "@/services/queries/groups";
+import { useGetOwnGroups } from "@/services/queries/groups";
 
 const Page = () => {
     const { id: groupId } = useParams();
     const { data: events, isLoading } = useGetAllEvents();
-    const { data: groups } = useGetAllGroups();
+    const { data: ownGroups } = useGetOwnGroups();
     const randomChristmasColors = getRandomChristmasColors(events?.length);
-
-    console.log(groups);
 
     let upcomingEvents: EventType[] = [];
     let activeEvents: EventType[] = [];
@@ -54,7 +52,7 @@ const Page = () => {
                 <div className="p-4 order-2 md:order-1 max-w-[30%] w-full h-full flex items-center justify-center ">
                     <AppCalendar />
                 </div>
-                <div className="space-y-8 p-4 order-1 md:order-2 max-w-[35%] ">
+                <div className="space-y-8 p-4 order-1 md:order-2 max-w-[35%]">
                     <p>Upcoming Events</p>
                     <div>
                         {upcomingEvents.length > 0 ? (
@@ -127,19 +125,19 @@ const Page = () => {
             <section>
                 <div className="flex items-center gap-12 justify-between mb-8">
                     <h2 className="font-bold text-2xl">My Groups</h2>
-                    <Link href="#">View all</Link>
+                    {ownGroups && ownGroups?.length > 0 && <Link href="#">View all</Link>}
                 </div>
 
                 <div className="flex items-center justify-center md:justify-between gap-8 flex-wrap">
-                    {groups &&
-                        groups?.map((group) => (
+                    {ownGroups &&
+                        ownGroups?.map((group) => (
                             <div
                                 key={group.id}
                                 className="bg-white py-4 px-6 rounded-lg rounded-l-none shadow-md space-y-4  border-l-4 border-l-primary-red w-[20rem]"
                             >
                                 <div className="flex items-center gap-4">
                                     <Image
-                                        src={group.logoUrl}
+                                        src={group.logoUrl || "/images/Christian.jpg"}
                                         alt={group.description}
                                         className="rounded-full h-16 w-16"
                                         width={64}
@@ -155,15 +153,36 @@ const Page = () => {
                                     <span className="text-black">{group.members?.length}</span>
                                 </p>
                                 <div className="h-max relative flex">
-                                    <span className="h-10 w-10 bg-sky-500 bg-opacity-50 rounded-full flex items-center justify-center text-sky-700 font-semibold z-10">
-                                        LW
-                                    </span>
-                                    <span className="h-10 w-10 bg-rose-500 bg-opacity-50 rounded-full flex items-center justify-center text-rose-700 font-semibold z-20 -ml-2">
-                                        EH
-                                    </span>
-                                    <span className="h-10 w-10 bg-emerald-500 bg-opacity-50 rounded-full flex items-center justify-center text-emerald-700 font-semibold z-30 -ml-2">
-                                        GW
-                                    </span>
+                                    {group.members?.length > 0 && (
+                                        <span className="h-10 w-10 bg-sky-500 bg-opacity-50 rounded-full flex items-center justify-center text-sky-700 font-semibold z-10">
+                                            {extractInitials(
+                                                group.members[0].user.firstName +
+                                                    " " +
+                                                    group.members[0].user.lastName,
+                                            )}
+                                        </span>
+                                    )}
+                                    {group.members?.length > 1 && (
+                                        <span className="h-10 w-10 bg-rose-500 bg-opacity-50 rounded-full flex items-center justify-center text-rose-700 font-semibold z-20 -ml-2">
+                                            {extractInitials(
+                                                group.members[1].user.firstName +
+                                                    " " +
+                                                    group.members[1].user.lastName,
+                                            )}
+                                        </span>
+                                    )}
+                                    {group.members?.length > 2 && (
+                                        <span className="h-10 w-10 bg-emerald-500 bg-opacity-50 rounded-full flex items-center justify-center text-emerald-700 font-semibold z-30 -ml-2">
+                                            {extractInitials(
+                                                group.members[2].user.firstName +
+                                                    " " +
+                                                    group.members[2].user.lastName,
+                                            )}
+                                        </span>
+                                    )}
+                                    {group.members?.length > 3 && (
+                                        <p>+{group.members?.length - 3}</p>
+                                    )}
                                 </div>
                             </div>
                         ))}
@@ -173,17 +192,18 @@ const Page = () => {
             <section>
                 <div className="flex items-center gap-12 justify-between mb-8">
                     <h2 className="font-bold text-2xl">My Events</h2>
-                    <Link href="#">View all</Link>
+                    {combinedEvents.length > 0 && <Link href="#">View all</Link>}
                 </div>
 
                 <div className="flex items-center justify-center md:justify-between gap-8 flex-wrap">
                     {combinedEvents.length > 0 &&
-                        combinedEvents.map((event) => (
+                        combinedEvents.map((event, index) => (
                             <div
                                 key={event.id}
-                                className={`bg-white py-4 px-6 rounded-lg rounded-l-none shadow-md space-y-4 border-l-4 border-l-[${
-                                    randomChristmasColors[event.id as unknown as number]
-                                }] w-[24rem]`}
+                                className="bg-white py-4 px-6 rounded-lg rounded-l-none shadow-md space-y-4 border-l-4 w-[24rem]"
+                                style={{
+                                    borderLeftColor: `${randomChristmasColors[index]}`,
+                                }}
                             >
                                 <p className="font-semibold text-2xl">{event.title}</p>
                                 <div className="flex items-center gap-4">
@@ -225,7 +245,9 @@ const Page = () => {
                                             GW
                                         </span>
                                     </div>
-                                    <p>+{combinedEvents.length}</p>
+                                    {combinedEvents.length > 3 && (
+                                        <p>+{combinedEvents.length - 3}</p>
+                                    )}
                                 </div>
                             </div>
                         ))}
