@@ -96,7 +96,7 @@ const CreateEvent = () => {
                                 Group <span className="text-destructive text-sm ">*</span>
                             </Label>
                             <Select
-                                value={groupIdField.value || ""}
+                                value={groupIdField.value}
                                 onValueChange={(value) => groupIdField.onChange(value)}
                             >
                                 <SelectTrigger>
@@ -106,7 +106,7 @@ const CreateEvent = () => {
                                     <SelectGroup>
                                         <SelectLabel>Groups</SelectLabel>
                                         {groups?.map((group: GroupType) => (
-                                            <SelectItem key={group?.id} value={group?.id}>
+                                            <SelectItem key={group.id} value={group.id}>
                                                 {group.name}
                                             </SelectItem>
                                         ))}

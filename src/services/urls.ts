@@ -14,4 +14,5 @@ export const urls = {
     getOtherGroupsUrl: `${baseUrl}/groups/own-groups`,
     getGroupByIdUrl: (id: string) => `${baseUrl}/groups/${id}`,
     inviteGroupMembesrUrl: (id: string) => `${baseUrl}/groups/${id}/email-invite`,
+    getMatchUrl: (id: string) => `${baseUrl}/events/${id}/get-match`,
 };

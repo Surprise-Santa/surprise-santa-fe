@@ -54,35 +54,72 @@ const Page = () => {
                 <div className="p-4 order-2 md:order-1 max-w-[30%] w-full h-full flex items-center justify-center ">
                     <AppCalendar />
                 </div>
-                <div className="space-y-8 p-4 order-1 md:order-2">
-                    <p>Coming Events</p>
-                    <div className="flex gap-2">
-                        <Checkbox />
-                        <div className="-mt-1">
-                            <p>Secret Santa</p>
-                            <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4">
-                                <CalendarDays size={24} color="#000" />
-                                <div className="flex items-center gap-2">
-                                    <p className="whitespace-nowrap">23 Nov 2023</p>
-                                    <span> - </span>
-                                    <p className="whitespace-nowrap">23, Dev 2023</p>
-                                </div>
-                            </div>
-                        </div>
+                <div className="space-y-8 p-4 order-1 md:order-2 max-w-[35%] ">
+                    <p>Upcoming Events</p>
+                    <div>
+                        {upcomingEvents.length > 0 ? (
+                            upcomingEvents.map((event) => (
+                                <Link
+                                    href={`/dashboard/${groupId}/events/${event.id}`}
+                                    key={event.id}
+                                >
+                                    <div className="flex gap-2">
+                                        <Checkbox />
+                                        <div className="-mt-1">
+                                            <p className="text-sm">{event.title}</p>
+                                            <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4">
+                                                <CalendarDays size={20} color="#000" />
+                                                <div className="flex items-center gap-2">
+                                                    <p className="whitespace-nowrap">
+                                                        {convertDateFormat(event.startDate)}
+                                                    </p>
+                                                    <span> - </span>
+                                                    <p className="whitespace-nowrap">
+                                                        {convertDateFormat(event.endDate)}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))
+                        ) : (
+                            <p>No Upcoming Events</p>
+                        )}
                     </div>
-                    <div className="flex gap-2">
-                        <Checkbox />
-                        <div className="-mt-1">
-                            <p>Lola’s 27th birthday bash</p>
-                            <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4">
-                                <CalendarDays size={24} color="#000" />
-                                <div className="flex items-center gap-2">
-                                    <p className="whitespace-nowrap">23 Nov 2023</p>
-                                    <span> - </span>
-                                    <p className="whitespace-nowrap">23, Dev 2023</p>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                <div className="space-y-8 p-4 order-1 md:order-2 max-w-[35%] ">
+                    <p>Active Events</p>
+                    <div>
+                        {activeEvents.length > 0 ? (
+                            activeEvents.map((event) => (
+                                <Link
+                                    href={`/dashboard/${groupId}/events/${event.id}`}
+                                    key={event.id}
+                                >
+                                    <div className="flex gap-2">
+                                        <Checkbox />
+                                        <div className="-mt-1">
+                                            <p className="text-sm">{event.title}</p>
+                                            <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4">
+                                                <CalendarDays size={24} color="#000" />
+                                                <div className="flex items-center gap-2">
+                                                    <p className="whitespace-nowrap">
+                                                        {convertDateFormat(event.startDate)}
+                                                    </p>
+                                                    <span> - </span>
+                                                    <p className="whitespace-nowrap">
+                                                        {convertDateFormat(event.endDate)}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))
+                        ) : (
+                            <p>No Upcoming Events</p>
+                        )}
                     </div>
                 </div>
             </section>
