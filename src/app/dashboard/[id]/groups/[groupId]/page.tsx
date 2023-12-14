@@ -1,51 +1,60 @@
 "use client";
 import React from "react";
-import GroupTable from "../components/group-table";
+import GroupTable from "../../../../../components/groups/group-table";
 import { MoveLeft } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { useGetGroupById } from "@/services/queries/groups";
+import { convertDateFormat } from "@/lib/utils";
+import LoadingSpinner from "@/components/ui/spinner";
 
 const GroupDetails = () => {
     const router = useRouter();
+    const { groupId } = useParams();
+    const { data, isLoading } = useGetGroupById(groupId as string);
 
     const dataA = [
         {
             id: "1",
             title: "Group name:",
-            value: "SantaCares",
+            value: data?.name,
         },
         {
             id: "2",
             title: "Description:",
-            value: "Fake it till you make it",
+            value: data?.description,
         },
+
         {
             id: "3",
-            title: "Group Creator:",
-            value: "Ayotunde",
-        },
-        {
-            id: "4",
             title: "Group Link:",
-            value: "https://secretsanta.com/56-yy/join",
+            value: data?.groupLink,
         },
     ];
     const dataB = [
         {
             id: "1",
             title: "Members:",
-            value: "10",
+            value: data?.members?.length,
         },
         {
             id: "2",
             title: "Group Type:",
-            value: "Public",
+            value: data?.isPublic ? "Public" : "Private",
         },
+
         {
             id: "3",
             title: "Date Created:",
-            value: "23-7-2023",
+            value: convertDateFormat(data?.createdAt),
         },
     ];
+
+    if (isLoading)
+        return (
+            <main className="flex items-center justify-center h-[calc(100vh-10rem)]">
+                <LoadingSpinner />
+            </main>
+        );
     return (
         <section className="mt-4">
             <button
@@ -82,7 +91,7 @@ const GroupDetails = () => {
                 </div>
             </div>
             <div className="mt-20">
-                <GroupTable />
+                <GroupTable data={data} />
             </div>
         </section>
     );

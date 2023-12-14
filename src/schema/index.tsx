@@ -58,3 +58,11 @@ export const createEventSchema = Yup.object().shape({
     endDate: Yup.string().required("Event end date is required"),
     groupId: Yup.string().trim().required("Event group is required"),
 });
+
+export const createGroupSchema = Yup.object().shape({
+    name: Yup.string().trim().required("Group name is required"),
+    description: Yup.string().trim().required("Group description is required"),
+});
+export const inviteMemberSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Email is required"),
+});

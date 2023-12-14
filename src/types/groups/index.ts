@@ -1,7 +1,12 @@
 export interface GroupType {
-    id: string;
-    name: string;
-    description: string;
+    id?: any;
+    logo?: any;
+    name?: string;
+    description?: string;
+}
+export interface MemberType {
+    id?: string;
+    email?: any;
 }
 
 export interface User {

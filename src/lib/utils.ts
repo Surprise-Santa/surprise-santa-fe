@@ -17,3 +17,10 @@ export function convertDateFormat(inputDate: string): string {
 
     return formattedDate;
 }
+
+export const extractInitials = (inputString: string) => {
+    return inputString
+        .split(" ")
+        .map((word) => word.charAt(0))
+        .join("");
+};
