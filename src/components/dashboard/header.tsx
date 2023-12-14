@@ -6,7 +6,7 @@ import MobileSideNav from "./mobile-sidenav";
 
 const Header = () => {
     const [openMenu, setOpenMenu] = useState(false);
-    const userDetails = JSON.parse(sessionStorage.getItem("user") as string).user;
+    const userDetails = JSON.parse(sessionStorage.getItem("user") as string)?.user;
     const fullName = userDetails?.firstName + " " + userDetails?.lastName;
 
     const handleOpenMenu = () => {
