@@ -21,7 +21,7 @@ export const useCreateGroupMutation = () => {
 };
 
 export const useInviteMembersMutation = (id: any) =>
-    useMutation(["inviteMember"], async (data: MemberType) => {
+    useMutation(["inviteMember"], async (data: any) => {
         const res = await axios.post(urls.inviteGroupMembesrUrl(id), data);
         return res;
     });

@@ -30,7 +30,7 @@ const GroupTable = ({ data }: Props) => {
         <div>
             <div className="flex flex-col sm:flex-row justify-between gap-10 items-start sm:items-center mb-10 flex-wrap">
                 <h1 className="font-bold text-[1.4rem]">Members</h1>
-                <div className="flex flex-col sm:flex-row items-center gap-4 ">
+                <div className="flex flex-col sm:flex-row gap-4 ">
                     <Dialog open={open} onOpenChange={setOpen}>
                         <DialogTrigger asChild>
                             <Button type="button">
@@ -65,7 +65,7 @@ const GroupTable = ({ data }: Props) => {
                                 <TableCell>{member?.user?.email}</TableCell>
                                 <TableCell> {convertDateFormat(member?.user?.createdAt)}</TableCell>
                                 <TableCell>
-                                    <div className="flex items-center gap-4">
+                                    <div className="flex items-center gap-4 cursor-pointer">
                                         <Dialog>
                                             <DialogTrigger asChild>
                                                 <EyeIcon onClick={() => {}} />

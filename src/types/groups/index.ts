@@ -6,7 +6,7 @@ export interface GroupType {
 }
 export interface MemberType {
     id?: string;
-    email?: any;
+    email?: string;
 }
 
 export interface User {

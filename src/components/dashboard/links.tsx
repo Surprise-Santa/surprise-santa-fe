@@ -16,11 +16,11 @@ export const sideNavLinks = [
         icon: <CalendarClock />,
         href: "events",
     },
-    {
-        name: "Wishlist",
-        icon: <ListChecks />,
-        href: "wishlist",
-    },
+    // {
+    //     name: "Wishlist",
+    //     icon: <ListChecks />,
+    //     href: "wishlist",
+    // },
     {
         name: "Settings",
         icon: <Settings />,
