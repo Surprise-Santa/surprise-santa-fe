@@ -39,7 +39,7 @@ const GroupDetails = () => {
         {
             id: "2",
             title: "Group Type:",
-            value: data?.isPublic ? 'Public' : 'Private',
+            value: data?.isPublic ? "Public" : "Private",
         },
 
         {

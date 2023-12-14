@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
- import axios from "@/services/axios";
+import axios from "@/services/axios";
 import { urls } from "../urls";
 
 export const useGetAllGroups = () => {
@@ -14,7 +14,6 @@ export const useGetOtherGroups = () => {
         return res.data.data;
     });
 };
-
 
 export const useGetGroupById = (id: string) => {
     return useQuery(["getGroupById", id], async () => {

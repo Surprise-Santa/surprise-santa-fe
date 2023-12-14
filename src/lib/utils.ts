@@ -20,7 +20,7 @@ export function convertDateFormat(inputDate: string): string {
 
 export const extractInitials = (inputString: string) => {
     return inputString
-      .split(" ")
-      .map((word) => word.charAt(0))
-      .join("");
-  };
+        .split(" ")
+        .map((word) => word.charAt(0))
+        .join("");
+};

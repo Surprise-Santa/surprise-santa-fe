@@ -20,7 +20,7 @@ interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CreateGroup = ({setOpen}: Props) => {
+const CreateGroup = ({ setOpen }: Props) => {
     const { mutateAsync: createGroup, isLoading } = useCreateGroupMutation();
 
     const formHook = useForm<GroupType>({
@@ -30,10 +30,7 @@ const CreateGroup = ({setOpen}: Props) => {
             description: "",
         },
     } as { resolver: Resolver<GroupType> });
-    const {
-        handleSubmit,
-        control,
-    } = formHook;
+    const { handleSubmit, control } = formHook;
 
     const submit: SubmitHandler<GroupType> = async (data: GroupType) => {
         const result = await createGroup(data);
@@ -42,7 +39,7 @@ const CreateGroup = ({setOpen}: Props) => {
 
             if (result.status === 200 || result.status === 201) {
                 toast.success(result.data.message || "Group Created Successfully");
-                setOpen(false)
+                setOpen(false);
             }
         } catch (error: any) {
             toast.error(error?.response?.data?.message || "An error occurred");
@@ -54,39 +51,37 @@ const CreateGroup = ({setOpen}: Props) => {
                 <DialogTitle>Create Group</DialogTitle>
             </DialogHeader>
             <Form {...formHook}>
+                <form onSubmit={handleSubmit(submit)}>
+                    <div className="mt-8 mb-20">
+                        <AppInput
+                            type="text"
+                            label="Group name"
+                            placeholder="Enter group title"
+                            control={control}
+                            name="name"
+                            isRequired
+                        />
+                        <AppInput
+                            type="text"
+                            label="Description"
+                            placeholder="Enter group description"
+                            control={control}
+                            name="description"
+                            isRequired
+                        />
+                    </div>
 
-            <form onSubmit={handleSubmit(submit)}>
-
-                <div className="mt-8 mb-20">
-                    <AppInput
-                        type="text"
-                        label="Group name"
-                        placeholder="Enter group title"
-                        control={control}
-                        name="name"
-                        isRequired
-                    />
-                    <AppInput
-                        type="text"
-                        label="Description"
-                        placeholder="Enter group description"
-                        control={control}
-                        name="description"
-                        isRequired
-                    />
-                </div>
-
-                <DialogFooter>
-                    <DialogClose asChild>
-                        <Button variant="outline" type="button" className="w-max mr-4">
-                            Cancel
-                        </Button>
-                    </DialogClose>
-                    <Button type="submit" disabled={isLoading} className="w-max">
+                    <DialogFooter>
+                        <DialogClose asChild>
+                            <Button variant="outline" type="button" className="w-max mr-4">
+                                Cancel
+                            </Button>
+                        </DialogClose>
+                        <Button type="submit" disabled={isLoading} className="w-max">
                             {isLoading ? <LoadingSpinner /> : "Create Group"}
                         </Button>
-                </DialogFooter>
-            </form>
+                    </DialogFooter>
+                </form>
             </Form>
         </DialogContent>
     );

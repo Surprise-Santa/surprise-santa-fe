@@ -17,7 +17,7 @@ import CreateGroup from "../../../../components/groups/create-group";
 
 const Groups = () => {
     const [displayScrollbar, setDisplayScrollbar] = useState(false);
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
     const { data: myGroups, isLoading: myGroupsLoading } = useGetAllGroups();
     const { data: otherGroups, isLoading: otherGroupsLoading } = useGetOtherGroups();
     const { id } = useParams();
@@ -31,13 +31,13 @@ const Groups = () => {
 
     return (
         <section>
-            <Dialog open={open} onOpenChange={setOpen} >
+            <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                     <div className="flex justify-end align-end mb-4">
                         <Button type="button">Create Group</Button>
                     </div>
                 </DialogTrigger>
-                <CreateGroup setOpen={setOpen}/>
+                <CreateGroup setOpen={setOpen} />
             </Dialog>
             <div className="flex flex-col lg:flex-row gap-2 justify-between transition-all duration-300 ease-in-out">
                 <div

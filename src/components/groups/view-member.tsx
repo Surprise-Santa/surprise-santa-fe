@@ -17,11 +17,10 @@ import { Form } from "../ui/form";
 import LoadingSpinner from "../ui/spinner";
 
 interface Props {
-    data: any
+    data: any;
 }
 
 const ViewMemberDetails = ({ data }: Props) => {
-
     return (
         <DialogContent className="max-w-[100%] w-full sm:max-w-[40rem]">
             <DialogHeader>
@@ -30,37 +29,45 @@ const ViewMemberDetails = ({ data }: Props) => {
 
             <div className="mt-8 mb-20 flex justify-space-between gap-10 flex-col md:flex-row text-[1.1rem]">
                 <div className="flex flex-col w-[100%] sm:w-[50%] gap-8 ">
-                <p className="font-medium">
-                    <span className="text-neutral-400 font-normal mr-1 sm:mr-4">First name</span>
-                    kkk
-                </p>
-                <p className="font-medium">
-                    <span className="text-neutral-400 font-normal mr-1 sm:mr-4">Middle name</span>
-                    kkk
-                </p>
-                <p className="font-medium">
-                    <span className="text-neutral-400 font-normal mr-1 sm:mr-4">Last name</span>
-                    kkk
-                </p>
-                <p className="font-medium">
-                    <span className="text-neutral-400 font-normal mr-1 sm:mr-4">Phone number</span>
-                    kkk
-                </p>
+                    <p className="font-medium">
+                        <span className="text-neutral-400 font-normal mr-1 sm:mr-4">
+                            First name
+                        </span>
+                        kkk
+                    </p>
+                    <p className="font-medium">
+                        <span className="text-neutral-400 font-normal mr-1 sm:mr-4">
+                            Middle name
+                        </span>
+                        kkk
+                    </p>
+                    <p className="font-medium">
+                        <span className="text-neutral-400 font-normal mr-1 sm:mr-4">Last name</span>
+                        kkk
+                    </p>
+                    <p className="font-medium">
+                        <span className="text-neutral-400 font-normal mr-1 sm:mr-4">
+                            Phone number
+                        </span>
+                        kkk
+                    </p>
                 </div>
                 <div className="flex flex-col w-[100%] sm:w-[50%] gap-8">
-                <p className="font-medium">
-                    <span className="text-neutral-400 font-normal mr-1 sm:mr-4">Gender</span>
-                    kkk
-                </p>
-                <p className="font-medium">
-                    <span className="text-neutral-400 font-normal mr-1 sm:mr-4">Email</span>
-                    kkk
-                </p>
-                <p className="font-medium">
-                    <span className="text-neutral-400 font-normal mr-1 sm:mr-4">Date Joined</span>
-                    kkk
-                </p>
-            </div>
+                    <p className="font-medium">
+                        <span className="text-neutral-400 font-normal mr-1 sm:mr-4">Gender</span>
+                        kkk
+                    </p>
+                    <p className="font-medium">
+                        <span className="text-neutral-400 font-normal mr-1 sm:mr-4">Email</span>
+                        kkk
+                    </p>
+                    <p className="font-medium">
+                        <span className="text-neutral-400 font-normal mr-1 sm:mr-4">
+                            Date Joined
+                        </span>
+                        kkk
+                    </p>
+                </div>
             </div>
 
             <DialogFooter>

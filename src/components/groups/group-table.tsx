@@ -68,7 +68,7 @@ const GroupTable = ({ data }: Props) => {
                                     <div className="flex items-center gap-4">
                                         <Dialog>
                                             <DialogTrigger asChild>
-                                                <EyeIcon onClick={() => {}}/>
+                                                <EyeIcon onClick={() => {}} />
                                             </DialogTrigger>
                                             <ViewMemberDetails data={data} />
                                         </Dialog>

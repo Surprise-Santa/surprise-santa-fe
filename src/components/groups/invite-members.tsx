@@ -22,15 +22,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Resolver, SubmitHandler, useForm, Form } from "react-hook-form";
 import LoadingSpinner from "../ui/spinner";
 
-
 interface Props {
     data: any;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-
 }
 const InviteMembers = ({ data, setOpen }: Props) => {
     const { mutateAsync: inviteMembers, isLoading } = useInviteMembersMutation(data?.id);
-
 
     const formHook = useForm<MemberType>({
         resolver: yupResolver(inviteMemberSchema),
@@ -38,10 +35,7 @@ const InviteMembers = ({ data, setOpen }: Props) => {
             email: "",
         },
     } as { resolver: Resolver<MemberType> });
-    const {
-        handleSubmit,
-        control,
-    } = formHook;
+    const { handleSubmit, control } = formHook;
 
     const submit: SubmitHandler<MemberType> = async (data: MemberType) => {
         const result = await inviteMembers(data);
@@ -50,7 +44,7 @@ const InviteMembers = ({ data, setOpen }: Props) => {
 
             if (result.status === 200 || result.status === 201) {
                 toast.success(result.data.message || "Group Created Successfully");
-                setOpen(false)
+                setOpen(false);
             }
         } catch (error: any) {
             toast.error(error?.response?.data?.message || "An error occurred");
@@ -61,35 +55,33 @@ const InviteMembers = ({ data, setOpen }: Props) => {
             <DialogHeader>
                 <DialogTitle>Invite Members</DialogTitle>
             </DialogHeader>
-            <Form   {...formHook}>
+            <Form {...formHook}>
+                <form onSubmit={handleSubmit(submit)}>
+                    <div className="mt-8 mb-60">
+                        <Select>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Invite Members" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                    {/* to do populate the list here */}
+                                    <SelectLabel>Groups</SelectLabel>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    </div>
 
-            <form onSubmit={handleSubmit(submit)}>
-                <div className="mt-8 mb-60">
-                    <Select>
-                        <SelectTrigger>
-                            <SelectValue placeholder="Invite Members" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectGroup>
-                                {/* to do populate the list here */}
-                                <SelectLabel>Groups</SelectLabel>
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
-                </div>
-
-                <DialogFooter className="mt-10 ">
-                    <DialogClose asChild>
-                        <Button variant="outline" type="button" className="w-max mr-4">
-                            Cancel
+                    <DialogFooter className="mt-10 ">
+                        <DialogClose asChild>
+                            <Button variant="outline" type="button" className="w-max mr-4">
+                                Cancel
+                            </Button>
+                        </DialogClose>
+                        <Button type="submit" disabled={isLoading} className="w-max">
+                            {isLoading ? <LoadingSpinner /> : " Add Selected"}
                         </Button>
-                    </DialogClose>
-                    <Button type="submit" disabled={isLoading} className="w-max">
-                        {isLoading ? <LoadingSpinner /> : " Add Selected"}
-
-                    </Button>
-                </DialogFooter>
-            </form>
+                    </DialogFooter>
+                </form>
             </Form>
         </DialogContent>
     );
