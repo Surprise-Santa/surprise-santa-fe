@@ -14,30 +14,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ParticipantType } from "@/types/events";
-import { useUpdateMatchMutation } from "@/services/mutations/events.mutation";
 import toast from "react-hot-toast";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import AddParticipants from "@/components/events/add-participants-popup";
 
 const EventDetails = () => {
     const { eventId } = useParams();
     const { data, isLoading } = useGetEventById(eventId as string);
-    const { mutateAsync: updateMatch, isLoading: isUpdateMatchLoading } = useUpdateMatchMutation(
-        eventId as string,
-    );
-    const { data: matchData, isLoading: isMatchDataLoading } = useGetMatch(eventId as string);
+    // const { data: matchData, isLoading: isMatchDataLoading } = useGetMatch(eventId as string);
 
-    const handleMatch = async () => {
-        const result = await updateMatch();
-        try {
-            if (!result) return;
-            if (result.status === 200 || result.status === 201) {
-                toast.success(result.data.message || "Matched successfully");
-            }
-        } catch (error: any) {
-            toast.error(error?.response?.data?.message || "An error occurred");
-        }
-    };
-
-    if (isLoading || isMatchDataLoading)
+    if (isLoading)
         return (
             <main className="flex items-center justify-center h-[calc(100vh-10rem)]">
                 <LoadingSpinner />
@@ -75,31 +61,23 @@ const EventDetails = () => {
             </div>
 
             <div className="w-full flex align-center mt-8">
-                {matchData ? (
-                    <div>
-                        <p className="font-medium">
-                            <span className="text-neutral-400 font-normal">Matched: </span>
-                            {matchData?.name}
-                        </p>
-                        <p className="font-medium">
-                            <span className="text-neutral-400 font-normal">Email: </span>
-                            {matchData?.email}
-                        </p>
-                    </div>
-                ) : (
-                    <Button
-                        className="mx-auto"
-                        disabled={isUpdateMatchLoading}
-                        onClick={handleMatch}
-                    >
-                        {isUpdateMatchLoading ? <LoadingSpinner /> : " Click here to be matched!"}
-                    </Button>
-                )}
+                <Button
+                    className="mx-auto"
+                    // onClick={handleMatch}
+                >
+                    Click here to be matched!
+                </Button>
             </div>
 
             <div className="mt-16 flex justify-between items-center">
                 <h2 className="font-bold text-xl">Event Participants</h2>
                 <div className="flex">
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <Button className="mr-4">Add Participant</Button>
+                        </DialogTrigger>
+                        <AddParticipants groupId={data?.groupId} eventData={data} />
+                    </Dialog>
                     <Input type="text" placeholder="Search participants" />
                 </div>
             </div>
@@ -108,13 +86,14 @@ const EventDetails = () => {
                 <TableHeader>
                     <TableRow className="font-bold text-base mt-8 bg-[#C7E8CA]">
                         <TableHead>Participant Name</TableHead>
-                        <TableHead>Email</TableHead>
+
+                        <TableHead>Email Address</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {data?.participants.map((participant: ParticipantType) => (
                         <TableRow key={participant.id}>
-                            <TableCell>{participant?.name}</TableCell>
+                            <TableCell>{participant?.id}</TableCell>
                             <TableCell>{participant?.email}</TableCell>
                         </TableRow>
                     ))}

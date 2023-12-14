@@ -12,7 +12,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { Label } from "../ui/label";
-import { useGetAllGroups } from "@/services/queries/groups";
+import { useGetOwnGroups } from "@/services/queries/groups";
 import {
     Select,
     SelectContent,
@@ -28,13 +28,12 @@ import toast from "react-hot-toast";
 import LoadingSpinner from "../ui/spinner";
 
 const CreateEvent = () => {
-    const { data: groups } = useGetAllGroups();
+    const { data: groups } = useGetOwnGroups();
     const formHook = useForm<CreateEventType>({
         resolver: yupResolver(createEventSchema),
     } as { resolver: Resolver<CreateEventType> });
     const { handleSubmit, control } = formHook;
 
-    // to do: find a better way to do this
     const { field: startDateField, fieldState: startDateFieldState } = useController({
         name: "startDate",
         control,
@@ -69,15 +68,15 @@ const CreateEvent = () => {
 
             if (result.status === 200 || result.status === 201) {
                 toast.success(result.data.message || "Event Created Successfully");
-                // todo: close modal
             }
         } catch (error: any) {
             toast.error(error?.response?.data?.message || "An error occurred");
         }
+        document.getElementById("closeDialog")?.click();
     };
 
     return (
-        <DialogContent className="sm:max-w-[40rem] sm:max-h-[30rem] overflow-y-auto">
+        <DialogContent className="sm:max-w-[40rem] sm:max-h-[60rem] overflow-y-auto">
             <DialogHeader>
                 <DialogTitle>Create Event</DialogTitle>
             </DialogHeader>
@@ -198,7 +197,7 @@ const CreateEvent = () => {
                                             : ""
                                     }
                                 >
-                                    Start Date <span className="text-destructive text-sm ">*</span>
+                                    End Date <span className="text-destructive text-sm ">*</span>
                                 </Label>
                                 <Popover>
                                     <PopoverTrigger asChild>
@@ -246,7 +245,7 @@ const CreateEvent = () => {
                         </div>
                     </div>
                     <DialogFooter className="w-max ml-auto my-4">
-                        <DialogClose asChild>
+                        <DialogClose asChild id="closeDialog">
                             <Button variant="outline" type="button" className="w-max mr-4">
                                 Cancel
                             </Button>

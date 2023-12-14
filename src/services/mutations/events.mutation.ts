@@ -10,8 +10,12 @@ export const useCreateEventMutation = () =>
     });
 // to do: invalidate query cache after mutation
 
-export const useUpdateMatchMutation = (id: string) =>
-    useMutation(["updateMatch", id], async () => {
-        const res = await axios.post(urls.getMatchUrl(id));
-        return res;
-    });
+export const useAddParticipantsToEventMutation = (eventId: string) => {
+    return useMutation(
+        ["addParticipantsToEvent", eventId],
+        async (data: { participants: string[]; all: boolean }) => {
+            const res = await axios.post(urls.addParticipantsToEventUrl(eventId), data);
+            return res;
+        },
+    );
+};
