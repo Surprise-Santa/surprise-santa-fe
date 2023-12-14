@@ -16,7 +16,8 @@ import { Button } from "@/components/ui/button";
 import CreateGroup from "../../../../components/groups/create-group";
 
 const Groups = () => {
-    const [displayScrollbar, setDisplayScrollbar] = useState(false);
+    const [displayAllGroupScrollbar, setDisplayAllGroupScrollbar] = useState(false);
+    const [displayOtherGroupScrollbar, setDisplayOtherGroupScrollbar] = useState(false);
     const [open, setOpen] = useState(false);
     const { data: myGroups, isLoading: myGroupsLoading } = useGetAllGroups();
     const { data: otherGroups, isLoading: otherGroupsLoading } = useGetOtherGroups();
@@ -42,10 +43,10 @@ const Groups = () => {
             <div className="flex flex-col lg:flex-row gap-2 justify-between transition-all duration-300 ease-in-out">
                 <div
                     className={`w-[100%] lg:w-[47%] h-[28rem] relative border-2 border-primary-gray mt-4 rounded-xl p-6 overflow-y-auto ${
-                        displayScrollbar ? "scrollBar" : "scroll"
+                        displayAllGroupScrollbar ? "scrollBar" : "scroll"
                     }`}
-                    onMouseEnter={() => setDisplayScrollbar(true)}
-                    onMouseLeave={() => setDisplayScrollbar(false)}
+                    onMouseEnter={() => setDisplayAllGroupScrollbar(true)}
+                    onMouseLeave={() => setDisplayAllGroupScrollbar(false)}
                 >
                     <h2 className="font-bold text-[1.4rem] ">My Groups</h2>
                     {myGroups?.length ? (
@@ -79,10 +80,10 @@ const Groups = () => {
                 </div>
                 <div
                     className={`w-[100%] lg:w-[47%] h-[28rem] relative border-2 border-primary-gray mt-4 rounded-xl p-6 overflow-y-auto ${
-                        displayScrollbar ? "scrollBar" : "scroll"
+                        displayOtherGroupScrollbar ? "scrollBar" : "scroll"
                     }`}
-                    onMouseEnter={() => setDisplayScrollbar(true)}
-                    onMouseLeave={() => setDisplayScrollbar(false)}
+                    onMouseEnter={() => setDisplayOtherGroupScrollbar(true)}
+                    onMouseLeave={() => setDisplayOtherGroupScrollbar(false)}
                 >
                     <h2 className="font-bold text-[1.4rem]">Other Groups</h2>
                     {otherGroups?.length ? (
