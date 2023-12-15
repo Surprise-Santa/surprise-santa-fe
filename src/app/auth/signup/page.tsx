@@ -141,7 +141,7 @@ function SignUp() {
                                 type="password"
                                 control={control}
                                 name="password"
-                                placeholder="Enter your password"
+                                placeholder="********"
                                 isRequired
                             />
 
@@ -150,7 +150,7 @@ function SignUp() {
                                 type="password"
                                 control={control}
                                 name="confirmPassword"
-                                placeholder="Confirm your password"
+                                placeholder="********"
                                 isRequired
                             />
                         </div>

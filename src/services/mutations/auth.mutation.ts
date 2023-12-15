@@ -3,6 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "@/services/axios";
 import { urls } from "../urls";
 import { SignUpType, SignInType } from "@/types/auth";
+import { UpdatePasswordType } from "@/types/settings";
 
 export const useSignupMutation = () =>
     useMutation(["signUp"], async (data: SignUpType) => {

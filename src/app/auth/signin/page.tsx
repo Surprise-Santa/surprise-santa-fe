@@ -137,7 +137,7 @@ function SignIn() {
                                 type="password"
                                 control={control}
                                 name="password"
-                                placeholder="Enter your password"
+                                placeholder="********"
                                 isRequired
                             />
                         </div>

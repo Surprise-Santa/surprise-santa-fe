@@ -7,22 +7,22 @@ import ProtectedPage from "@/services/guard/ProtectedPage";
 const settingsData = [
     {
         id: "1",
-        title: "Profile Settings",
+        title: "Profile settings",
         icon: <User />,
     },
     {
         id: "2",
-        title: "Group Settings",
+        title: "Group settings",
         icon: <Users />,
     },
     {
         id: "3",
-        title: "Event Settings",
+        title: "Event settings",
         icon: <CalendarClock />,
     },
     {
         id: "4",
-        title: "Wishlist Settings",
+        title: "Wishlist settings",
         icon: <ListChecks />,
     },
 ];
@@ -35,7 +35,10 @@ const Settings = () => {
                     <Link
                         key={item.id}
                         className="w-[15rem] h-[10rem] p-4 text-center rounded-md bg-white shadow-md flex flex-col items-center justify-center gap-4 text-xl font-semibold"
-                        href={item.title.toLowerCase().replace(" ", "-")}
+                        href={`settings/${item.title
+                            .toLowerCase()
+                            .replace(/\s+/g, "-") // Replace any whitespace character with a hyphen
+                            .replace("-settings", "")}`}
                     >
                         {item.icon}
                         <p>{item.title}</p>

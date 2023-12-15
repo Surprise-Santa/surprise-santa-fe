@@ -77,7 +77,7 @@ function ResetPassword() {
                                 type="password"
                                 control={control}
                                 name="password"
-                                placeholder="Enter new password"
+                                placeholder="********"
                                 isRequired
                             />
 
@@ -86,7 +86,7 @@ function ResetPassword() {
                                 type="password"
                                 control={control}
                                 name="confirmPassword"
-                                placeholder="Confirm your new password"
+                                placeholder="********"
                                 isRequired
                             />
                         </div>
