@@ -32,9 +32,8 @@ axios.interceptors.response.use(
             toast.error(
                 `${error.response?.data?.message}. Please login to continue` || error.message,
             );
-
-            window.location.href = "/";
-
+            sessionStorage.removeItem("user");
+            window.location.href = "/auth/signin";
             return;
         }
         if (error instanceof AxiosError && error.response?.status === 400) {

@@ -28,7 +28,7 @@ const Navbar = () => {
                             </div>
                         </Link>
                     ) : (
-                        <Link href="/auth/signup">
+                        <Link href="/auth/signin">
                             <div className="bg-primary-green font-bold text-white px-4 sm:px-6 py-[8px] rounded-2xl	flex items-center mr-4">
                                 Get Started
                             </div>
