@@ -1,7 +1,7 @@
 "use client";
 import LoadingSpinner from "@/components/ui/spinner";
 import { convertDateFormat } from "@/lib/utils";
-import { useGetEventById, useGetMatch } from "@/services/queries/events";
+import { useGetEventById } from "@/services/queries/events";
 import { useParams } from "next/navigation";
 import {
     Table,
@@ -17,11 +17,29 @@ import { ParticipantType } from "@/types/events";
 import toast from "react-hot-toast";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import AddParticipants from "@/components/events/add-participants-popup";
+import { usePostMatchMutation } from "@/services/mutations/events.mutation";
+import { useQuery } from "@tanstack/react-query";
+import axios from "@/services/axios";
+import { urls } from "@/services/urls";
+import { isAfter } from "date-fns";
 
 const EventDetails = () => {
     const { eventId } = useParams();
     const { data, isLoading } = useGetEventById(eventId as string);
-    // const { data: matchData, isLoading: isMatchDataLoading } = useGetMatch(eventId as string);
+    const { data: matchData, isLoading: isMatchDataLoading } = useQuery(
+        ["getMatch", eventId],
+        async () => {
+            const res = await axios.get(urls.getMatchUrl(eventId as string));
+            return res.data.data;
+        },
+        {
+            enabled: isAfter(new Date(), new Date(data?.startDate)),
+        },
+    );
+
+    const { mutateAsync: handleMatch, isLoading: isMatchLoading } = usePostMatchMutation(
+        eventId as string,
+    );
 
     if (isLoading)
         return (
@@ -61,12 +79,27 @@ const EventDetails = () => {
             </div>
 
             <div className="w-full flex align-center mt-8">
-                <Button
-                    className="mx-auto"
-                    // onClick={handleMatch}
-                >
-                    Click here to be matched!
-                </Button>
+                {matchData ? (
+                    <div className="flex flex-col gap-8 mx-auto">
+                        <p className="font-medium text-lg">
+                            <span className="text-neutral-400 font-normal">
+                                You have been matched with{" "}
+                            </span>
+                            {matchData?.beneficiary?.firstName} {matchData?.beneficiary?.lastName}!
+                        </p>
+                    </div>
+                ) : (
+                    <Button
+                        className="mx-auto min-w-[10rem]"
+                        onClick={
+                            isAfter(new Date(), new Date(data?.startDate))
+                                ? () => handleMatch()
+                                : () => toast.error("Event has not started yet!")
+                        }
+                    >
+                        {isMatchLoading ? <LoadingSpinner /> : "Get Matched!"}
+                    </Button>
+                )}
             </div>
 
             <div className="mt-16 flex justify-between items-center">
