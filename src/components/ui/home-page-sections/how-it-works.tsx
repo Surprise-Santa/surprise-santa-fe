@@ -7,7 +7,7 @@ const HowItWorks = () => {
         <section className="w-full py-8 md:py-20 px-5 xl:px-[136px]">
             <h2 className="text-center font-bold text-[31px] md:mb-10">How Does It Work?</h2>
 
-            <div className="flex flex-col gap-6 md:gap-0">
+            <div className="flex flex-col gap-6 md:gap-0 mt-28">
                 {howItWorksData.map((card) => (
                     <div
                         key={card.index}
