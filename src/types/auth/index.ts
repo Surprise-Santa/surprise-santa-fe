@@ -19,17 +19,3 @@ export interface SignUpType {
     confirmPassword?: string;
     profileImgUrl?: string;
 }
-
-export interface EditProfileType {
-    firstName?: string;
-    lastName?: string;
-    middleName?: string;
-    gender?: string;
-    email?: string;
-    phone?: string;
-}
-
-export interface UpdatePasswordType {
-    currentPassword: string;
-    newPassword: string;
-}

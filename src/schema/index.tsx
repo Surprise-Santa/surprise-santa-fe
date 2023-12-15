@@ -42,7 +42,6 @@ export const editProfileSchema = Yup.object({
     lastName: Yup.string().trim().notRequired(),
     middleName: Yup.string().trim().notRequired(),
     gender: Yup.string().trim().notRequired(),
-    email: Yup.string().email("Invalid email").notRequired(),
     phone: Yup.string().trim().notRequired(),
 });
 
