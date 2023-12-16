@@ -1,47 +1,52 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import Calendar from "react-calendar";
+import Calendar, { CalendarProps } from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { isSameDay } from "date-fns";
-import ClientWrapper from "@/components/wrapper/client";
+import { EventType } from "@/types/events";
 
 type ValuePiece = Date | null;
-
 type Value = ValuePiece | [ValuePiece, ValuePiece];
-
 interface TileContentProp {
-    date: number | Date;
+    date: Date;
     view: string;
 }
+interface CalendarPropsType extends CalendarProps {
+    props?: any;
+    events?: EventType[];
+}
 
-const ViewCalendar = () => {
-    const [value, onChange] = useState<Value>(new Date());
+export const AppCalendar = ({ props, events }: CalendarPropsType) => {
+    const [value, setValue] = useState<Value>(new Date());
 
-    const tileContent = useCallback(({ date, view }: TileContentProp) => {
-        const datesToAddContentTo = [new Date("23 Dec 2023"), new Date()];
-
-        // Add class to tiles in month view only
-        if (view === "month") {
-            // Check if a date React-Calendar wants to check is on the list of dates to add class to
-            if (datesToAddContentTo.find((dDate) => isSameDay(dDate, date))) {
-                return "Secret Santa";
+    const tileContent = useCallback(
+        ({ date, view }: TileContentProp) => {
+            if (view === "month") {
+                const day = date.getDate();
+                const month = date.getMonth();
+                const year = date.getFullYear();
+                const event = events?.find((event) => {
+                    const eventDate = new Date(event.startDate);
+                    const eventDay = eventDate.getDate();
+                    const eventMonth = eventDate.getMonth();
+                    const eventYear = eventDate.getFullYear();
+                    return day === eventDay && month === eventMonth && year === eventYear;
+                });
+                return <span className="text-xs w-full min-w-fit max-w-max">{event?.title}</span>;
             }
-        }
-    }, []);
+            return null;
+        },
+        [events],
+    );
 
     return (
         <Calendar
-            onChange={onChange}
+            onChange={setValue}
             value={value}
             tileContent={tileContent}
-            tileClassName="gap-2 grid place-items-center"
+            tileClassName="w-full grid place-items-center gap-1"
+            className="w-full h-full px-2 text-ellipsis"
+            {...props}
         />
     );
 };
-
-export const AppCalendar = () => (
-    <ClientWrapper>
-        <ViewCalendar />
-    </ClientWrapper>
-);

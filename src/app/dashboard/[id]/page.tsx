@@ -48,15 +48,15 @@ const Page = () => {
 
     return (
         <main className="space-y-12">
-            <section className="rounded-md w-full bg-white py-4 shadow-lg flex flex-col md:flex-row gap-8 md:divide-x-2 w-[80vw]">
-                <div className="p-4 order-2 md:order-1 w-full h-full flex items-center justify-center ">
-                    <AppCalendar />
+            <section className="rounded-md w-full bg-white py-4 shadow-lg flex flex-col md:flex-row gap-8 md:divide-x-2">
+                <div className="p-4 order-3 md:order-1 w-full h-full flex items-center justify-center">
+                    <AppCalendar events={combinedEvents} />
                 </div>
                 <div className="space-y-8 p-4 order-1 md:order-2 w-full">
-                    <p>Upcoming Events</p>
+                    <p>Active Events</p>
                     <div>
-                        {upcomingEvents.length > 0 ? (
-                            upcomingEvents.map((event) => (
+                        {activeEvents.length > 0 ? (
+                            activeEvents.map((event) => (
                                 <Link
                                     href={`/dashboard/${groupId}/events/${event.id}`}
                                     key={event.id}
@@ -66,7 +66,7 @@ const Page = () => {
                                         <div className="-mt-1">
                                             <p className="text-sm">{event.title}</p>
                                             <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4">
-                                                <CalendarDays size={20} color="#000" />
+                                                <CalendarDays size={24} color="#000" />
                                                 <div className="flex items-center gap-2">
                                                     <p className="whitespace-nowrap">
                                                         {convertDateFormat(event.startDate)}
@@ -86,21 +86,21 @@ const Page = () => {
                         )}
                     </div>
                 </div>
-                <div className="space-y-8 p-4 order-1 md:order-2 w-full">
-                    <p>Active Events</p>
+                <div className="space-y-8 p-4 order-2 md:order-3 w-full">
+                    <p>Upcoming Events</p>
                     <div>
-                        {activeEvents.length > 0 ? (
-                            activeEvents.map((event) => (
+                        {upcomingEvents.length > 0 ? (
+                            upcomingEvents.map((event) => (
                                 <Link
                                     href={`/dashboard/${groupId}/events/${event.id}`}
                                     key={event.id}
                                 >
-                                    <div className="flex gap-2">
+                                    <div className="flex gap-2 mb-6">
                                         <Checkbox />
                                         <div className="-mt-1">
                                             <p className="text-sm">{event.title}</p>
                                             <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4">
-                                                <CalendarDays size={24} color="#000" />
+                                                <CalendarDays size={20} color="#000" />
                                                 <div className="flex items-center gap-2">
                                                     <p className="whitespace-nowrap">
                                                         {convertDateFormat(event.startDate)}
