@@ -5,14 +5,19 @@ export interface EventType {
     startDate: string;
     endDate: string;
     createdBy: string;
+    participants: ParticipantType[];
 }
 
 export interface ParticipantType {
     id: string;
-    name: string;
-    email: string;
     group: string;
     status: boolean;
+    user: {
+        firstName: string;
+        lastName: string;
+        gender: string;
+        email: string;
+    };
 }
 
 export interface CreateEventType {
