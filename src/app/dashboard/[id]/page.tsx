@@ -263,8 +263,8 @@ const Page = () => {
                                             </span>
                                         )}
                                     </div>
-                                    {combinedEvents.length > 3 && (
-                                        <p>+{combinedEvents.length - 3}</p>
+                                    {event?.participants?.length > 3 && (
+                                        <p>+{event?.participants?.length - 3}</p>
                                     )}
                                 </div>
                             </div>

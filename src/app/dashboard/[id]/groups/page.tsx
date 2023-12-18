@@ -1,16 +1,16 @@
 "use client";
 
+import { Dialog } from "@radix-ui/react-dialog";
+import Image from "next/image";
+import { useParams } from "next/navigation";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { DialogTrigger } from "@/components/ui/dialog";
 import LoadingSpinner from "@/components/ui/spinner";
 import { extractInitials } from "@/lib/utils";
 import ProtectedPage from "@/services/guard/ProtectedPage";
 import { useGetAllGroups, useGetOwnGroups } from "@/services/queries/groups";
-import { Dialog } from "@radix-ui/react-dialog";
-import Image from "next/image";
-import { useParams } from "next/navigation";
 import NoDataImage from "public/images/no-data-icon.png";
-import { useState } from "react";
 import CreateGroup from "../../../../components/groups/create-group";
 import GroupCard from "../../../../components/groups/group-card";
 
