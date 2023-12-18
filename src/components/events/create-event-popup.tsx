@@ -76,7 +76,7 @@ const CreateEvent = () => {
     };
 
     return (
-        <DialogContent className="sm:max-w-[40rem] sm:max-h-[60rem] overflow-y-auto">
+        <DialogContent className="max-w-[20rem] sm:max-w-[40rem] sm:max-h-[60rem] overflow-y-auto">
             <DialogHeader>
                 <DialogTitle>Create Event</DialogTitle>
             </DialogHeader>
@@ -133,17 +133,17 @@ const CreateEvent = () => {
                             isRequired
                         />
 
-                        <div className="flex justify-between">
-                            <div className="flex flex-col gap-2">
+                        <div className="sm:flex block gap-4 w-full">
+                            <div className="flex flex-col gap-2 w-full">
                                 <Label
-                                    htmlFor="startDate"
+                                    htmlFor="startDates"
                                     className={
                                         startDateFieldState?.error?.message
                                             ? "text-destructive text-sm"
                                             : ""
                                     }
                                 >
-                                    Start Date <span className="text-destructive text-sm ">*</span>
+                                    Start Date <span className="text-destructive text-sm">*</span>
                                 </Label>
                                 <Popover>
                                     <PopoverTrigger asChild>
@@ -188,7 +188,7 @@ const CreateEvent = () => {
                                     {startDateFieldState?.error?.message}
                                 </span>
                             </div>
-                            <div className="flex flex-col gap-2">
+                            <div className="flex flex-col gap-2 w-full">
                                 <Label
                                     htmlFor="endDate"
                                     className={
