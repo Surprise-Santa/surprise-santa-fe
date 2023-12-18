@@ -48,20 +48,20 @@ const Page = () => {
 
     return (
         <main className="space-y-12">
-            <section className="rounded-md w-full bg-white py-4 shadow-lg flex flex-col md:flex-row gap-8 md:divide-x-2">
+            <section className="rounded-md w-full bg-white py-4 shadow-lg flex flex-col md:flex-row gap-2 md:gap-8 md:divide-x-2">
                 <div className="p-4 order-3 md:order-1 w-full h-full flex items-center justify-center">
                     <AppCalendar events={combinedEvents} />
                 </div>
-                <div className="space-y-8 p-4 order-1 md:order-2 w-full">
+                <div className="space-y-4 p-4 order-1 md:order-2 w-full">
                     <p>Active Events</p>
-                    <div>
+                    <div className="flex flex-col gap-6">
                         {activeEvents.length > 0 ? (
                             activeEvents.map((event) => (
                                 <Link
                                     href={`/dashboard/${groupId}/events/${event.id}`}
                                     key={event.id}
                                 >
-                                    <div className="flex gap-2 mb-6">
+                                    <div className="flex gap-2">
                                         <Checkbox />
                                         <div className="-mt-1">
                                             <p className="text-sm">{event.title}</p>
@@ -86,16 +86,16 @@ const Page = () => {
                         )}
                     </div>
                 </div>
-                <div className="space-y-8 p-4 order-2 md:order-3 w-full">
+                <div className="space-y-4 p-4 order-2 md:order-3 w-full">
                     <p>Upcoming Events</p>
-                    <div>
+                    <div className="flex flex-col gap-6">
                         {upcomingEvents.length > 0 ? (
                             upcomingEvents.map((event) => (
                                 <Link
                                     href={`/dashboard/${groupId}/events/${event.id}`}
                                     key={event.id}
                                 >
-                                    <div className="flex gap-2 mb-6">
+                                    <div className="flex gap-2">
                                         <Checkbox />
                                         <div className="-mt-1">
                                             <p className="text-sm">{event.title}</p>
@@ -235,15 +235,33 @@ const Page = () => {
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <div className="flex">
-                                        <span className="h-10 w-10 bg-sky-500 bg-opacity-50 rounded-full flex items-center justify-center text-sky-700 font-semibold z-10">
-                                            LW
-                                        </span>
-                                        <span className="h-10 w-10 bg-rose-500 bg-opacity-50 rounded-full flex items-center justify-center text-rose-700 font-semibold z-20 -ml-2">
-                                            EH
-                                        </span>
-                                        <span className="h-10 w-10 bg-emerald-500 bg-opacity-50 rounded-full flex items-center justify-center text-emerald-700 font-semibold z-30 -ml-2">
-                                            GW
-                                        </span>
+                                        {event.participants?.length > 0 && (
+                                            <span className="h-10 w-10 bg-sky-500 bg-opacity-50 rounded-full flex items-center justify-center text-sky-700 font-semibold z-10">
+                                                {extractInitials(
+                                                    event.participants[0].user.firstName +
+                                                        " " +
+                                                        event.participants[0].user.lastName,
+                                                )}
+                                            </span>
+                                        )}
+                                        {event.participants?.length > 1 && (
+                                            <span className="h-10 w-10 bg-rose-500 bg-opacity-50 rounded-full flex items-center justify-center text-rose-700 font-semibold z-20 -ml-2">
+                                                {extractInitials(
+                                                    event.participants[1].user.firstName +
+                                                        " " +
+                                                        event.participants[1].user.lastName,
+                                                )}
+                                            </span>
+                                        )}
+                                        {event.participants?.length > 2 && (
+                                            <span className="h-10 w-10 bg-emerald-500 bg-opacity-50 rounded-full flex items-center justify-center text-emerald-700 font-semibold z-30 -ml-2">
+                                                {extractInitials(
+                                                    event.participants[2].user.firstName +
+                                                        " " +
+                                                        event.participants[2].user.lastName,
+                                                )}
+                                            </span>
+                                        )}
                                     </div>
                                     {combinedEvents.length > 3 && (
                                         <p>+{combinedEvents.length - 3}</p>

@@ -1,3 +1,5 @@
+import { User } from "../groups";
+
 export interface EventType {
     id: string;
     title: string;
@@ -12,12 +14,7 @@ export interface ParticipantType {
     id: string;
     group: string;
     status: boolean;
-    user: {
-        firstName: string;
-        lastName: string;
-        gender: string;
-        email: string;
-    };
+    user: User;
 }
 
 export interface CreateEventType {
