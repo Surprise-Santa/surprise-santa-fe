@@ -29,7 +29,7 @@ const Events = () => {
     return (
         <main className="flex flex-col ">
             <div className="flex items-center justify-between">
-                <Input className="w-1/4" type="text" placeholder="Search events" />
+                <Input className="w-1/2 md:w-1/4" type="text" placeholder="Search events" />
                 <Dialog>
                     <DialogTrigger asChild>
                         <Button className="mr-4">Create Event</Button>
