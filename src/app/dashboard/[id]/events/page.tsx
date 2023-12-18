@@ -27,23 +27,25 @@ const Events = () => {
         );
 
     return (
-        <main className="flex flex-col ">
-            <div className="flex items-center justify-between">
-                <Input className="w-1/4" type="text" placeholder="Search events" />
+        <main className="flex flex-col">
+            <div className="flex flex-col sm:flex-row items-center justify-between">
+                <Input className="w-full sm:w-1/4" type="text" placeholder="Search events" />
                 <Dialog>
                     <DialogTrigger asChild>
-                        <Button className="mr-4">Create Event</Button>
+                        <Button className="mt-4 sm:mt-0 sm:mr-4 sm:w-max w-full">
+                            Create Event
+                        </Button>
                     </DialogTrigger>
                     <CreateEvent />
                 </Dialog>
             </div>
 
             {data.length ? (
-                <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-8">
-                    {data?.map(({ id, title, startDate, endDate }: EventType) => {
+                <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 overflow-x-auto whitespace-nowrap">
+                    {data?.map(({ id, title, startDate, endDate, participants }: EventType) => {
                         return (
                             <Link href={`/dashboard/${groupId}/events/${id}`} key={id}>
-                                <div className="w-[100%] border-l-4 border-l-red-500 rounded px-8 py-4 shadow-md flex flex-col gap-2 hover:shadow-lg">
+                                <div className="min-w-[18rem] w-full border-l-4 border-l-red-500 rounded px-8 py-4 shadow-md flex flex-col gap-2 hover:shadow-lg mr-8">
                                     <h2 className="font-semibold text-xl">{title}</h2>
                                     <div className="flex items-center gap-2">
                                         <Avatar className="h-10 w-10">
@@ -76,7 +78,9 @@ const Events = () => {
                                                 GW
                                             </span>
                                         </div>
-                                        <p className="text-lg font-medium">+12</p>
+                                        <p className="text-lg font-medium">
+                                            + {participants?.length}
+                                        </p>
                                     </div>
                                 </div>
                             </Link>
