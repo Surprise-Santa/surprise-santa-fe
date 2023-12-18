@@ -76,7 +76,7 @@ const CreateEvent = () => {
     };
 
     return (
-        <DialogContent className="sm:max-w-[40rem] sm:max-h-[60rem] overflow-y-auto">
+        <DialogContent className="max-w-[20rem] sm:max-w-[40rem] sm:max-h-[60rem] overflow-y-auto">
             <DialogHeader>
                 <DialogTitle>Create Event</DialogTitle>
             </DialogHeader>
@@ -133,7 +133,7 @@ const CreateEvent = () => {
                             isRequired
                         />
 
-                        <div className="flex justify-between">
+                        <div className="md:flex flex-col justify-between">
                             <div className="flex flex-col gap-2">
                                 <Label
                                     htmlFor="startDate"
