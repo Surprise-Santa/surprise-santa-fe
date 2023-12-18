@@ -241,7 +241,7 @@ const Page = () => {
                                                     event.participants[0].user.firstName +
                                                         " " +
                                                         event.participants[0].user.lastName,
-                                                    )}
+                                                )}
                                             </span>
                                         )}
                                         {event.participants?.length > 1 && (
@@ -250,7 +250,7 @@ const Page = () => {
                                                     event.participants[1].user.firstName +
                                                         " " +
                                                         event.participants[1].user.lastName,
-                                                    )}
+                                                )}
                                             </span>
                                         )}
                                         {event.participants?.length > 2 && (
@@ -259,7 +259,7 @@ const Page = () => {
                                                     event.participants[2].user.firstName +
                                                         " " +
                                                         event.participants[2].user.lastName,
-                                                    )}
+                                                )}
                                             </span>
                                         )}
                                     </div>

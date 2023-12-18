@@ -33,7 +33,9 @@ const Layout = ({ children }: { children: ReactNode }) => {
                 }`}
             >
                 <Header />
-                <div className="px-4 lg:px-8 py-4 -mt-8 m-0 w-full h-full overflow-x-auto">{children}</div>
+                <div className="px-4 lg:px-8 py-4 -mt-8 m-0 w-full h-full overflow-x-auto">
+                    {children}
+                </div>
             </div>
         </main>
     );
