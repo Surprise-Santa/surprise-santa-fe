@@ -12,8 +12,6 @@ export interface EventType {
 
 export interface ParticipantType {
     id: string;
-    name: string;
-    email: string;
     group: string;
     status: boolean;
     user: User;
