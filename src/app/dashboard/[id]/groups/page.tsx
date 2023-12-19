@@ -11,7 +11,7 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import NoDataImage from "public/images/no-data-icon.png";
 import { useState } from "react";
-import CreateGroup from "../../../../components/groups/create-group";
+import CreateGroup from "../../../../components/groups/create-group-modal";
 import GroupCard from "../../../../components/groups/group-card";
 
 const Groups = () => {

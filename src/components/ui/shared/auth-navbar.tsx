@@ -26,10 +26,10 @@ function AuthNavbar({ isSignInPage, isSignUpPage, isResetPasswordPage }: NavbarP
                 </p>
 
                 <div className="flex items-center">
-                    <p className="mr-4">{haveAccountText}</p>
+                    <p className="mr-4 hidden sm:block">{haveAccountText}</p>
 
                     <Link href={linkRoute}>
-                        <div className="bg-primary-green font-bold text-white px-4 sm:px-6 py-[8px] rounded-2xl	flex items-center">
+                        <div className="bg-primary-green font-bold text-white px-4 sm:px-6 py-[8px] rounded-2xl	flex items-center justify-center w-[6rem] sm:w-[7rem]">
                             {linkText}
                         </div>
                     </Link>

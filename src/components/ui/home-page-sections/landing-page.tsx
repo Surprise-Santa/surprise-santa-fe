@@ -9,9 +9,10 @@ import Rocket from "public/images/rocket.png";
 import Santa from "public/images/santa.png";
 import Tree from "public/images/tree.png";
 
-const LandingPage = () => {
+const LandingPage = ({opac}: any) => {
     return (
-        <section className="h-[100vh] bg-stars relative to-red-50">
+        <section className={`h-[100vh] bg-stars relative to-red-50 opacity-${opac ?? 100}`}>
+
             <div className="absolute top-20 sm:top-20 left-0 lg:left-40 xl:left-52 w-[120px]  sm:w-[180px] xl:w-[250px]">
                 {" "}
                 <Image src={Band} alt="icons" />
@@ -43,7 +44,7 @@ const LandingPage = () => {
                     facilisis leo magna luctus augue ullamcorper.”{" "}
                 </p>
                 <div className="mt-8 md:mt-6 flex items-end gap-2 ml-0 sm:ml-20 w-[180px]  sm:w-[300px] ">
-                    <Link href="/auth/signup">
+                    <Link href="/auth/signin">
                         <div className="bg-primary-green font-bold text-white px-6 sm:px-10 py-[12px] rounded-3xl flex items-center gap-2">
                             Get Started
                             <Image src={Rocket} alt="icons" height={20} />

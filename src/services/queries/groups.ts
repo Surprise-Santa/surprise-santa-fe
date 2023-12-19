@@ -22,3 +22,9 @@ export const useGetGroupById = (id: string) => {
         return res.data.data;
     });
 };
+export const useGetGroupMembers = (id: string) => {
+    return useQuery(["getGroupMembers", id], async () => {
+        const res = await axios.get(urls.getGroupMembersrUrl(id));
+        return res.data.data;
+    });
+};

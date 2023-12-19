@@ -14,6 +14,7 @@ export const urls = {
     getOwnGroupsUrl: `${baseUrl}/groups/own-groups`,
     getGroupByIdUrl: (id: string) => `${baseUrl}/groups/${id}`,
     inviteGroupMembesrUrl: (id: string) => `${baseUrl}/groups/${id}/email-invite`,
+    getGroupMembersrUrl: (id: string) => `${baseUrl}/member/${id}`,
     getMatchUrl: (id: string) => `${baseUrl}/events/${id}/get-match`,
     addParticipantsToEventUrl: (eventId: string) => `${baseUrl}/events/${eventId}/add-participants`,
     changePasswordUrl: `${baseUrl}/settings/profile/change-password`,

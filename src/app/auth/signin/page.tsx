@@ -47,12 +47,18 @@ function SignIn() {
             if (!result) return;
 
             const userId = result?.data?.data?.user?.id;
+            const groupCode = sessionStorage.getItem("groupCode");
 
             if (result.status === 200 || result.status === 201) {
                 toast.success("Sign In Successful!" || result.data.message);
                 sessionStorage.setItem("user", JSON.stringify(result.data.data));
 
-                return router.push(`/dashboard/${userId}`);
+                if (sessionStorage.getItem("groupCode")) {
+                    return router.push(`/dashboard/${userId}/groups/${groupCode}`);
+                } else {
+                    return router.push(`/dashboard/${userId}`);
+                }
+
             }
         } catch (error: any) {
             toast.error(error?.response?.data?.message || "An error occurred");
@@ -92,11 +98,10 @@ function SignIn() {
                 <Form {...formHook}>
                     <form
                         onSubmit={handleSubmit(submit)}
-                        className="bg-white py-6 sm:py-12 px-8 sm:px-24 rounded-2xl shadow-lg w-[320px] sm:w-[600px] mx-auto"
+                        className="bg-white my-6 py-6 sm:py-12 px-8 sm:px-16 md:px-24 rounded-2xl shadow-lg w-[95%] max-w-[600px] mx-auto"
                     >
                         <h4 className="text-[31px] font-bold text-center mb-4">Welcome Back</h4>
 
-                        <p className=" text-center mb-2">Glad to see you again</p>
 
                         <p className="text-center mb-8">Login into your account below</p>
 
