@@ -47,16 +47,17 @@ const ViewMemberDetails = ({ memberDetails }: Props) => {
                 </div>
                 <div className="mt-8 mb-20 flex justify-space-between gap-8 flex-col md:flex-row text-[1.1rem]">
                     <div className="flex flex-col w-[100%] sm:w-[50%] gap-8 ">
-                      
                         <p className="font-medium">
                             <span className="text-neutral-400 font-normal mr-1 sm:mr-4">
                                 Gender:
                             </span>
-                            {memberDetails?.user?.gender ?? 'N/A'}
+                            {memberDetails?.user?.gender ?? "N/A"}
                         </p>
                         <p className="font-medium">
-                            <span className="text-neutral-400 font-normal mr-1 sm:mr-4">Email:</span>
-                            {memberDetails?.user?.email ?? 'N/A'}
+                            <span className="text-neutral-400 font-normal mr-1 sm:mr-4">
+                                Email:
+                            </span>
+                            {memberDetails?.user?.email ?? "N/A"}
                         </p>
                     </div>
                     <div className="flex flex-col w-[100%] sm:w-[50%] gap-8">
@@ -64,13 +65,13 @@ const ViewMemberDetails = ({ memberDetails }: Props) => {
                             <span className="text-neutral-400 font-normal mr-1 sm:mr-4">
                                 Phone:
                             </span>
-                            {memberDetails?.user?.phone ?? 'N/A'}
+                            {memberDetails?.user?.phone ?? "N/A"}
                         </p>
                         <p className="font-medium">
                             <span className="text-neutral-400 font-normal mr-1 sm:mr-4">
                                 Date Joined:
                             </span>
-                            {convertDateFormat(memberDetails?.user?.createdAt) ?? 'N/A'}
+                            {convertDateFormat(memberDetails?.user?.createdAt) ?? "N/A"}
                         </p>
                     </div>
                 </div>

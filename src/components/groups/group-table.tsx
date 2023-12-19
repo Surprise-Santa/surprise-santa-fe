@@ -26,7 +26,7 @@ interface Props {
 
 const GroupTable = ({ data }: Props) => {
     const [open, setOpen] = useState(false);
-    const [memberDetails, setMemberDetails] = useState({})
+    const [memberDetails, setMemberDetails] = useState({});
 
     return (
         <div>
@@ -70,12 +70,13 @@ const GroupTable = ({ data }: Props) => {
                                     <div className="flex items-center gap-4 cursor-pointer">
                                         <Dialog>
                                             <DialogTrigger asChild>
-                                                <EyeIcon onClick={() => {
-                                                    setMemberDetails(member)
-                                                }} />
+                                                <EyeIcon
+                                                    onClick={() => {
+                                                        setMemberDetails(member);
+                                                    }}
+                                                />
                                             </DialogTrigger>
-                                            <ViewMemberDetails memberDetails={memberDetails}/>
-                                            
+                                            <ViewMemberDetails memberDetails={memberDetails} />
                                         </Dialog>
                                     </div>
                                 </TableCell>
@@ -119,7 +120,6 @@ export default GroupTable;
 //      const [open, setOpen] = useState(false);
 
 //      const { data:membersData, isLoading } = useGetGroupMembers(groupId as string);
-
 
 //      console.log(groupId, "groupId")
 //      console.log(membersData, "membersData")

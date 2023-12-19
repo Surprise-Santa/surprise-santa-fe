@@ -58,7 +58,6 @@ function SignIn() {
                 } else {
                     return router.push(`/dashboard/${userId}`);
                 }
-
             }
         } catch (error: any) {
             toast.error(error?.response?.data?.message || "An error occurred");
@@ -101,7 +100,6 @@ function SignIn() {
                         className="bg-white my-6 py-6 sm:py-12 px-8 sm:px-16 md:px-24 rounded-2xl shadow-lg w-[95%] max-w-[600px] mx-auto"
                     >
                         <h4 className="text-[31px] font-bold text-center mb-4">Welcome Back</h4>
-
 
                         <p className="text-center mb-8">Login into your account below</p>
 

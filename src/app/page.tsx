@@ -15,12 +15,11 @@ export default function Home() {
     const [displayModal, setDisplayModal] = useState(false);
     const path = usePathname();
 
-    
     const groupParams = useSearchParams();
-    
+
     const group = groupParams.get("group");
-    console.log(path, 'path')
-    console.log(group, 'group')
+    console.log(path, "path");
+    console.log(group, "group");
 
     useEffect(() => {
         const newPath = () => {
