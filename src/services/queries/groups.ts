@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "@/services/axios";
 import { urls } from "../urls";
+import { ResponseDataType } from "@/types";
 import { GroupTypes } from "@/types/groups";
 
 export const useGetAllGroups = () => {
@@ -12,7 +13,7 @@ export const useGetAllGroups = () => {
 export const useGetOwnGroups = () => {
     return useQuery(["getOwnGroups"], async () => {
         const res = await axios.get(urls.getOwnGroupsUrl);
-        return res.data.data as GroupTypes[];
+        return res.data.data as ResponseDataType<GroupTypes>;
     });
 };
 

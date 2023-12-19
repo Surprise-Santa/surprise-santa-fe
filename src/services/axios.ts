@@ -38,10 +38,10 @@ axios.interceptors.response.use(
         }
         if (error instanceof AxiosError && error.response?.status === 400) {
             toast.error(error.response?.data?.message || error.message);
-            return Promise.reject(error.response);
+            return;
         }
         toast.error(error.response?.data?.message || error.message);
-        return Promise.reject(error);
+        return;
     },
 );
 
