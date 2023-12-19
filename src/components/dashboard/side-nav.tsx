@@ -28,9 +28,9 @@ export default function SideNav({ isNavOpen, setIsNavOpen }: SideNavPropType) {
             >
                 {isNavOpen ? <ChevronsLeft /> : <ChevronsRight />}
             </button>
-            <div className="text-primary-red font-bold text-[1.3rem] mb-14 mt-2">
+            <div className="text-primary-red font-bold text-[1.3rem] mb-8 mt-2">
                 <Link href="/">
-                    <Image src={Logo} alt="logo" width={100} height={100} />
+                    <Image src={Logo} alt="logo" />
                 </Link>
             </div>
             <nav className="flex flex-col gap-6 text-center">
