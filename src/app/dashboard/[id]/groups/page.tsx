@@ -15,12 +15,14 @@ import CreateGroup from "../../../../components/groups/create-group";
 import GroupCard from "../../../../components/groups/group-card";
 
 const Groups = () => {
+    const { id } = useParams();
     const [displayAllGroupScrollbar, setDisplayAllGroupScrollbar] = useState(false);
     const [displayOtherGroupScrollbar, setDisplayOtherGroupScrollbar] = useState(false);
     const [open, setOpen] = useState(false);
     const { data: allGroups, isLoading: allGroupsLoading } = useGetAllGroups();
-    const { data: ownGroups, isLoading: ownGroupsLoading } = useGetOwnGroups();
-    const { id } = useParams();
+    const { data: groups, isLoading: ownGroupsLoading } = useGetOwnGroups();
+
+    const { totalCount: totalGroupsCount, pageEdges: ownGroups } = groups || {};
 
     if (allGroupsLoading || ownGroupsLoading)
         return (
@@ -48,8 +50,9 @@ const Groups = () => {
                     onMouseLeave={() => setDisplayOtherGroupScrollbar(false)}
                 >
                     <h2 className="font-bold text-[1.4rem]">My Groups</h2>
-                    {ownGroups?.length ? (
-                        ownGroups?.map((list: any) => {
+                    {totalGroupsCount && totalGroupsCount > 0 ? (
+                        ownGroups?.map((item) => {
+                            const { node: list } = item;
                             return (
                                 <div key={list.id} className="mt-8 ">
                                     <GroupCard
