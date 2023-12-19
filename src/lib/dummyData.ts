@@ -22,15 +22,14 @@ export const howItWorksData = [
         index: 1,
         title: "Set up group",
         description:
-            "Lorem ipsum dolor sit amet consectetur. Sem vulputate vulputate malesuada porttitor quis et commodo leo bibendum. Fringilla consectetur vel aliquam ut a. Mi amet eu eu eu sed a. Neque feugiat quis egestas aliquet.",
+            "After setting up your account, invite people to join your group by sending them the invite link to the group. Once the group is set up, you can proceed to the next step.",
         image: "/images/setup-group.svg",
         backgroundImage: "/images/setup-group-bg.svg",
     },
     {
         index: 2,
         title: "Create event",
-        description:
-            "Lorem ipsum dolor sit amet consectetur. Sem vulputate vulputate malesuada porttitor quis et commodo leo bibendum. Fringilla consectetur vel aliquam ut a. Mi amet eu eu eu sed a. Neque feugiat quis egestas aliquet.",
+        description: "The second step is to create an event in the group, ",
         image: "/images/create-event.svg",
         backgroundImage: "/images/create-event-bg.svg",
     },
@@ -38,15 +37,14 @@ export const howItWorksData = [
         index: 3,
         title: "Share event",
         description:
-            "Lorem ipsum dolor sit amet consectetur. Sem vulputate vulputate malesuada porttitor quis et commodo leo bibendum. Fringilla consectetur vel aliquam ut a. Mi amet eu eu eu sed a. Neque feugiat quis egestas aliquet.",
+            "After the creation of the event, members of your group can be invited to join the event. Please note that only members of the group the event is created in can join the event.",
         image: "/images/share-event.svg",
         backgroundImage: "/images/share-event-bg.svg",
     },
     {
         index: 4,
         title: "Get paired",
-        description:
-            "Lorem ipsum dolor sit amet consectetur. Sem vulputate vulputate malesuada porttitor quis et commodo leo bibendum. Fringilla consectetur vel aliquam ut a. Mi amet eu eu eu sed a. Neque feugiat quis egestas aliquet.",
+        description: "When the event starts, event participants can get paired anonymously",
         image: "/images/get-paired.svg",
         backgroundImage: "/images/get-paired-bg.svg",
     },
