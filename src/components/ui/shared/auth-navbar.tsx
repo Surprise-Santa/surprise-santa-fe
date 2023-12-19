@@ -25,7 +25,9 @@ function AuthNavbar({ isSignInPage, isSignUpPage, isResetPasswordPage }: NavbarP
         <header className="bg-gradient-to-r from-[#fdf4f5] to-[#fbfdfb] w-screen p-1">
             <div className="max-w-[1280px] w-[98%] mx-auto py-2 flex items-center justify-between">
                 <p className="text-center px-4 text-primary-red font-bold">
-                    <Image src={Logo} alt="logo" />
+                    <Link href="/">
+                        <Image src={Logo} alt="logo" />
+                    </Link>
                 </p>
 
                 <div className="flex items-center">
