@@ -5,9 +5,11 @@ import { howItWorksData } from "@/lib/dummyData";
 const HowItWorks = () => {
     return (
         <section className="w-full py-8 md:py-20 px-5 xl:px-[136px]">
-            <h2 className="text-center font-bold text-[31px] md:mb-10">How Does It Work?</h2>
+            <h2 className="text-center font-bold text-[24px] sm:text-[31px] md:mb-10">
+                How Does It Work?
+            </h2>
 
-            <div className="flex flex-col gap-6 md:gap-0 mt-28">
+            <div className="flex flex-col gap-6 md:gap-0 mt-16 sm:mt-28">
                 {howItWorksData.map((card) => (
                     <div
                         key={card.index}

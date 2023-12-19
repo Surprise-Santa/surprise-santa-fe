@@ -12,11 +12,11 @@ import Tree from "public/images/tree.png";
 const LandingPage = () => {
     return (
         <section className="h-[100vh] bg-stars relative to-red-50">
-            <div className="absolute top-20 sm:top-20 left-0 lg:left-40 xl:left-52 w-[120px]  sm:w-[180px] xl:w-[250px]">
+            <div className="absolute top-32 sm:top-20 left-0 lg:left-40 xl:left-52 w-[120px]  sm:w-[180px] xl:w-[250px]">
                 {" "}
                 <Image src={Band} alt="icons" />
             </div>
-            <div className="absolute top-20  right-0 lg:right-40 w-[120px] sm:w-[180px] xl:w-[250px]">
+            <div className="absolute top-32 right-0 lg:right-40 w-[120px] sm:w-[180px] xl:w-[250px]">
                 {" "}
                 <Image src={Santa} alt="icons" />
             </div>
@@ -43,7 +43,7 @@ const LandingPage = () => {
                     facilisis leo magna luctus augue ullamcorper.”{" "}
                 </p>
                 <div className="mt-8 md:mt-6 flex items-end gap-2 ml-0 sm:ml-20 w-[180px]  sm:w-[300px] ">
-                    <Link href="/auth/signup">
+                    <Link href="/auth/signin">
                         <div className="bg-primary-green font-bold text-white px-6 sm:px-10 py-[12px] rounded-3xl flex items-center gap-2">
                             Get Started
                             <Image src={Rocket} alt="icons" height={20} />
