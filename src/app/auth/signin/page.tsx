@@ -94,9 +94,9 @@ function SignIn() {
                         onSubmit={handleSubmit(submit)}
                         className="bg-white py-6 sm:py-12 px-8 sm:px-24 rounded-2xl shadow-lg w-[320px] sm:w-[600px] mx-auto"
                     >
-                        <h4 className="text-[31px] font-bold text-center mb-4">Welcome Back</h4>
-
-                        <p className=" text-center mb-2">Glad to see you again</p>
+                        <h4 className="text-[24px] sm:text-[31px] font-bold text-center mb-4">
+                            Welcome Back
+                        </h4>
 
                         <p className="text-center mb-8">Login into your account below</p>
 

@@ -38,11 +38,8 @@ const LandingPage = () => {
                     <Image src={Text} alt="icons" />
                 </div>
 
-                <p className="text-center px-4 ">
-                    “Lorem ipsum dolor sit amet consectetur. Sed dolor magna placerat <br />
-                    facilisis leo magna luctus augue ullamcorper.”{" "}
-                </p>
-                <div className="mt-8 md:mt-6 flex items-end gap-2 ml-0 sm:ml-20 w-[180px]  sm:w-[300px] ">
+                <p className="text-center px-4 ">Unwrapping Joy, One Surprise at a Time!</p>
+                <div className="mt-8 md:mt-6 flex justify-center gap-2 ml-0 sm:ml-20 w-[180px] sm:w-[300px]">
                     <Link href="/auth/signin">
                         <div className="bg-primary-green font-bold text-white px-6 sm:px-10 py-[12px] rounded-3xl flex items-center gap-2">
                             Get Started

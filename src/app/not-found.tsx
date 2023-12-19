@@ -1,14 +1,17 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Band from "public/images/band.png";
 import Basket from "public/images/basket.png";
 import Gift from "public/images/gift.png";
-import Line from "public/images/line.png";
-import Rocket from "public/images/rocket.png";
 import Santa from "public/images/santa.png";
 import Tree from "public/images/tree.png";
 
 const NotFound = () => {
+    const router = useRouter();
+
     return (
         <section className="h-[100vh] bg-stars relative to-red-50">
             <div className="absolute top-20 sm:top-20 left-0 lg:left-40 xl:left-52 w-[120px]  sm:w-[180px] xl:w-[250px]">
@@ -36,12 +39,13 @@ const NotFound = () => {
                 <div className=" text-center bg-gradient-to-r from-green-600 to-red-500 text-transparent bg-clip-text text-[40px] md:text-[60px] font-extrabold">
                     WHOOPS PAGE NOT FOUND!!!
                 </div>
-                <div className="mt-8 md:mt-6 flex ml-0 sm:ml-20 w-[180px] sm:w-[300px] ">
-                    <Link href="/">
-                        <div className="bg-primary-green font-bold text-white px-6 sm:px-10 py-[12px] rounded-3xl flex items-center">
-                            Go Back
-                        </div>
-                    </Link>
+                <div
+                    className="mt-8 md:mt-6 flex justify-center ml-0 sm:ml-20 w-[180px] sm:w-[300px] cursor-pointer"
+                    onClick={() => router.back()}
+                >
+                    <div className="bg-primary-green font-bold text-white px-6 sm:px-10 py-[12px] rounded-3xl flex items-center">
+                        Go Back
+                    </div>
                 </div>
             </div>
         </section>
