@@ -136,7 +136,7 @@ const ProfileSettings = () => {
             {isClient && (
                 <main>
                     <button
-                        className="flex items-center gap-6 text-xl font-bold -mt-4 mb-8"
+                        className="flex items-center gap-6 text-xl font-bold mb-4"
                         onClick={() => router.back()}
                     >
                         <MoveLeft />
