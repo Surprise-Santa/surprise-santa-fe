@@ -1,10 +1,12 @@
-import { ChevronsLeft, ChevronsRight } from "lucide-react";
-import Link from "next/link";
 import { Dispatch } from "react";
+import { ChevronsLeft, ChevronsRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import SignOutBtn from "../ui/shared/signOutBtn";
 import ClientWrapper from "../wrapper/client";
 import { sideNavLinks } from "./links";
 import SideLink from "./side-link";
+import Logo from "public/images/logo-white.svg";
 
 export type SideNavPropType = {
     isNavOpen: boolean;
@@ -27,7 +29,9 @@ export default function SideNav({ isNavOpen, setIsNavOpen }: SideNavPropType) {
                 {isNavOpen ? <ChevronsLeft /> : <ChevronsRight />}
             </button>
             <div className="text-primary-red font-bold text-[1.3rem] mb-14 mt-2">
-                <Link href="/">LOGO</Link>
+                <Link href="/">
+                    <Image src={Logo} alt="logo" width={100} height={100} />
+                </Link>
             </div>
             <nav className="flex flex-col gap-6 text-center">
                 {sideNavLinks.map((link) => (

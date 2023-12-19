@@ -3,7 +3,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "../avatar";
 export default function Index() {
     return (
         <section className="min-h-screen bg-secondary-green py-10 md:py-20 px-5 xl:px-[136px]">
-            <h2 className="text-center font-bold text-[31px] mb-16">What Others Think</h2>
+            <h2 className="text-center font-bold text-[24px] sm:text-[31px] mb-16">
+                What Others Think
+            </h2>
 
             <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12">
                 <div>
@@ -17,7 +19,7 @@ export default function Index() {
                         <h3 className="text-xl text-center mb-2 mt-5">Adetunji Igbatayo</h3>
                         <p className="text-center mb-4">Getbit Inc</p>
 
-                        <p className="text-center mt-4">
+                        <p className="text-center mt-4 text-[14px] sm:text-[16px]">
                             “Lorem ipsum dolor sit amet consectetur. Sed dolor magna placerat
                             facilisis leo magna luctus augue ullamcorper.”{" "}
                         </p>
@@ -33,7 +35,7 @@ export default function Index() {
                         <h3 className="text-xl text-center mb-2 mt-5">Taladeogo Abraham</h3>
                         <p className="text-center mb-4">Getbit Inc</p>
 
-                        <p className="text-center mt-4">
+                        <p className="text-center mt-4 text-[14px] sm:text-[16px]">
                             “Lorem ipsum dolor sit amet consectetur. Sed dolor magna placerat
                             facilisis leo magna luctus augue ullamcorper.”{" "}
                         </p>
@@ -51,7 +53,7 @@ export default function Index() {
                         <h3 className="text-xl text-center mb-2 mt-5">Emelder Okafor</h3>
                         <p className="text-center mb-4">Getbit Inc</p>
 
-                        <p className="text-center mt-4">
+                        <p className="text-center mt-4 text-[14px] sm:text-[16px]">
                             “Lorem ipsum dolor sit amet consectetur. Sed dolor magna placerat
                             facilisis leo magna luctus augue ullamcorper.”{" "}
                         </p>
@@ -67,7 +69,7 @@ export default function Index() {
                         <h3 className="text-xl text-center mb-2 mt-5">Christian Enyia</h3>
                         <p className="text-center mb-4">Getbit Inc</p>
 
-                        <p className="text-center mt-4">
+                        <p className="text-center mt-4 text-[14px] sm:text-[16px]">
                             “Lorem ipsum dolor sit amet consectetur. Sed dolor magna placerat
                             facilisis leo magna luctus augue ullamcorper.”{" "}
                         </p>

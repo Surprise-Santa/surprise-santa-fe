@@ -1,7 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+
+import Logo from "public/images/logo.svg";
 
 const Navbar = () => {
     const [isClient, setIsClient] = useState(false);
@@ -19,7 +22,9 @@ const Navbar = () => {
             {isClient && (
                 <div className="max-w-[1280px] w-[98%] mx-auto py-2 flex items-center justify-between">
                     <div className="text-center px-4 text-primary-red font-bold text-[1.25rem]">
-                        <Link href="/">LOGO</Link>
+                        <Link href="/">
+                            <Image src={Logo} alt="logo" />
+                        </Link>
                     </div>
                     {user ? (
                         <Link href={`/dashboard/${user.user.id}`}>
