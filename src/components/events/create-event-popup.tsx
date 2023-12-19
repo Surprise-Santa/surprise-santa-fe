@@ -22,13 +22,13 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { GroupType } from "@/types/groups";
 import { useCreateEventMutation } from "@/services/mutations/events.mutation";
 import toast from "react-hot-toast";
 import LoadingSpinner from "../ui/spinner";
 
 const CreateEvent = () => {
-    const { data: groups } = useGetOwnGroups();
+    const { data: ownGroups } = useGetOwnGroups();
+    const { pageEdges: groups } = ownGroups || {};
     const formHook = useForm<CreateEventType>({
         resolver: yupResolver(createEventSchema),
     } as { resolver: Resolver<CreateEventType> });
@@ -104,11 +104,14 @@ const CreateEvent = () => {
                                 <SelectContent>
                                     <SelectGroup>
                                         <SelectLabel>Groups</SelectLabel>
-                                        {groups?.map((group: GroupType) => (
-                                            <SelectItem key={group.id} value={group.id}>
-                                                {group.name}
-                                            </SelectItem>
-                                        ))}
+                                        {groups?.map((item) => {
+                                            const { node: group } = item;
+                                            return (
+                                                <SelectItem key={group.id} value={group.id}>
+                                                    {group.name}
+                                                </SelectItem>
+                                            )
+                                        })}
                                     </SelectGroup>
                                 </SelectContent>
                             </Select>
@@ -176,7 +179,7 @@ const CreateEvent = () => {
                                                 startDateField.onChange(
                                                     new Date(
                                                         date.getTime() -
-                                                            date.getTimezoneOffset() * 60000,
+                                                        date.getTimezoneOffset() * 60000,
                                                     ).toISOString(),
                                                 )
                                             }
@@ -230,7 +233,7 @@ const CreateEvent = () => {
                                                 endDateField.onChange(
                                                     new Date(
                                                         date.getTime() -
-                                                            date.getTimezoneOffset() * 60000,
+                                                        date.getTimezoneOffset() * 60000,
                                                     ).toISOString(),
                                                 )
                                             }
