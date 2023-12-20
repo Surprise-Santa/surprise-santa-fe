@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "public/images/logo.svg";
+import Logo from "public/images/logo.png";
 
 const Navbar = () => {
     const [isClient, setIsClient] = useState(false);
@@ -22,7 +22,7 @@ const Navbar = () => {
                 <div className="max-w-[1280px] w-[98%] mx-auto flex items-center justify-between">
                     <div className=" w-[5rem]">
                         <Link href="/">
-                            <Image src={Logo} alt="logo" />
+                            <Image src={Logo} alt="logo" className="h-16 w-full object-contain" />
                         </Link>
                     </div>
                     {user ? (

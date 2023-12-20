@@ -15,6 +15,7 @@ import CreateGroup from "../../../../components/groups/create-group-modal";
 import GroupCard from "../../../../components/groups/group-card";
 
 const Groups = () => {
+    const { id } = useParams();
     const [displayAllGroupScrollbar, setDisplayAllGroupScrollbar] = useState(false);
     const [displayOtherGroupScrollbar, setDisplayOtherGroupScrollbar] = useState(false);
     const [open, setOpen] = useState(false);
@@ -29,7 +30,6 @@ const Groups = () => {
         isLoading: ownGroupsLoading,
         isSuccess: ownGroupsSuccess,
     } = useGetOwnGroups();
-    const { id } = useParams();
 
     const memoizedAllGroups = useMemo(() => {
         if (allGroupsSuccess) return reformData(allGroups);

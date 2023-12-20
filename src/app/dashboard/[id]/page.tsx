@@ -16,24 +16,27 @@ import LoadingSpinner from "@/components/ui/spinner";
 import { useGetOwnGroups } from "@/services/queries/groups";
 
 const Page = () => {
-    const { id: groupId } = useParams();
+    const { id } = useParams();
     const { data: events, isLoading } = useGetAllEvents();
-    const { data: ownGroups } = useGetOwnGroups();
+    const { data: groups } = useGetOwnGroups();
     const randomChristmasColors = getRandomChristmasColors(events?.length);
+
+    const { totalCount: totalGroupsCount, pageEdges: ownGroups } = groups || {};
+    const { pageEdges: ownEvents } = events || {};
 
     let upcomingEvents: EventType[] = [];
     let activeEvents: EventType[] = [];
 
-    // events?.forEach((event: EventType) => {
-    //     let startDate = new Date(event.startDate);
-    //     let endDate = new Date(event.endDate);
+    ownEvents?.forEach((event: EventType) => {
+        let startDate = new Date(event.startDate);
+        let endDate = new Date(event.endDate);
 
-    //     if (isFuture(startDate)) {
-    //         upcomingEvents.push(event);
-    //     } else if (isPast(startDate) && isFuture(endDate)) {
-    //         activeEvents.push(event);
-    //     }
-    // });
+        if (isFuture(startDate)) {
+            upcomingEvents.push(event);
+        } else if (isPast(startDate) && isFuture(endDate)) {
+            activeEvents.push(event);
+        }
+    });
     upcomingEvents = upcomingEvents.slice(0, 2);
     activeEvents = activeEvents.slice(0, 2);
 
@@ -48,7 +51,7 @@ const Page = () => {
 
     return (
         <main className="space-y-12">
-            {/* <section className="rounded-md w-full bg-white py-4 shadow-lg flex flex-col md:flex-row gap-2 md:gap-8 md:divide-x-2">
+            <section className="rounded-md w-full bg-white py-4 shadow-lg flex flex-col md:flex-row gap-2 md:gap-8 md:divide-x-2">
                 <div className="p-4 order-3 md:order-1 w-full h-full flex items-center justify-center">
                     <AppCalendar events={combinedEvents} />
                 </div>
@@ -57,10 +60,7 @@ const Page = () => {
                     <div className="flex flex-col gap-6">
                         {activeEvents.length > 0 ? (
                             activeEvents.map((event) => (
-                                <Link
-                                    href={`/dashboard/${groupId}/events/${event.id}`}
-                                    key={event.id}
-                                >
+                                <Link href={`/dashboard/${id}/events/${event.id}`} key={event.id}>
                                     <div className="flex gap-2">
                                         <Checkbox />
                                         <div className="-mt-1">
@@ -91,10 +91,7 @@ const Page = () => {
                     <div className="flex flex-col gap-6">
                         {upcomingEvents.length > 0 ? (
                             upcomingEvents.map((event) => (
-                                <Link
-                                    href={`/dashboard/${groupId}/events/${event.id}`}
-                                    key={event.id}
-                                >
+                                <Link href={`/dashboard/${id}/events/${event.id}`} key={event.id}>
                                     <div className="flex gap-2">
                                         <Checkbox />
                                         <div className="-mt-1">
@@ -125,67 +122,75 @@ const Page = () => {
             <section>
                 <div className="flex items-center gap-12 justify-between mb-8">
                     <h2 className="font-bold text-2xl">My Groups</h2>
-                    {ownGroups && ownGroups?.length > 0 && <Link href="#">View all</Link>}
+                    {totalGroupsCount && totalGroupsCount > 0 ? (
+                        <Link href="#">View all</Link>
+                    ) : null}
                 </div>
 
                 <div className="flex items-center justify-center md:justify-between gap-8 flex-wrap">
                     {ownGroups &&
-                        ownGroups?.map((group) => (
-                            <div
-                                key={group.id}
-                                className="bg-white py-4 px-6 rounded-lg rounded-l-none shadow-md space-y-4  border-l-4 border-l-primary-red w-[20rem]"
-                            >
-                                <div className="flex items-center gap-4">
-                                    <Image
-                                        src={group.logoUrl || "/images/Christian.jpg"}
-                                        alt={group.description}
-                                        className="rounded-full h-16 w-16"
-                                        width={64}
-                                        height={64}
-                                    />
-                                    <div>
-                                        <p className="font-semibold text-xl">{group.name}</p>
-                                        <p className="text-primary-opaque">{group.description}</p>
+                        ownGroups?.map((item: any) => {
+                            const group = item?.node;
+                            return (
+                                <Link
+                                    href={`/dashboard/${id}}/groups/${group.id}`}
+                                    key={group.id}
+                                    className="bg-white py-4 px-6 rounded-lg rounded-l-none shadow-md space-y-4  border-l-4 border-l-primary-red w-[20rem]"
+                                >
+                                    <div className="flex items-center gap-4">
+                                        <Image
+                                            src={group.logoUrl || "/images/Christian.jpg"}
+                                            alt={group.description}
+                                            className="rounded-full h-16 w-16"
+                                            width={64}
+                                            height={64}
+                                        />
+                                        <div>
+                                            <p className="font-semibold text-xl">{group.name}</p>
+                                            <p className="text-primary-opaque">
+                                                {group.description}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                                <p className="text-primary-light-opaque">
-                                    Participants:{" "}
-                                    <span className="text-black">{group.members?.length}</span>
-                                </p>
-                                <div className="h-max relative flex">
-                                    {group.members?.length > 0 && (
-                                        <span className="h-10 w-10 bg-sky-500 bg-opacity-50 rounded-full flex items-center justify-center text-sky-700 font-semibold z-10">
-                                            {extractInitials(
-                                                group.members[0].user.firstName +
-                                                    " " +
-                                                    group.members[0].user.lastName,
-                                            )}
-                                        </span>
-                                    )}
-                                    {group.members?.length > 1 && (
-                                        <span className="h-10 w-10 bg-rose-500 bg-opacity-50 rounded-full flex items-center justify-center text-rose-700 font-semibold z-20 -ml-2">
-                                            {extractInitials(
-                                                group.members[1].user.firstName +
-                                                    " " +
-                                                    group.members[1].user.lastName,
-                                            )}
-                                        </span>
-                                    )}
-                                    {group.members?.length > 2 && (
-                                        <span className="h-10 w-10 bg-emerald-500 bg-opacity-50 rounded-full flex items-center justify-center text-emerald-700 font-semibold z-30 -ml-2">
-                                            {extractInitials(
-                                                group.members[2].user.firstName +
-                                                    " " +
-                                                    group.members[2].user.lastName,
-                                            )}
-                                        </span>
-                                    )}
-                                    {group.members?.length > 3 && (
-                                        <p>+{group.members?.length - 3}</p>
-                                    )}
-                                </div>
-                            </div>
-                        ))}
+                                    <p className="text-primary-light-opaque">
+                                        Participants:{" "}
+                                        <span className="text-black">{group.members?.length}</span>
+                                    </p>
+                                    <div className="h-max relative flex">
+                                        {group.members?.length > 0 && (
+                                            <span className="h-10 w-10 bg-sky-500 bg-opacity-50 rounded-full flex items-center justify-center text-sky-700 font-semibold z-10">
+                                                {extractInitials(
+                                                    group.members[0].user.firstName +
+                                                        " " +
+                                                        group.members[0].user.lastName,
+                                                )}
+                                            </span>
+                                        )}
+                                        {group.members?.length > 1 && (
+                                            <span className="h-10 w-10 bg-rose-500 bg-opacity-50 rounded-full flex items-center justify-center text-rose-700 font-semibold z-20 -ml-2">
+                                                {extractInitials(
+                                                    group.members[1].user.firstName +
+                                                        " " +
+                                                        group.members[1].user.lastName,
+                                                )}
+                                            </span>
+                                        )}
+                                        {group.members?.length > 2 && (
+                                            <span className="h-10 w-10 bg-emerald-500 bg-opacity-50 rounded-full flex items-center justify-center text-emerald-700 font-semibold z-30 -ml-2">
+                                                {extractInitials(
+                                                    group.members[2].user.firstName +
+                                                        " " +
+                                                        group.members[2].user.lastName,
+                                                )}
+                                            </span>
+                                        )}
+                                        {group.members?.length > 3 && (
+                                            <p>+{group.members?.length - 3}</p>
+                                        )}
+                                    </div>
+                                </Link>
+                            );
+                        })}
                 </div>
             </section>
 
@@ -197,7 +202,7 @@ const Page = () => {
 
                 <div className="flex items-center justify-center md:justify-between gap-8 flex-wrap">
                     {combinedEvents.length > 0 &&
-                        combinedEvents.map((event, index) => (
+                        combinedEvents?.map((event, index) => (
                             <div
                                 key={event.id}
                                 className="bg-white py-4 px-6 rounded-lg rounded-l-none shadow-md space-y-4 border-l-4 w-[24rem]"
@@ -270,7 +275,7 @@ const Page = () => {
                             </div>
                         ))}
                 </div>
-            </section> */}
+            </section>
         </main>
     );
 };

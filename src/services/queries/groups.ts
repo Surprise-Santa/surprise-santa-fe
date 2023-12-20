@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "@/services/axios";
 import { urls } from "../urls";
-import { GroupTypes } from "@/types/groups";
 import { DataType, QueryParamsType } from "@/types";
 
 export const useGetAllGroups = () => {

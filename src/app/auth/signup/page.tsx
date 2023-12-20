@@ -72,7 +72,7 @@ function SignUp() {
                         onSubmit={handleSubmit(submit)}
                         className="bg-white py-3 sm:py-6 px-4 md:px-12 rounded-2xl shadow-lg w-[95%] max-w-[750px] mx-auto"
                     >
-                        <h4 className="text-[31px] font-bold mb-4">Get Started</h4>
+                        <h4 className="text-[24px] sm:text-[31px] font-bold mb-4">Get Started</h4>
 
                         <p className="mb-8">
                             Welcome to Secret Santa - let&apos;s create your account

@@ -1,8 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-
-import Logo from "public/images/logo.svg";
+import Logo from "public/images/logo.png";
 
 interface NavbarProps {
     isSignInPage?: boolean;
@@ -26,7 +25,7 @@ function AuthNavbar({ isSignInPage, isSignUpPage, isResetPasswordPage }: NavbarP
             <div className="max-w-[1280px] w-[98%] mx-auto flex items-center justify-between">
                 <div className=" w-[5rem]">
                     <Link href="/">
-                        <Image src={Logo} alt="logo" />
+                        <Image src={Logo} alt="logo" className="h-16 w-full object-contain" />
                     </Link>
                 </div>
 
