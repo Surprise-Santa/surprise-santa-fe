@@ -1,19 +1,20 @@
 "use client";
 
+import JoinGroupModal from "@/components/groups/join-group-modal";
+import { AppCalendar } from "@/components/ui/calendar/calendar";
+import { Checkbox } from "@/components/ui/checkbox";
+import LoadingSpinner from "@/components/ui/spinner";
+import { getRandomChristmasColors } from "@/lib/colors";
+import { convertDateFormat, extractInitials } from "@/lib/utils";
+import ProtectedPage from "@/services/guard/ProtectedPage";
+import { useGetAllEvents } from "@/services/queries/events";
+import { useGetOwnGroups } from "@/services/queries/groups";
+import { EventType } from "@/types/events";
+import { isFuture, isPast } from "date-fns";
+import { CalendarDays } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { CalendarDays } from "lucide-react";
 import { useParams } from "next/navigation";
-import { isFuture, isPast } from "date-fns";
-import { Checkbox } from "@/components/ui/checkbox";
-import ProtectedPage from "@/services/guard/ProtectedPage";
-import { getRandomChristmasColors } from "@/lib/colors";
-import { AppCalendar } from "@/components/ui/calendar/calendar";
-import { useGetAllEvents } from "@/services/queries/events";
-import { EventType } from "@/types/events";
-import { convertDateFormat, extractInitials } from "@/lib/utils";
-import LoadingSpinner from "@/components/ui/spinner";
-import { useGetOwnGroups } from "@/services/queries/groups";
 
 const Page = () => {
     const { id } = useParams();
@@ -23,6 +24,8 @@ const Page = () => {
 
     const { totalCount: totalGroupsCount, pageEdges: ownGroups } = groups || {};
     const { pageEdges: ownEvents } = events || {};
+
+    const showGroupInviteModal = sessionStorage.getItem("groupCode");
 
     let upcomingEvents: EventType[] = [];
     let activeEvents: EventType[] = [];
@@ -276,6 +279,7 @@ const Page = () => {
                         ))}
                 </div>
             </section>
+            {showGroupInviteModal && <JoinGroupModal />}
         </main>
     );
 };

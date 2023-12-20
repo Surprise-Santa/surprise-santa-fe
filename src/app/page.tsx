@@ -40,7 +40,6 @@ export default function Home() {
                 </>
             ) : (
                 <>
-                    <LandingPage opac={20} />
                     <GroupInviteModal />
                 </>
             )}
