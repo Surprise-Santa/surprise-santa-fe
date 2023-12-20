@@ -40,9 +40,6 @@ const GroupTable = ({ groupId }: Props) => {
         return [];
     }, [membersData, memberSuccess]);
 
-    console.log(membersData);
-    // console.log(memoizedData.id)
-
     const columns: TableColumn<any>[] = [
         {
             name: "Name",
