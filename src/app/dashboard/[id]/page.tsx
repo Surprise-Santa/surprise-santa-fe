@@ -22,11 +22,12 @@ const Page = () => {
     const randomChristmasColors = getRandomChristmasColors(events?.length);
 
     const { totalCount: totalGroupsCount, pageEdges: ownGroups } = groups || {};
+    const { pageEdges: ownEvents } = events || {};
 
     let upcomingEvents: EventType[] = [];
     let activeEvents: EventType[] = [];
 
-    events?.forEach((event: EventType) => {
+    ownEvents?.forEach((event: EventType) => {
         let startDate = new Date(event.startDate);
         let endDate = new Date(event.endDate);
 
@@ -121,7 +122,9 @@ const Page = () => {
             <section>
                 <div className="flex items-center gap-12 justify-between mb-8">
                     <h2 className="font-bold text-2xl">My Groups</h2>
-                    {totalGroupsCount && totalGroupsCount > 0 && <Link href="#">View all</Link>}
+                    {totalGroupsCount && totalGroupsCount > 0 ? (
+                        <Link href="#">View all</Link>
+                    ) : null}
                 </div>
 
                 <div className="flex items-center justify-center md:justify-between gap-8 flex-wrap">

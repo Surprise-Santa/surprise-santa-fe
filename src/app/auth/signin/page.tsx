@@ -17,7 +17,6 @@ import GoogleIcon from "../../../../public/icons/google-icon";
 import AppInput from "@/components/ui/app-input";
 import { useSigninMutation, useSignInWithGoogleMutation } from "@/services/mutations/auth.mutation";
 import LoadingSpinner from "@/components/ui/spinner";
-import ProtectedPage from "@/services/guard/ProtectedPage";
 
 function SignIn() {
     const { mutateAsync: signin, isError } = useSigninMutation();
@@ -156,4 +155,4 @@ function SignIn() {
     );
 }
 
-export default ProtectedPage(SignIn);
+export default SignIn;
