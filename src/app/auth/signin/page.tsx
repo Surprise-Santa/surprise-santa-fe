@@ -17,9 +17,15 @@ import GoogleIcon from "../../../../public/icons/google-icon";
 import AppInput from "@/components/ui/app-input";
 import { useSigninMutation, useSignInWithGoogleMutation } from "@/services/mutations/auth.mutation";
 import LoadingSpinner from "@/components/ui/spinner";
+import ProtectedPage from "@/services/guard/ProtectedPage";
+import { useGetGroupCodeDetails } from "@/services/queries/groups";
 
 function SignIn() {
     const { mutateAsync: signin, isError } = useSigninMutation();
+    const groupCode = typeof window !== "undefined" && sessionStorage.getItem("groupCode");
+
+    const { data } = useGetGroupCodeDetails(groupCode as string);
+
     const [googleAuthToken, setGoogleAuthToken] = useState<string | null>(null);
     const {
         mutateAsync: signInWithGoogle,
@@ -51,7 +57,11 @@ function SignIn() {
                 toast.success("Sign In Successful!" || result.data.message);
                 sessionStorage.setItem("user", JSON.stringify(result.data.data));
 
-                return router.push(`/dashboard/${userId}`);
+                if (typeof window !== "undefined" && sessionStorage.getItem("groupCode")) {
+                    return router.push(`/dashboard/${userId}/groups/${data?.id}`);
+                } else {
+                    return router.push(`/dashboard/${userId}`);
+                }
             }
         } catch (error: any) {
             toast.error(error?.response?.data?.message || "An error occurred");
@@ -91,7 +101,7 @@ function SignIn() {
                 <Form {...formHook}>
                     <form
                         onSubmit={handleSubmit(submit)}
-                        className="bg-white py-6 sm:py-12 px-8 sm:px-24 rounded-2xl shadow-lg w-[320px] sm:w-[600px] mx-auto"
+                        className="bg-white my-6 py-6 sm:py-12 px-8 sm:px-16 md:px-24 rounded-2xl shadow-lg w-[95%] max-w-[600px] mx-auto"
                     >
                         <h4 className="text-[24px] sm:text-[31px] font-bold text-center mb-4">
                             Welcome Back

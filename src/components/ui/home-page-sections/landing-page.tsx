@@ -9,10 +9,10 @@ import Rocket from "public/images/rocket.png";
 import Santa from "public/images/santa.png";
 import Tree from "public/images/tree.png";
 
-const LandingPage = () => {
+const LandingPage = ({ opac }: any) => {
     return (
-        <section className="h-[100vh] bg-stars relative to-red-50">
-            <div className="absolute top-32 sm:top-20 left-0 lg:left-40 xl:left-52 w-[120px]  sm:w-[180px] xl:w-[250px]">
+        <section className={`h-[100vh] bg-stars relative to-red-50 opacity-${opac ?? 100}`}>
+            <div className="absolute top-20 sm:top-20 left-0 lg:left-40 xl:left-52 w-[120px]  sm:w-[180px] xl:w-[250px]">
                 {" "}
                 <Image src={Band} alt="icons" />
             </div>

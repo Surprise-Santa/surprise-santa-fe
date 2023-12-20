@@ -28,7 +28,7 @@ export default function SideNav({ isNavOpen, setIsNavOpen }: SideNavPropType) {
             >
                 {isNavOpen ? <ChevronsLeft /> : <ChevronsRight />}
             </button>
-            <div className="text-primary-red font-bold text-[1.3rem] mb-8 mt-2">
+            <div className="w-[6rem] ml-[-.4rem]">
                 <Link href="/">
                     <Image src={Logo} alt="logo" />
                 </Link>

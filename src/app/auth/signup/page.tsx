@@ -70,7 +70,7 @@ function SignUp() {
                 <Form {...formHook}>
                     <form
                         onSubmit={handleSubmit(submit)}
-                        className="bg-white py-3 sm:py-6 px-4 md:px-12 rounded-2xl shadow-lg w-[320px] sm:w-[574px] md:w-[600px] lg:w-[772px] md:mx-auto"
+                        className="bg-white py-3 sm:py-6 px-4 md:px-12 rounded-2xl shadow-lg w-[95%] max-w-[750px] mx-auto"
                     >
                         <h4 className="text-[24px] sm:text-[31px] font-bold mb-4">Get Started</h4>
 

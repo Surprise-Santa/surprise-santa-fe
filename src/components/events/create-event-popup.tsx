@@ -104,7 +104,7 @@ const CreateEvent = () => {
                                 <SelectContent>
                                     <SelectGroup>
                                         <SelectLabel>Groups</SelectLabel>
-                                        {groups?.map((item) => {
+                                        {groups?.map((item: any) => {
                                             const { node: group } = item;
                                             return (
                                                 <SelectItem key={group.id} value={group.id}>

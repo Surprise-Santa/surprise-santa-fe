@@ -1,3 +1,4 @@
+import { DataType, PageEdge } from "@/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -28,3 +29,6 @@ export const extractInitials = (inputString: string | undefined) => {
         .map((word) => word.charAt(0))
         .join("");
 };
+
+export const reformData = <T>(data: DataType<T>): T[] =>
+    data?.pageEdges?.map((d: PageEdge<T>) => ({ ...d.node })) || [];

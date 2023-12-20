@@ -129,7 +129,7 @@ const Page = () => {
 
                 <div className="flex items-center justify-center md:justify-between gap-8 flex-wrap">
                     {ownGroups &&
-                        ownGroups?.map((item) => {
+                        ownGroups?.map((item: any) => {
                             const group = item?.node;
                             return (
                                 <Link
@@ -202,7 +202,7 @@ const Page = () => {
 
                 <div className="flex items-center justify-center md:justify-between gap-8 flex-wrap">
                     {combinedEvents.length > 0 &&
-                        combinedEvents.map((event, index) => (
+                        combinedEvents?.map((event, index) => (
                             <div
                                 key={event.id}
                                 className="bg-white py-4 px-6 rounded-lg rounded-l-none shadow-md space-y-4 border-l-4 w-[24rem]"
