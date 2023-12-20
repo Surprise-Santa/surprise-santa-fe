@@ -26,3 +26,9 @@ export const useInviteMembersMutation = (id: any) =>
         const res = await axios.post(urls.inviteGroupMembesrUrl(id), data);
         return res;
     });
+
+export const useJoinGroupMutation = (id: any) =>
+    useMutation(["joinGroup"], async () => {
+        const res = await axios.post(urls.joinGroupUrl(id));
+        return res;
+    });
