@@ -21,18 +21,18 @@ const GroupDetails = () => {
         {
             id: "1",
             title: "Group name:",
-            value: data?.name ?? 'N/A',
+            value: data?.name ?? "N/A",
         },
         {
             id: "2",
             title: "Description:",
-            value: data?.description ?? 'N/A',
+            value: data?.description ?? "N/A",
         },
 
         {
             id: "3",
             title: "Group Code:",
-            value: data?.groupCode ?? 'N/A',
+            value: data?.groupCode ?? "N/A",
         },
     ];
     const dataB = [
@@ -50,7 +50,7 @@ const GroupDetails = () => {
         {
             id: "3",
             title: "Date Created:",
-            value: convertDateFormat(data?.createdAt) ?? 'N/A',
+            value: convertDateFormat(data?.createdAt) ?? "N/A",
         },
     ];
 
