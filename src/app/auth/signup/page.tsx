@@ -35,6 +35,9 @@ function SignUp() {
 
     const submit = async (data: SignUpType) => {
         const { firstName, lastName, email, password, middleName, gender, phone } = data;
+
+        const processedPhone = phone?.startsWith("+234") ? phone : `+234${phone}`;
+
         const result = await signup({
             firstName,
             lastName,
@@ -42,7 +45,7 @@ function SignUp() {
             email,
             password,
             gender,
-            phone,
+            phone: processedPhone,
         });
 
         try {

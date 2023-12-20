@@ -18,9 +18,14 @@ import AppInput from "@/components/ui/app-input";
 import { useSigninMutation, useSignInWithGoogleMutation } from "@/services/mutations/auth.mutation";
 import LoadingSpinner from "@/components/ui/spinner";
 import ProtectedPage from "@/services/guard/ProtectedPage";
+import { useGetGroupCodeDetails } from "@/services/queries/groups";
 
 function SignIn() {
     const { mutateAsync: signin, isError } = useSigninMutation();
+    const groupCode =  typeof window !== "undefined" && sessionStorage.getItem("groupCode");
+
+    const { data } = useGetGroupCodeDetails(groupCode as string);
+
     const [googleAuthToken, setGoogleAuthToken] = useState<string | null>(null);
     const {
         mutateAsync: signInWithGoogle,
@@ -47,14 +52,13 @@ function SignIn() {
             if (!result) return;
 
             const userId = result?.data?.data?.user?.id;
-            const groupCode = sessionStorage.getItem("groupCode");
 
             if (result.status === 200 || result.status === 201) {
                 toast.success("Sign In Successful!" || result.data.message);
                 sessionStorage.setItem("user", JSON.stringify(result.data.data));
 
-                if (sessionStorage.getItem("groupCode")) {
-                    return router.push(`/dashboard/${userId}/groups/${groupCode}`);
+                if ( typeof window !== "undefined" && sessionStorage.getItem("groupCode")) {
+                    return router.push(`/dashboard/${userId}/groups/${data?.id}`);
                 } else {
                     return router.push(`/dashboard/${userId}`);
                 }

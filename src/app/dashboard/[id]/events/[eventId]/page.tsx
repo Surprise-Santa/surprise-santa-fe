@@ -51,7 +51,7 @@ const EventDetails = () => {
     return (
         <main>
             <h1 className="font-bold text-2xl">Event Detail</h1>
-            <div className="flex gap-12 mt-8 text-lg">
+            <div className="flex flex-col md:flex-row sm:gap-12 gap-8 mt-8 text-lg">
                 <div className="flex flex-col gap-8">
                     <p className="font-medium">
                         <span className="text-neutral-400 font-normal">Event Title: </span>
@@ -80,8 +80,8 @@ const EventDetails = () => {
 
             <div className="w-full flex align-center mt-8">
                 {matchData ? (
-                    <div className="flex flex-col gap-8 mx-auto">
-                        <p className="font-medium text-lg">
+                    <div className="flex flex-col gap-8 bg-[#C7E8CA] w-full p-4 rounded-md">
+                        <p className="font-medium text-lg text-center">
                             <span className="text-neutral-400 font-normal">
                                 You have been matched with{" "}
                             </span>
@@ -102,34 +102,42 @@ const EventDetails = () => {
                 )}
             </div>
 
-            <div className="mt-16 flex justify-between items-center">
-                <h2 className="font-bold text-xl">Event Participants</h2>
-                <div className="flex">
+            <div className="mt-16 flex flex-col gap-4">
+                <div className="flex flex-row w-full justify-between items-center">
+                    <h2 className="font-bold text-xl">Event Participants</h2>
                     <Dialog>
                         <DialogTrigger asChild>
-                            <Button className="mr-4">Add Participant</Button>
+                            <Button>Add Participant</Button>
                         </DialogTrigger>
                         <AddParticipants groupId={data?.groupId} eventData={data} />
                     </Dialog>
-                    <Input type="text" placeholder="Search participants" />
+                </div>
+                <div className="flex flex-row w-full justify-between items-center gap-4">
+                    <Input type="text" placeholder="Search participants" /> <Button>Search</Button>
                 </div>
             </div>
 
             <Table className="mt-8">
                 <TableHeader>
                     <TableRow className="font-bold text-base mt-8 bg-[#C7E8CA]">
-                        <TableHead>Participant Name</TableHead>
-
+                        <TableHead>Name</TableHead>
                         <TableHead>Email Address</TableHead>
+                        <TableHead>Gender</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {data?.participants.map((participant: ParticipantType) => (
-                        <TableRow key={participant.id}>
-                            <TableCell>{participant?.id}</TableCell>
-                            <TableCell>{participant?.email}</TableCell>
-                        </TableRow>
-                    ))}
+                    {data?.participants.map((participant: ParticipantType) => {
+                        const { user } = participant;
+                        return (
+                            <TableRow key={participant?.id}>
+                                <TableCell>
+                                    {user?.firstName} {user?.lastName}
+                                </TableCell>
+                                <TableCell>{user?.email}</TableCell>
+                                <TableCell>{user?.gender}</TableCell>
+                            </TableRow>
+                        );
+                    })}
                 </TableBody>
             </Table>
         </main>

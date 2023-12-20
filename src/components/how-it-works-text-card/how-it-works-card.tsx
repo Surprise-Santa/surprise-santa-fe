@@ -16,8 +16,8 @@ const HowItWorksCard: FC<HowItWorksCardProps> = ({ title, description, backgroun
                 backgroundPosition: "90% 50%",
             }}
         >
-            <h3 className="font-bold text-[28px] mb-4">{title}</h3>
-            <p className="text-lg">{description}</p>
+            <h3 className="font-bold text-[20px] sm:text-[28px] mb-4">{title}</h3>
+            <p className="text-sm sm:text-lg">{description}</p>
         </div>
     );
 };

@@ -10,7 +10,22 @@ const openSans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "Secret Santa",
-    description: "A secret santa app for your family and friends",
+    description: "A surpise santa app for your friends and colleagues",
+    alternates: {
+        canonical: "https://secret-santa-supreme.vercel.app/",
+        languages: {
+            "en-US": "/en-US",
+        },
+    },
+    verification: {
+        google: "2T_R5GhrkpqOkgC3cktqb9aWhJ6umlykENu1PvR6ti4",
+    },
+    other: {
+        "theme-color": "#5D9C59",
+        "og:type": "website",
+        "og:description": "A surpise santa app for your friends and colleagues",
+        "og:locale": "en_US",
+    },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

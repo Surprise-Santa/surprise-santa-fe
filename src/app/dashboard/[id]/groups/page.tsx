@@ -1,16 +1,16 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { DialogTrigger } from "@/components/ui/dialog";
-import LoadingSpinner from "@/components/ui/spinner";
-import { extractInitials } from "@/lib/utils";
-import ProtectedPage from "@/services/guard/ProtectedPage";
-import { useGetAllGroups, useGetOwnGroups } from "@/services/queries/groups";
 import { Dialog } from "@radix-ui/react-dialog";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+import { useMemo, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { DialogTrigger } from "@/components/ui/dialog";
+import LoadingSpinner from "@/components/ui/spinner";
+import { extractInitials, reformData } from "@/lib/utils";
+import ProtectedPage from "@/services/guard/ProtectedPage";
+import { useGetAllGroups, useGetOwnGroups } from "@/services/queries/groups";
 import NoDataImage from "public/images/no-data-icon.png";
-import { useState } from "react";
 import CreateGroup from "../../../../components/groups/create-group-modal";
 import GroupCard from "../../../../components/groups/group-card";
 
@@ -18,9 +18,28 @@ const Groups = () => {
     const [displayAllGroupScrollbar, setDisplayAllGroupScrollbar] = useState(false);
     const [displayOtherGroupScrollbar, setDisplayOtherGroupScrollbar] = useState(false);
     const [open, setOpen] = useState(false);
-    const { data: allGroups, isLoading: allGroupsLoading } = useGetAllGroups();
-    const { data: ownGroups, isLoading: ownGroupsLoading } = useGetOwnGroups();
+    const {
+        data: allGroups,
+        isLoading: allGroupsLoading,
+        isSuccess: allGroupsSuccess,
+    } = useGetAllGroups();
+
+    const {
+        data: ownGroups,
+        isLoading: ownGroupsLoading,
+        isSuccess: ownGroupsSuccess,
+    } = useGetOwnGroups();
     const { id } = useParams();
+
+    const memoizedAllGroups = useMemo(() => {
+        if (allGroupsSuccess) return reformData(allGroups);
+        return [];
+    }, [allGroups, allGroupsSuccess]);
+
+    const memoizedOwnGroups = useMemo(() => {
+        if (ownGroupsSuccess) return reformData(ownGroups);
+        return [];
+    }, [ownGroups, ownGroupsSuccess]);
 
     if (allGroupsLoading || ownGroupsLoading)
         return (
@@ -48,8 +67,8 @@ const Groups = () => {
                     onMouseLeave={() => setDisplayOtherGroupScrollbar(false)}
                 >
                     <h2 className="font-bold text-[1.4rem]">My Groups</h2>
-                    {ownGroups?.length ? (
-                        ownGroups?.map((list: any) => {
+                    {memoizedOwnGroups?.length ? (
+                        memoizedOwnGroups?.map((list: any) => {
                             return (
                                 <div key={list.id} className="mt-8 ">
                                     <GroupCard
@@ -85,8 +104,8 @@ const Groups = () => {
                     onMouseLeave={() => setDisplayAllGroupScrollbar(false)}
                 >
                     <h2 className="font-bold text-[1.4rem] ">Other Groups</h2>
-                    {allGroups?.length ? (
-                        allGroups?.map((list: any) => {
+                    {memoizedAllGroups?.length ? (
+                        memoizedAllGroups?.map((list: any) => {
                             return (
                                 <div key={list.id} className="mt-8 ">
                                     <GroupCard
@@ -119,4 +138,4 @@ const Groups = () => {
     );
 };
 
-export default ProtectedPage(Groups);
+ export default ProtectedPage(Groups);

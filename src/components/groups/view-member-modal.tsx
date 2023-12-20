@@ -1,3 +1,4 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
     DialogClose,
@@ -6,16 +7,6 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog";
-import { createGroupSchema } from "@/schema";
-import { GroupType } from "@/types/groups";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Resolver, SubmitHandler, useForm } from "react-hook-form";
-import AppInput from "../ui/app-input";
-import { useCreateGroupMutation } from "@/services/mutations/group.mutation";
-import toast from "react-hot-toast";
-import { Form } from "../ui/form";
-import LoadingSpinner from "../ui/spinner";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { convertDateFormat } from "@/lib/utils";
 
 interface Props {

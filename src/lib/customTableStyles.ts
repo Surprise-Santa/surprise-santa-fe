@@ -14,7 +14,7 @@ export const customStyles: TableStyles = {
     },
     headCells: {
         style: {
-            padding: "0",
+            padding: "0 10px",
             letterSpacing: "0.2px",
             fontSize: "17px",
         },
@@ -27,7 +27,7 @@ export const customStyles: TableStyles = {
     },
     cells: {
         style: {
-            padding: "0",
+            padding: "0 10px",
             letterSpacing: "0.2px",
             fontSize: "17px",
             minWidth: "unset",

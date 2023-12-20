@@ -29,7 +29,11 @@ const FaqAccordion = () => {
                         <span className="text-left">{item.question}</span>
                         <span className="ml-auto">{active === index ? "-" : "+"}</span>
                     </button>
-                    <div className={`mt-2 ${active === index ? "block" : "hidden"}`}>
+                    <div
+                        className={`mt-2 ${
+                            active === index ? "block text-sm sm:text-base" : "hidden"
+                        }`}
+                    >
                         {item.answer}
                     </div>
                 </div>

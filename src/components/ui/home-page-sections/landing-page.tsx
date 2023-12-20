@@ -16,7 +16,7 @@ const LandingPage = ({ opac }: any) => {
                 {" "}
                 <Image src={Band} alt="icons" />
             </div>
-            <div className="absolute top-20  right-0 lg:right-40 w-[120px] sm:w-[180px] xl:w-[250px]">
+            <div className="absolute top-32 right-0 lg:right-40 w-[120px] sm:w-[180px] xl:w-[250px]">
                 {" "}
                 <Image src={Santa} alt="icons" />
             </div>

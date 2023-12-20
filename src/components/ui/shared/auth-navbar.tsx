@@ -1,5 +1,8 @@
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
+
+import Logo from "public/images/logo.svg";
 
 interface NavbarProps {
     isSignInPage?: boolean;
@@ -20,10 +23,12 @@ function AuthNavbar({ isSignInPage, isSignUpPage, isResetPasswordPage }: NavbarP
 
     return (
         <header className="bg-gradient-to-r from-[#fdf4f5] to-[#fbfdfb] w-screen p-1">
-            <div className="max-w-[1280px] w-[98%] mx-auto py-2 flex items-center justify-between">
-                <p className="text-center px-4 text-primary-red font-bold">
-                    <Link href="/">LOGO</Link>
-                </p>
+            <div className="max-w-[1280px] w-[98%] mx-auto flex items-center justify-between">
+                <div className=" w-[5rem]">
+                    <Link href="/">
+                        <Image src={Logo} alt="logo" />
+                    </Link>
+                </div>
 
                 <div className="flex items-center">
                     <p className="mr-4 hidden sm:block">{haveAccountText}</p>
