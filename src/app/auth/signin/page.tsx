@@ -22,7 +22,7 @@ import { useGetGroupCodeDetails } from "@/services/queries/groups";
 
 function SignIn() {
     const { mutateAsync: signin, isError } = useSigninMutation();
-    const groupCode =  typeof window !== "undefined" && sessionStorage.getItem("groupCode");
+    const groupCode = typeof window !== "undefined" && sessionStorage.getItem("groupCode");
 
     const { data } = useGetGroupCodeDetails(groupCode as string);
 
@@ -57,7 +57,7 @@ function SignIn() {
                 toast.success("Sign In Successful!" || result.data.message);
                 sessionStorage.setItem("user", JSON.stringify(result.data.data));
 
-                if ( typeof window !== "undefined" && sessionStorage.getItem("groupCode")) {
+                if (typeof window !== "undefined" && sessionStorage.getItem("groupCode")) {
                     return router.push(`/dashboard/${userId}/groups/${data?.id}`);
                 } else {
                     return router.push(`/dashboard/${userId}`);

@@ -49,10 +49,12 @@ export const useGetGroupMemberDetails = (id: string) => {
     });
 };
 export const useGetGroupCodeDetails = (groupCode: string) => {
-    return useQuery(["getGroupCodeDetails", groupCode], async () => {
-        const res = await axios.get(urls.getGroupCodeDetails(groupCode));
-        return res.data.data;
-    }, 
-    { enabled: !!groupCode },
+    return useQuery(
+        ["getGroupCodeDetails", groupCode],
+        async () => {
+            const res = await axios.get(urls.getGroupCodeDetails(groupCode));
+            return res.data.data;
+        },
+        { enabled: !!groupCode },
     );
 };

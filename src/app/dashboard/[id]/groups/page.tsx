@@ -138,4 +138,4 @@ const Groups = () => {
     );
 };
 
- export default ProtectedPage(Groups);
+export default ProtectedPage(Groups);
