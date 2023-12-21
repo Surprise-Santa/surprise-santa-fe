@@ -65,7 +65,9 @@ const GroupTable = ({ groupId }: Props) => {
         },
         {
             name: "Date Joined",
-            cell: (row: any) => <div>{convertDateFormat(row.user?.createdAt)}</div>,
+            cell: (row: any) => {
+                return <div>{convertDateFormat(row?.createdAt)}</div>;
+            },
         },
 
         {

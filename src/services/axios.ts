@@ -37,7 +37,11 @@ axios.interceptors.response.use(
             return;
         }
         if (error instanceof AxiosError && error.response?.status === 400) {
-            toast.error(error.response?.data?.message || error.message);
+            toast.error(
+                error.response?.data?.message ||
+                    error.response?.data?.constraints?.isPhoneNumber ||
+                    error.message,
+            );
             return;
         }
         toast.error(error.response?.data?.message || error.message);

@@ -2,6 +2,7 @@
 
 import React, { InputHTMLAttributes, useState } from "react";
 import { FieldValues, FieldPath } from "react-hook-form";
+import PhoneInput from "react-phone-number-input";
 
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "../input";
@@ -15,6 +16,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import "react-phone-number-input/style.css";
 
 interface AppInputProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: string;
@@ -25,6 +27,7 @@ interface AppInputProps extends InputHTMLAttributes<HTMLInputElement> {
     isRequired?: boolean;
     isSelect?: boolean;
     options?: OptionType[];
+    isPhone?: boolean;
 }
 
 interface OptionType {
@@ -41,6 +44,7 @@ function AppInput({
     isRequired,
     isSelect,
     options,
+    isPhone,
     ...inputProps
 }: AppInputProps) {
     const [showPassword, setShowPassword] = useState(false);
@@ -73,13 +77,25 @@ function AppInput({
                                         <SelectGroup>
                                             <SelectLabel>{label}</SelectLabel>
                                             {options?.map((option) => (
-                                                <SelectItem key={option.value} value={option.value}>
+                                                <SelectItem
+                                                    key={option.value}
+                                                    value={option.value}
+                                                    style={{ cursor: "pointer" }}
+                                                >
                                                     {option.label}
                                                 </SelectItem>
                                             ))}
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>
+                            ) : isPhone ? (
+                                <PhoneInput
+                                    placeholder="Enter phone number"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    defaultCountry="NG"
+                                    type="tel"
+                                />
                             ) : (
                                 <div className="relative">
                                     <Input

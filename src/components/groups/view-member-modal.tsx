@@ -62,7 +62,7 @@ const ViewMemberDetails = ({ memberDetails }: Props) => {
                             <span className="text-neutral-400 font-normal mr-1 sm:mr-4">
                                 Date Joined:
                             </span>
-                            {convertDateFormat(memberDetails?.user?.createdAt) ?? "N/A"}
+                            {convertDateFormat(memberDetails?.createdAt) ?? "N/A"}
                         </p>
                     </div>
                 </div>

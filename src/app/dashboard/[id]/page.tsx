@@ -25,7 +25,9 @@ const Page = () => {
     const { totalCount: totalGroupsCount, pageEdges: ownGroups } = groups || {};
     const { pageEdges: ownEvents } = events || {};
 
-    const showGroupInviteModal = sessionStorage.getItem("groupCode");
+    const showGroupInviteModal =
+        typeof window !== "undefined" &&
+        JSON.parse(window.sessionStorage.getItem("groupCode") as string);
 
     let upcomingEvents: EventType[] = [];
     let activeEvents: EventType[] = [];
@@ -123,14 +125,14 @@ const Page = () => {
             </section>
 
             <section>
-                <div className="flex items-center gap-12 justify-between mb-8">
+                <div className="flex items-center gap-12 mb-8">
                     <h2 className="font-bold text-2xl">My Groups</h2>
                     {totalGroupsCount && totalGroupsCount > 0 ? (
                         <Link href="#">View all</Link>
                     ) : null}
                 </div>
 
-                <div className="flex items-center justify-center md:justify-between gap-8 flex-wrap">
+                <div className="flex items-center justify-center md:justify-start gap-8 flex-wrap">
                     {ownGroups &&
                         ownGroups?.map((item: any) => {
                             const group = item?.node;
@@ -142,7 +144,7 @@ const Page = () => {
                                 >
                                     <div className="flex items-center gap-4">
                                         <Image
-                                            src={group.logoUrl || "/images/Christian.jpg"}
+                                            src={group.logoUrl || "/images/santa.png"}
                                             alt={group.description}
                                             className="rounded-full h-16 w-16"
                                             width={64}
@@ -198,12 +200,12 @@ const Page = () => {
             </section>
 
             <section>
-                <div className="flex items-center gap-12 justify-between mb-8">
+                <div className="flex items-center gap-12 mb-8">
                     <h2 className="font-bold text-2xl">My Events</h2>
                     {combinedEvents.length > 0 && <Link href="#">View all</Link>}
                 </div>
 
-                <div className="flex items-center justify-center md:justify-between gap-8 flex-wrap">
+                <div className="flex items-center justify-center md:justify-start gap-8 flex-wrap">
                     {combinedEvents.length > 0 &&
                         combinedEvents?.map((event, index) => (
                             <div
