@@ -102,6 +102,8 @@ const ProfileSettings = () => {
 
                 sessionStorage.setItem("user", JSON.stringify(currentUser));
 
+                window.location.reload();
+
                 return;
             }
         } catch (error: any) {
