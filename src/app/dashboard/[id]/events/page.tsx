@@ -8,16 +8,22 @@ import { useGetAllEvents } from "@/services/queries/events";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import CalendarIcon from "../../../../../public/icons/calendar-icon";
 import { EventType } from "@/types/events";
-import { convertDateFormat, extractInitials } from "@/lib/utils";
+import { convertDateFormat, extractInitials, reformData } from "@/lib/utils";
 import LoadingSpinner from "@/components/ui/spinner";
 import NoEventImg from "../../../../../public/images/no-event.png";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import CreateEvent from "@/components/events/create-event-popup";
+import { useMemo } from "react";
 
 const Events = () => {
     const { id: groupId } = useParams();
-    const { data, isLoading } = useGetAllEvents();
+    const { data: allEvents, isLoading, isSuccess } = useGetAllEvents();
+
+    const memoizedAllEvents = useMemo(() => {
+        if (isSuccess) return reformData(allEvents);
+        return [];
+    }, [allEvents, isSuccess]);
 
     if (isLoading)
         return (
@@ -40,9 +46,10 @@ const Events = () => {
                 </Dialog>
             </div>
 
-            {data.length ? (
+            {memoizedAllEvents.length ? (
                 <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 overflow-x-auto whitespace-nowrap">
-                    {data?.map(
+                    {memoizedAllEvents?.map(
+                        //@ts-ignore
                         ({ id, title, startDate, endDate, participants, ...event }: EventType) => {
                             return (
                                 <Link href={`/dashboard/${groupId}/events/${id}`} key={id}>
@@ -54,7 +61,8 @@ const Events = () => {
                                                 <AvatarFallback>AI</AvatarFallback>
                                             </Avatar>
                                             <p className="text-lg font-medium">
-                                                {event?.createdBy}{" "}
+                                                {event?.organizer?.firstName}{" "}
+                                                {event?.organizer?.lastName}
                                                 <span className="text-neutral-400 text-md ml-2 font-normal">
                                                     (organizer)
                                                 </span>
