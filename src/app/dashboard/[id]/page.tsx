@@ -132,7 +132,7 @@ const Page = () => {
                     ) : null}
                 </div>
 
-                <div className="flex items-center justify-center md:justify-between gap-8 flex-wrap">
+                <div className="flex items-center justify-center md:justify-start gap-8 flex-wrap">
                     {ownGroups &&
                         ownGroups?.map((item: any) => {
                             const group = item?.node;
@@ -144,7 +144,7 @@ const Page = () => {
                                 >
                                     <div className="flex items-center gap-4">
                                         <Image
-                                            src={group.logoUrl || "/images/Christian.jpg"}
+                                            src={group.logoUrl || "/images/santa.png"}
                                             alt={group.description}
                                             className="rounded-full h-16 w-16"
                                             width={64}
@@ -205,7 +205,7 @@ const Page = () => {
                     {combinedEvents.length > 0 && <Link href="#">View all</Link>}
                 </div>
 
-                <div className="flex items-center justify-center md:justify-between gap-8 flex-wrap">
+                <div className="flex items-center justify-center md:justify-start gap-8 flex-wrap">
                     {combinedEvents.length > 0 &&
                         combinedEvents?.map((event, index) => (
                             <div
