@@ -25,7 +25,9 @@ const Page = () => {
     const { totalCount: totalGroupsCount, pageEdges: ownGroups } = groups || {};
     const { pageEdges: ownEvents } = events || {};
 
-    const showGroupInviteModal = sessionStorage.getItem("groupCode");
+    const showGroupInviteModal =
+        typeof window !== "undefined" &&
+        JSON.parse(window.sessionStorage.getItem("groupCode") as string);
 
     let upcomingEvents: EventType[] = [];
     let activeEvents: EventType[] = [];
@@ -123,7 +125,7 @@ const Page = () => {
             </section>
 
             <section>
-                <div className="flex items-center gap-12 justify-between mb-8">
+                <div className="flex items-center gap-12 mb-8">
                     <h2 className="font-bold text-2xl">My Groups</h2>
                     {totalGroupsCount && totalGroupsCount > 0 ? (
                         <Link href="#">View all</Link>
@@ -198,7 +200,7 @@ const Page = () => {
             </section>
 
             <section>
-                <div className="flex items-center gap-12 justify-between mb-8">
+                <div className="flex items-center gap-12 mb-8">
                     <h2 className="font-bold text-2xl">My Events</h2>
                     {combinedEvents.length > 0 && <Link href="#">View all</Link>}
                 </div>

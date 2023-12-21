@@ -2,6 +2,7 @@ export const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const urls = {
     signUpUrl: `${baseUrl}/auth/signup`,
+    googleSignUpUrl: `${baseUrl}/auth/signup/social-auth`,
     loginUrl: `${baseUrl}/auth/login`,
     googleLoginUrl: `${baseUrl}/auth/login/social-auth`,
     forgotPasswordUrl: `${baseUrl}/auth/request-password-reset`,

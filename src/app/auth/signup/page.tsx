@@ -36,8 +36,6 @@ function SignUp() {
     const submit = async (data: SignUpType) => {
         const { firstName, lastName, email, password, middleName, gender, phone } = data;
 
-        const processedPhone = phone?.startsWith("+234") ? phone : `+234${phone}`;
-
         const result = await signup({
             firstName,
             lastName,
@@ -45,7 +43,7 @@ function SignUp() {
             email,
             password,
             gender,
-            phone: processedPhone,
+            phone,
         });
 
         try {
@@ -75,7 +73,7 @@ function SignUp() {
                         <h4 className="text-[24px] sm:text-[31px] font-bold mb-4">Get Started</h4>
 
                         <p className="mb-8">
-                            Welcome to Secret Santa - let&apos;s create your account
+                            Welcome to Surprise Santa - let&apos;s create your account
                         </p>
 
                         <div className="mb-2 flex flex-col md:flex-row items-center justify-between gap-4">
@@ -130,6 +128,7 @@ function SignUp() {
                             />
 
                             <AppInput
+                                isPhone
                                 label="Phone Number"
                                 type="text"
                                 control={control}
@@ -167,7 +166,7 @@ function SignUp() {
                             <label htmlFor="terms">
                                 By clicking this box, I agree and acknowledge to the terms of{" "}
                                 <Link href={"/"} className="text-primary-green">
-                                    SecretSanta Platform agreement.
+                                    Surprise Santa Platform agreement.
                                 </Link>
                             </label>
                         </div>
