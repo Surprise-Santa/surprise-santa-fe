@@ -1,8 +1,10 @@
 "use client";
+import { MoveLeft } from "lucide-react";
 import LoadingSpinner from "@/components/ui/spinner";
 import { convertDateFormat } from "@/lib/utils";
 import { useGetEventById } from "@/services/queries/events";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+
 import {
     Table,
     TableBody,
@@ -26,6 +28,9 @@ import { isAfter } from "date-fns";
 const EventDetails = () => {
     const { eventId } = useParams();
     const { data, isLoading } = useGetEventById(eventId as string);
+
+    const router = useRouter();
+
     const { data: matchData, isLoading: isMatchDataLoading } = useQuery(
         ["getMatch", eventId],
         async () => {
@@ -50,7 +55,15 @@ const EventDetails = () => {
 
     return (
         <main>
-            <h1 className="font-bold text-2xl">Event Detail</h1>
+            <div className="mt-4">
+                <button
+                    className="flex items-center gap-6 text-xl font-bold -mt-4 mb-8"
+                    onClick={() => router.back()}
+                >
+                    <MoveLeft />
+                    <h1 className="font-bold text-[1.4rem]">Event Detail</h1>
+                </button>
+            </div>
             <div className="flex flex-col md:flex-row sm:gap-12 gap-8 mt-8 text-lg">
                 <div className="flex flex-col gap-8">
                     <p className="font-medium">

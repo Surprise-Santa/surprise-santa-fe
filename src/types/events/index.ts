@@ -8,6 +8,12 @@ export interface EventType {
     endDate: string;
     createdBy: string;
     participants: ParticipantType[];
+    organizer: {
+        id: string;
+        firstName: string;
+        lastName: string;
+        middleName: string;
+    };
 }
 
 export interface ParticipantType {
