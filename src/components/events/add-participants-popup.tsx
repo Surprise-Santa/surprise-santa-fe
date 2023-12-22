@@ -38,7 +38,7 @@ const AddParticipants = ({ eventData }: { eventData: any }) => {
         const participantIds = selectedParticipants.map((participant) => participant.value);
         const data = {
             participants: participantIds,
-            all: true,
+            all: false,
         };
 
         const result = await addParticipants(data);
