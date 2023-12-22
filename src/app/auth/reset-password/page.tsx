@@ -12,7 +12,6 @@ import AuthNavbar from "@/components/ui/shared/auth-navbar";
 import { resetPasswordSchema } from "@/schema";
 import { Button } from "@/components/ui/button";
 import { ResetPasswordType } from "@/types/auth";
-import ProtectedPage from "@/services/guard/ProtectedPage";
 import AppInput from "@/components/ui/app-input";
 import { useResetPasswordMutation } from "@/services/mutations/auth.mutation";
 import LoadingSpinner from "@/components/ui/spinner";
@@ -101,4 +100,4 @@ function ResetPassword() {
     );
 }
 
-export default ProtectedPage(ResetPassword);
+export default ResetPassword;
