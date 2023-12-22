@@ -19,30 +19,6 @@ interface CalendarPropsType extends CalendarProps {
 export const AppCalendar = ({ props, events }: CalendarPropsType) => {
     const [value, setValue] = useState<Value>(new Date());
 
-    console.log("ev", events);
-
-    // const tileContent = useCallback(
-    //     ({ date, view }: TileContentProp) => {
-    //         if (view === "month") {
-    //             const day = date.getDate();
-    //             const month = date.getMonth();
-    //             const year = date.getFullYear();
-    //             const event = events?.find((event) => {
-    //                 const eventDate = new Date(event?.node?.startDate);
-    //                 const eventDay = eventDate.getDate();
-    //                 const eventMonth = eventDate.getMonth();
-    //                 const eventYear = eventDate.getFullYear();
-    //                 return day === eventDay && month === eventMonth && year === eventYear;
-    //             });
-    //             return (
-    //                 <span className="text-xs w-full min-w-fit max-w-max">{event?.node?.title}</span>
-    //             );
-    //         }
-    //         return null;
-    //     },
-    //     [events],
-    // );
-
     const tileContent = useCallback(
         ({ date, view }: TileContentProp) => {
             if (view === "month") {
