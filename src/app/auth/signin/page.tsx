@@ -1,26 +1,25 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { Resolver, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import toast from "react-hot-toast";
 import { useGoogleLogin } from "@react-oauth/google";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-
+import { useEffect, useState } from "react";
+import { Resolver, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import AppInput from "@/components/ui/app-input";
+import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import AuthNavbar from "@/components/ui/shared/auth-navbar";
+import LoadingSpinner from "@/components/ui/spinner";
 import { signInSchema } from "@/schema";
-import { Button } from "@/components/ui/button";
+import { useSigninMutation, useSignInWithGoogleMutation } from "@/services/mutations/auth.mutation";
 import { SignInType } from "@/types/auth";
 import GoogleIcon from "../../../../public/icons/google-icon";
-import AppInput from "@/components/ui/app-input";
-import { useSigninMutation, useSignInWithGoogleMutation } from "@/services/mutations/auth.mutation";
-import LoadingSpinner from "@/components/ui/spinner";
-import ProtectedPage from "@/services/guard/ProtectedPage";
 
 function SignIn() {
     const { mutateAsync: signin, isError } = useSigninMutation();
+
     const [googleAuthToken, setGoogleAuthToken] = useState<string | null>(null);
     const {
         mutateAsync: signInWithGoogle,
@@ -51,7 +50,6 @@ function SignIn() {
             if (result.status === 200 || result.status === 201) {
                 toast.success("Sign In Successful!" || result.data.message);
                 sessionStorage.setItem("user", JSON.stringify(result.data.data));
-
                 return router.push(`/dashboard/${userId}`);
             }
         } catch (error: any) {
@@ -92,7 +90,7 @@ function SignIn() {
                 <Form {...formHook}>
                     <form
                         onSubmit={handleSubmit(submit)}
-                        className="bg-white py-6 sm:py-12 px-8 sm:px-24 rounded-2xl shadow-lg w-[320px] sm:w-[600px] mx-auto"
+                        className="bg-white my-6 py-6 sm:py-12 px-8 sm:px-16 md:px-24 rounded-2xl shadow-lg w-[95%] max-w-[600px] mx-auto"
                     >
                         <h4 className="text-[24px] sm:text-[31px] font-bold text-center mb-4">
                             Welcome Back
@@ -156,4 +154,4 @@ function SignIn() {
     );
 }
 
-export default ProtectedPage(SignIn);
+export default SignIn;

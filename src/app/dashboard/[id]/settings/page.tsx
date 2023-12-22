@@ -10,21 +10,22 @@ const settingsData = [
         title: "Profile settings",
         icon: <User />,
     },
-    {
-        id: "2",
-        title: "Group settings",
-        icon: <Users />,
-    },
-    {
-        id: "3",
-        title: "Event settings",
-        icon: <CalendarClock />,
-    },
-    {
-        id: "4",
-        title: "Wishlist settings",
-        icon: <ListChecks />,
-    },
+    // TODO: Add these pages later
+    // {
+    //     id: "2",
+    //     title: "Group settings",
+    //     icon: <Users />,
+    // },
+    // {
+    //     id: "3",
+    //     title: "Event settings",
+    //     icon: <CalendarClock />,
+    // },
+    // {
+    //     id: "4",
+    //     title: "Wishlist settings",
+    //     icon: <ListChecks />,
+    // },
 ];
 
 const Settings = () => {

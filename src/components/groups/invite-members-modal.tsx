@@ -19,13 +19,13 @@ import { Form } from "../ui/form";
 import LoadingSpinner from "../ui/spinner";
 
 interface Props {
-    data: any;
+    groupId: any;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const InviteMembers = ({ data, setOpen }: Props) => {
+const InviteMembers = ({ setOpen, groupId }: Props) => {
     const [selectedEmails, setSelectedEmails] = useState<string[]>([]);
 
-    const { mutateAsync: inviteMembers, isLoading } = useInviteMembersMutation(data?.id);
+    const { mutateAsync: inviteMembers, isLoading } = useInviteMembersMutation(groupId as string);
     const formHook = useForm<MemberType>({
         resolver: yupResolver(inviteMemberSchema),
         defaultValues: {

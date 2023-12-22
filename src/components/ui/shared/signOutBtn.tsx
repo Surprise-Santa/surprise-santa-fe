@@ -13,6 +13,7 @@ const SignOutBtn = ({ isNavOpen }: PropType) => {
 
     const handleSignOut = () => {
         sessionStorage.removeItem("user");
+        sessionStorage.removeItem("groupCode");
         router.push("/auth/signin");
         return toast.success("You have Successfully signed out!");
     };

@@ -104,7 +104,7 @@ const CreateEvent = () => {
                                 <SelectContent>
                                     <SelectGroup>
                                         <SelectLabel>Groups</SelectLabel>
-                                        {groups?.map((item) => {
+                                        {groups?.map((item: any) => {
                                             const { node: group } = item;
                                             return (
                                                 <SelectItem key={group.id} value={group.id}>
@@ -183,6 +183,7 @@ const CreateEvent = () => {
                                                     ).toISOString(),
                                                 )
                                             }
+                                            disabled={(date) => date < new Date()}
                                             initialFocus
                                         />
                                     </PopoverContent>
@@ -236,6 +237,10 @@ const CreateEvent = () => {
                                                             date.getTimezoneOffset() * 60000,
                                                     ).toISOString(),
                                                 )
+                                            }
+                                            disabled={(date) =>
+                                                date < new Date() ||
+                                                date < new Date(startDateField.value)
                                             }
                                             initialFocus
                                         />

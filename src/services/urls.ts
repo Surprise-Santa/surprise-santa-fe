@@ -2,6 +2,7 @@ export const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const urls = {
     signUpUrl: `${baseUrl}/auth/signup`,
+    googleSignUpUrl: `${baseUrl}/auth/signup/social-auth`,
     loginUrl: `${baseUrl}/auth/login`,
     googleLoginUrl: `${baseUrl}/auth/login/social-auth`,
     forgotPasswordUrl: `${baseUrl}/auth/request-password-reset`,
@@ -14,6 +15,10 @@ export const urls = {
     getOwnGroupsUrl: `${baseUrl}/groups/own-groups`,
     getGroupByIdUrl: (id: string) => `${baseUrl}/groups/${id}`,
     inviteGroupMembesrUrl: (id: string) => `${baseUrl}/groups/${id}/email-invite`,
+    getGroupMembersrUrl: (id: string) => `${baseUrl}/groups/${id}/members`,
+    getGroupMemberDetailsrUrl: (id: string) => `${baseUrl}/groups/members/${id}`,
+    getGroupCodeDetails: (groupCode: string) => `${baseUrl}/groups/${groupCode}/details`,
+    joinGroupUrl: (id: string) => `${baseUrl}/groups/${id}/join`,
     getMatchUrl: (id: string) => `${baseUrl}/events/${id}/get-match`,
     addParticipantsToEventUrl: (eventId: string) => `${baseUrl}/events/${eventId}/add-participants`,
     changePasswordUrl: `${baseUrl}/settings/profile/change-password`,

@@ -17,11 +17,12 @@ export default function Index() {
                             </Avatar>
                         </div>
                         <h3 className="text-xl text-center mb-2 mt-5">Adetunji Igbatayo</h3>
-                        <p className="text-center mb-4">Getbit Inc</p>
+                        <p className="text-center mb-4">Octosoft</p>
 
                         <p className="text-center mt-4 text-[14px] sm:text-[16px]">
-                            “Lorem ipsum dolor sit amet consectetur. Sed dolor magna placerat
-                            facilisis leo magna luctus augue ullamcorper.”{" "}
+                            “Surprise Santa made our Christmas so much fun! The anticipation of
+                            finding the perfect gift for someone, not knowing who&apos;s getting it,
+                            adds an extra layer of joy to the season.”{" "}
                         </p>
                     </div>
 
@@ -33,11 +34,13 @@ export default function Index() {
                             </Avatar>
                         </div>
                         <h3 className="text-xl text-center mb-2 mt-5">Taladeogo Abraham</h3>
-                        <p className="text-center mb-4">Getbit Inc</p>
+                        <p className="text-center mb-4">Octosoft</p>
 
                         <p className="text-center mt-4 text-[14px] sm:text-[16px]">
-                            “Lorem ipsum dolor sit amet consectetur. Sed dolor magna placerat
-                            facilisis leo magna luctus augue ullamcorper.”{" "}
+                            “I love the mystery behind Surprise Santa. It brings out the holiday
+                            spirit in the most delightful way. It&apos;s not just about the gifts;
+                            it&apos;s the excitement of spreading joy without expecting anything in
+                            return.”{" "}
                         </p>
                     </div>
                 </div>
@@ -51,11 +54,13 @@ export default function Index() {
                             </Avatar>
                         </div>
                         <h3 className="text-xl text-center mb-2 mt-5">Emelder Okafor</h3>
-                        <p className="text-center mb-4">Getbit Inc</p>
+                        <p className="text-center mb-4">Octosoft</p>
 
                         <p className="text-center mt-4 text-[14px] sm:text-[16px]">
-                            “Lorem ipsum dolor sit amet consectetur. Sed dolor magna placerat
-                            facilisis leo magna luctus augue ullamcorper.”{" "}
+                            “Surprise Santa is the highlight of my holiday season. The element of
+                            surprise and the thoughtfulness behind the gifts create unforgettable
+                            memories. It&apos;s a wonderful way to celebrate Christmas with friends
+                            and colleagues.”{" "}
                         </p>
                     </div>
 
@@ -67,11 +72,12 @@ export default function Index() {
                             </Avatar>
                         </div>
                         <h3 className="text-xl text-center mb-2 mt-5">Christian Enyia</h3>
-                        <p className="text-center mb-4">Getbit Inc</p>
+                        <p className="text-center mb-4">Octosoft</p>
 
                         <p className="text-center mt-4 text-[14px] sm:text-[16px]">
-                            “Lorem ipsum dolor sit amet consectetur. Sed dolor magna placerat
-                            facilisis leo magna luctus augue ullamcorper.”{" "}
+                            “Participating in Surprise Santa is like being a part of a magical
+                            holiday adventure. The secrecy adds an element of surprise and makes the
+                            gift exchange so much more exciting. It&apos;s a brilliant idea!”{" "}
                         </p>
                     </div>
                 </div>

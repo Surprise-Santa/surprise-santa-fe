@@ -19,3 +19,10 @@ export interface SignUpType {
     confirmPassword?: string;
     profileImgUrl?: string;
 }
+
+export interface SignUpWithGoogleType {
+    accessToken: string;
+    gender: string;
+    password: string;
+    phone?: string;
+}

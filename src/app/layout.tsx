@@ -9,7 +9,7 @@ import "./globals.css";
 const openSans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Secret Santa",
+    title: "Surprise Santa",
     description: "A surpise santa app for your friends and colleagues",
     alternates: {
         canonical: "https://secret-santa-supreme.vercel.app/",

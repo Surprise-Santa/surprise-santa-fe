@@ -1,4 +1,3 @@
-import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 
@@ -44,7 +43,7 @@ const GroupCard = ({
                     </div>
                     {members && members.length > 0 && (
                         <div className="flex mt-2">
-                            {members.map((member: any, index: any) => (
+                            {members.slice(0, 4).map((member: any, index: any) => (
                                 <div key={index} className="flex">
                                     <Avatar className="h-10 w-10" style={{ margin: "-3px" }}>
                                         <AvatarImage src={member.src} />

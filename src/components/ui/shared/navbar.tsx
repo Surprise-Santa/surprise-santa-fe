@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
 import Logo from "public/images/logo.png";
 
 const Navbar = () => {
@@ -21,7 +20,7 @@ const Navbar = () => {
         <header className="bg-gradient-to-r from-[#fdf4f5] to-[#fbfdfb] fixed top-0 z-50 w-screen p-1">
             {isClient && (
                 <div className="max-w-[1280px] w-[98%] mx-auto flex items-center justify-between">
-                    <div className="text-center px-4 text-primary-red font-bold text-[1.25rem]">
+                    <div className=" w-[5rem]">
                         <Link href="/">
                             <Image src={Logo} alt="logo" className="h-16 w-full object-contain" />
                         </Link>
