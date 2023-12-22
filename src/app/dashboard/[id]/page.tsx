@@ -27,8 +27,7 @@ const Page = () => {
     const randomChristmasColors = getRandomChristmasColors(totalEventsCount || 0);
 
     const showGroupInviteModal =
-        typeof window !== "undefined" &&
-        JSON.parse(window.sessionStorage.getItem("groupCode") as string);
+        typeof window !== "undefined" && window.sessionStorage.getItem("groupCode") as string;
 
     let upcomingEvents: EventType[] = [];
     let activeEvents: EventType[] = [];
