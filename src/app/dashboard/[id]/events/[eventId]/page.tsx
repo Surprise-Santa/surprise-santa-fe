@@ -77,7 +77,7 @@ const EventDetails = () => {
                     </p>
                     <p className="font-medium">
                         <span className="text-neutral-400 font-normal">Group Name: </span>
-                        Bedrock Community
+                        {data?.group?.name || "N/A"}
                     </p>
                 </div>
                 <div className="flex flex-col gap-8">
