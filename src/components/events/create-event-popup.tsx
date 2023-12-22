@@ -110,7 +110,7 @@ const CreateEvent = () => {
                                                 <SelectItem key={group.id} value={group.id}>
                                                     {group.name}
                                                 </SelectItem>
-                                            )
+                                            );
                                         })}
                                     </SelectGroup>
                                 </SelectContent>
@@ -179,7 +179,7 @@ const CreateEvent = () => {
                                                 startDateField.onChange(
                                                     new Date(
                                                         date.getTime() -
-                                                        date.getTimezoneOffset() * 60000,
+                                                            date.getTimezoneOffset() * 60000,
                                                     ).toISOString(),
                                                 )
                                             }
@@ -233,7 +233,7 @@ const CreateEvent = () => {
                                                 endDateField.onChange(
                                                     new Date(
                                                         date.getTime() -
-                                                        date.getTimezoneOffset() * 60000,
+                                                            date.getTimezoneOffset() * 60000,
                                                     ).toISOString(),
                                                 )
                                             }
