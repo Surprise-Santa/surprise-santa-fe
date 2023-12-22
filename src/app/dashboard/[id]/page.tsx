@@ -20,10 +20,11 @@ const Page = () => {
     const { id } = useParams();
     const { data: events, isLoading } = useGetAllEvents();
     const { data: groups } = useGetOwnGroups();
-    const randomChristmasColors = getRandomChristmasColors(events?.length);
 
     const { totalCount: totalGroupsCount, pageEdges: ownGroups } = groups || {};
-    const { pageEdges: ownEvents } = events || {};
+    const { totalCount: totalEventsCount, pageEdges: ownEvents } = events || {};
+
+    const randomChristmasColors = getRandomChristmasColors(totalEventsCount || 0);
 
     const showGroupInviteModal =
         typeof window !== "undefined" &&
@@ -141,10 +142,10 @@ const Page = () => {
             </section>
 
             <section>
-                <div className="flex items-center gap-12 mb-8">
+                <div className="flex items-center gap-12 mb-8 justify-between">
                     <h2 className="font-bold text-2xl">My Groups</h2>
                     {totalGroupsCount && totalGroupsCount > 0 ? (
-                        <Link href="#">View all</Link>
+                        <Link href={`/dashboard/${id}/groups`}>View all</Link>
                     ) : null}
                 </div>
 
@@ -177,9 +178,9 @@ const Page = () => {
                                         Participants:{" "}
                                         <span className="text-black">{group.members?.length}</span>
                                     </p>
-                                    <div className="h-max relative flex">
+                                    <div className="h-max flex">
                                         {group.members?.length > 0 && (
-                                            <span className="h-10 w-10 bg-sky-500 bg-opacity-50 rounded-full flex items-center justify-center text-sky-700 font-semibold z-10">
+                                            <span className="h-10 w-10 bg-sky-500 bg-opacity-50 rounded-full flex items-center justify-center text-sky-700 font-semibold z-10 uppercase">
                                                 {extractInitials(
                                                     group.members[0].user.firstName +
                                                         " " +
@@ -188,7 +189,7 @@ const Page = () => {
                                             </span>
                                         )}
                                         {group.members?.length > 1 && (
-                                            <span className="h-10 w-10 bg-rose-500 bg-opacity-50 rounded-full flex items-center justify-center text-rose-700 font-semibold z-20 -ml-2">
+                                            <span className="h-10 w-10 bg-rose-500 bg-opacity-50 rounded-full flex items-center justify-center text-rose-700 font-semibold z-20 -ml-2 uppercase">
                                                 {extractInitials(
                                                     group.members[1].user.firstName +
                                                         " " +
@@ -197,7 +198,7 @@ const Page = () => {
                                             </span>
                                         )}
                                         {group.members?.length > 2 && (
-                                            <span className="h-10 w-10 bg-emerald-500 bg-opacity-50 rounded-full flex items-center justify-center text-emerald-700 font-semibold z-30 -ml-2">
+                                            <span className="h-10 w-10 bg-emerald-500 bg-opacity-50 rounded-full flex items-center justify-center text-emerald-700 font-semibold z-30 -ml-2 uppercase">
                                                 {extractInitials(
                                                     group.members[2].user.firstName +
                                                         " " +
@@ -206,7 +207,9 @@ const Page = () => {
                                             </span>
                                         )}
                                         {group.members?.length > 3 && (
-                                            <p>+{group.members?.length - 3}</p>
+                                            <p className="self-center ml-1 text-lg font-medium">
+                                                +{group.members?.length - 3}
+                                            </p>
                                         )}
                                     </div>
                                 </Link>
@@ -216,9 +219,11 @@ const Page = () => {
             </section>
 
             <section>
-                <div className="flex items-center gap-12 mb-8">
+                <div className="flex items-center gap-12 mb-8 justify-between">
                     <h2 className="font-bold text-2xl">My Events</h2>
-                    {combinedEvents.length > 0 && <Link href="#">View all</Link>}
+                    {combinedEvents.length > 0 && (
+                        <Link href={`/dashboard/${id}/events`}>View all</Link>
+                    )}
                 </div>
 
                 <div className="flex items-center justify-center md:justify-start gap-8 flex-wrap">
@@ -226,8 +231,9 @@ const Page = () => {
                         combinedEvents?.map((event, index) => {
                             const singleEvent = event.node;
                             return (
-                                <div
+                                <Link
                                     key={singleEvent.id}
+                                    href={`/dashboard/${id}/events/${singleEvent.id}`}
                                     className="bg-white py-4 px-6 rounded-lg rounded-l-none shadow-md space-y-4 border-l-4 w-[24rem]"
                                     style={{
                                         borderLeftColor: `${randomChristmasColors[index]}`,
@@ -236,8 +242,11 @@ const Page = () => {
                                     <p className="font-semibold text-2xl">{singleEvent.title}</p>
                                     <div className="flex items-center gap-4">
                                         <Image
-                                            src="/images/Christian.jpg"
-                                            alt="Christian Enyia"
+                                            src={
+                                                singleEvent?.organizer?.profileImgUrl ||
+                                                "/images/santa.png"
+                                            }
+                                            alt={singleEvent?.description}
                                             className="rounded-full h-12 w-12"
                                             width={48}
                                             height={48}
@@ -262,10 +271,10 @@ const Page = () => {
                                             </p>
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-2">
+                                    <div className="flex items-center gap-1">
                                         <div className="flex">
                                             {singleEvent.participants?.length > 0 && (
-                                                <span className="h-10 w-10 bg-sky-500 bg-opacity-50 rounded-full flex items-center justify-center text-sky-700 font-semibold z-10">
+                                                <span className="h-10 w-10 bg-sky-500 bg-opacity-50 rounded-full flex items-center justify-center text-sky-700 font-semibold z-10 uppercase">
                                                     {extractInitials(
                                                         singleEvent.participants[0].user.firstName +
                                                             " " +
@@ -275,7 +284,7 @@ const Page = () => {
                                                 </span>
                                             )}
                                             {singleEvent.participants?.length > 1 && (
-                                                <span className="h-10 w-10 bg-rose-500 bg-opacity-50 rounded-full flex items-center justify-center text-rose-700 font-semibold z-20 -ml-2">
+                                                <span className="h-10 w-10 bg-rose-500 bg-opacity-50 rounded-full flex items-center justify-center text-rose-700 font-semibold z-20 -ml-2 uppercase">
                                                     {extractInitials(
                                                         singleEvent.participants[1].user.firstName +
                                                             " " +
@@ -285,7 +294,7 @@ const Page = () => {
                                                 </span>
                                             )}
                                             {singleEvent.participants?.length > 2 && (
-                                                <span className="h-10 w-10 bg-emerald-500 bg-opacity-50 rounded-full flex items-center justify-center text-emerald-700 font-semibold z-30 -ml-2">
+                                                <span className="h-10 w-10 bg-emerald-500 bg-opacity-50 rounded-full flex items-center justify-center text-emerald-700 font-semibold z-30 -ml-2 uppercase">
                                                     {extractInitials(
                                                         singleEvent.participants[2].user.firstName +
                                                             " " +
@@ -296,10 +305,12 @@ const Page = () => {
                                             )}
                                         </div>
                                         {singleEvent?.participants?.length > 3 && (
-                                            <p>+{singleEvent?.participants?.length - 3}</p>
+                                            <p className="self-center text-lg font-medium">
+                                                +{singleEvent?.participants?.length - 3}
+                                            </p>
                                         )}
                                     </div>
-                                </div>
+                                </Link>
                             );
                         })}
                 </div>

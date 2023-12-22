@@ -74,10 +74,10 @@ const Events = () => {
                                             {convertDateFormat(endDate)}
                                         </p>
                                     </div>
-                                    <div className="flex gap-2 items-center">
+                                    <div className="flex gap-1 items-center">
                                         <div className="flex">
                                             {participants?.length > 0 && (
-                                                <span className="h-10 w-10 bg-sky-500 bg-opacity-50 rounded-full flex items-center justify-center text-sky-700 font-semibold z-10">
+                                                <span className="h-10 w-10 bg-sky-500 bg-opacity-50 rounded-full flex items-center justify-center text-sky-700 font-semibold z-10 uppercase">
                                                     {extractInitials(
                                                         participants[0].user.firstName +
                                                             " " +
@@ -86,7 +86,7 @@ const Events = () => {
                                                 </span>
                                             )}
                                             {participants?.length > 1 && (
-                                                <span className="h-10 w-10 bg-rose-500 bg-opacity-50 rounded-full flex items-center justify-center text-rose-700 font-semibold z-20 -ml-2">
+                                                <span className="h-10 w-10 bg-rose-500 bg-opacity-50 rounded-full flex items-center justify-center text-rose-700 font-semibold z-20 -ml-2 uppercase">
                                                     {extractInitials(
                                                         participants[1].user.firstName +
                                                             " " +
@@ -95,7 +95,7 @@ const Events = () => {
                                                 </span>
                                             )}
                                             {participants?.length > 2 && (
-                                                <span className="h-10 w-10 bg-emerald-500 bg-opacity-50 rounded-full flex items-center justify-center text-emerald-700 font-semibold z-30 -ml-2">
+                                                <span className="h-10 w-10 bg-emerald-500 bg-opacity-50 rounded-full flex items-center justify-center text-emerald-700 font-semibold z-30 -ml-2 uppercase">
                                                     {extractInitials(
                                                         participants[2].user.firstName +
                                                             " " +
@@ -105,7 +105,7 @@ const Events = () => {
                                             )}
                                         </div>
                                         {participants.length > 3 && (
-                                            <p className="text-lg font-medium">
+                                            <p className="text-lg font-medium self-center">
                                                 + {participants?.length - 3}
                                             </p>
                                         )}

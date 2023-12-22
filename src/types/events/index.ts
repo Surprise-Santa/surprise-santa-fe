@@ -14,6 +14,7 @@ export interface EventType {
             firstName: string;
             lastName: string;
             middleName: string;
+            profileImgUrl: string;
         };
     };
 }
