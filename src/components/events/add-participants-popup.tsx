@@ -6,6 +6,7 @@ import { useGetGroupById } from "@/services/queries/groups";
 import { useAddParticipantsToEventMutation } from "@/services/mutations/events.mutation";
 import { useParams } from "next/navigation";
 import toast from "react-hot-toast";
+import { ParticipantType } from "@/types/events";
 
 interface ParticipantOption {
     value: string;
@@ -13,17 +14,21 @@ interface ParticipantOption {
     user?: any;
 }
 
-const AddParticipants = ({ groupId, eventData }: { groupId: string; eventData: any }) => {
+const AddParticipants = ({ eventData }: { eventData: any }) => {
     const { eventId } = useParams();
-    const { data: groupData, isLoading } = useGetGroupById(groupId);
-    const [participants, setParticipants] = useState<ParticipantOption[]>([]);
+    const { data: groupData, isLoading } = useGetGroupById(eventData?.groupId);
+    const [participants, setParticipants] = useState<ParticipantType[]>([]);
     const [selectedParticipants, setSelectedParticipants] = useState<ParticipantOption[]>([]);
     const { mutateAsync: addParticipants } = useAddParticipantsToEventMutation(eventId as string);
 
     useEffect(() => {
-        if (!groupData) return;
-        const filteredParticipants = groupData?.members.filter(
-            (member: any) => !eventData?.participants.some((p: any) => p.userId === member.user.id),
+        if (!groupData || !eventData) return;
+
+        const participantUserIds = eventData.participants.pageEdges.map(
+            (participant: any) => participant.node.userId,
+        );
+        const filteredParticipants = groupData.members.pageEdges.filter(
+            (member: any) => !participantUserIds.includes(member.node.userId),
         );
         setParticipants(filteredParticipants);
     }, [groupData, eventData]);
@@ -33,7 +38,7 @@ const AddParticipants = ({ groupId, eventData }: { groupId: string; eventData: a
         const participantIds = selectedParticipants.map((participant) => participant.value);
         const data = {
             participants: participantIds,
-            all: true,
+            all: false,
         };
 
         const result = await addParticipants(data);
@@ -63,12 +68,10 @@ const AddParticipants = ({ groupId, eventData }: { groupId: string; eventData: a
                         options={
                             participants &&
                             participants?.map((participant) => {
+                                const { user } = participant?.node;
                                 return {
-                                    value: participant?.user?.id,
-                                    label:
-                                        participant?.user?.firstName +
-                                        " " +
-                                        participant?.user?.lastName,
+                                    value: user?.id,
+                                    label: user?.firstName + " " + user?.lastName,
                                 };
                             })
                         }

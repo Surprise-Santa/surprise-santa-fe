@@ -23,11 +23,20 @@ export const useCreateEventMutation = () => {
 };
 
 export const useAddParticipantsToEventMutation = (eventId: string) => {
+    const queryClient = useQueryClient();
+
     return useMutation(
         ["addParticipantsToEvent", eventId],
         async (data: { participants: string[]; all: boolean }) => {
             const res = await axios.post(urls.addParticipantsToEventUrl(eventId), data);
             return res;
+        },
+        {
+            onSuccess: () => {
+                queryClient.invalidateQueries({
+                    queryKey: ["getEventById"],
+                });
+            },
         },
     );
 };

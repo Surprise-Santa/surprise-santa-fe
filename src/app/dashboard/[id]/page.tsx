@@ -20,21 +20,21 @@ const Page = () => {
     const { id } = useParams();
     const { data: events, isLoading } = useGetAllEvents();
     const { data: groups } = useGetOwnGroups();
-    const randomChristmasColors = getRandomChristmasColors(events?.length);
 
     const { totalCount: totalGroupsCount, pageEdges: ownGroups } = groups || {};
-    const { pageEdges: ownEvents } = events || {};
+    const { totalCount: totalEventsCount, pageEdges: ownEvents } = events || {};
+
+    const randomChristmasColors = getRandomChristmasColors(totalEventsCount || 0);
 
     const showGroupInviteModal =
-        typeof window !== "undefined" &&
-        JSON.parse(window.sessionStorage.getItem("groupCode") as string);
+        typeof window !== "undefined" && window.sessionStorage.getItem("groupCode") as string;
 
     let upcomingEvents: EventType[] = [];
     let activeEvents: EventType[] = [];
 
     ownEvents?.forEach((event: EventType) => {
-        let startDate = new Date(event.startDate);
-        let endDate = new Date(event.endDate);
+        let startDate = new Date(event.node?.startDate);
+        let endDate = new Date(event.node?.endDate);
 
         if (isFuture(startDate)) {
             upcomingEvents.push(event);
@@ -64,28 +64,36 @@ const Page = () => {
                     <p>Active Events</p>
                     <div className="flex flex-col gap-6">
                         {activeEvents.length > 0 ? (
-                            activeEvents.map((event) => (
-                                <Link href={`/dashboard/${id}/events/${event.id}`} key={event.id}>
-                                    <div className="flex gap-2">
-                                        <Checkbox />
-                                        <div className="-mt-1">
-                                            <p className="text-sm">{event.title}</p>
-                                            <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4">
-                                                <CalendarDays size={24} color="#000" />
-                                                <div className="flex items-center gap-2">
-                                                    <p className="whitespace-nowrap">
-                                                        {convertDateFormat(event.startDate)}
-                                                    </p>
-                                                    <span> - </span>
-                                                    <p className="whitespace-nowrap">
-                                                        {convertDateFormat(event.endDate)}
-                                                    </p>
+                            activeEvents.map((event) => {
+                                const singleEvent = event.node;
+                                return (
+                                    <Link
+                                        href={`/dashboard/${id}/events/${singleEvent.id}`}
+                                        key={singleEvent.id}
+                                    >
+                                        <div className="flex gap-2">
+                                            <Checkbox />
+                                            <div className="-mt-1">
+                                                <p className="text-sm">{singleEvent.title}</p>
+                                                <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4">
+                                                    <CalendarDays size={24} color="#000" />
+                                                    <div className="flex items-center gap-2">
+                                                        <p className="whitespace-nowrap">
+                                                            {convertDateFormat(
+                                                                singleEvent.startDate,
+                                                            )}
+                                                        </p>
+                                                        <span> - </span>
+                                                        <p className="whitespace-nowrap">
+                                                            {convertDateFormat(singleEvent.endDate)}
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </Link>
-                            ))
+                                    </Link>
+                                );
+                            })
                         ) : (
                             <p>No Upcoming Events</p>
                         )}
@@ -95,28 +103,36 @@ const Page = () => {
                     <p>Upcoming Events</p>
                     <div className="flex flex-col gap-6">
                         {upcomingEvents.length > 0 ? (
-                            upcomingEvents.map((event) => (
-                                <Link href={`/dashboard/${id}/events/${event.id}`} key={event.id}>
-                                    <div className="flex gap-2">
-                                        <Checkbox />
-                                        <div className="-mt-1">
-                                            <p className="text-sm">{event.title}</p>
-                                            <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4">
-                                                <CalendarDays size={20} color="#000" />
-                                                <div className="flex items-center gap-2">
-                                                    <p className="whitespace-nowrap">
-                                                        {convertDateFormat(event.startDate)}
-                                                    </p>
-                                                    <span> - </span>
-                                                    <p className="whitespace-nowrap">
-                                                        {convertDateFormat(event.endDate)}
-                                                    </p>
+                            upcomingEvents.map((event) => {
+                                const singleEvent = event.node;
+                                return (
+                                    <Link
+                                        href={`/dashboard/${id}/events/${singleEvent.id}`}
+                                        key={singleEvent.id}
+                                    >
+                                        <div className="flex gap-2">
+                                            <Checkbox />
+                                            <div className="-mt-1">
+                                                <p className="text-sm">{singleEvent.title}</p>
+                                                <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4">
+                                                    <CalendarDays size={20} color="#000" />
+                                                    <div className="flex items-center gap-2">
+                                                        <p className="whitespace-nowrap">
+                                                            {convertDateFormat(
+                                                                singleEvent.startDate,
+                                                            )}
+                                                        </p>
+                                                        <span> - </span>
+                                                        <p className="whitespace-nowrap">
+                                                            {convertDateFormat(singleEvent.endDate)}
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </Link>
-                            ))
+                                    </Link>
+                                );
+                            })
                         ) : (
                             <p>No Upcoming Events</p>
                         )}
@@ -125,10 +141,10 @@ const Page = () => {
             </section>
 
             <section>
-                <div className="flex items-center gap-12 mb-8">
+                <div className="flex items-center gap-12 mb-8 justify-between">
                     <h2 className="font-bold text-2xl">My Groups</h2>
                     {totalGroupsCount && totalGroupsCount > 0 ? (
-                        <Link href="#">View all</Link>
+                        <Link href={`/dashboard/${id}/groups`}>View all</Link>
                     ) : null}
                 </div>
 
@@ -161,9 +177,9 @@ const Page = () => {
                                         Participants:{" "}
                                         <span className="text-black">{group.members?.length}</span>
                                     </p>
-                                    <div className="h-max relative flex">
+                                    <div className="h-max flex">
                                         {group.members?.length > 0 && (
-                                            <span className="h-10 w-10 bg-sky-500 bg-opacity-50 rounded-full flex items-center justify-center text-sky-700 font-semibold z-10">
+                                            <span className="h-10 w-10 bg-sky-500 bg-opacity-50 rounded-full flex items-center justify-center text-sky-700 font-semibold z-10 uppercase">
                                                 {extractInitials(
                                                     group.members[0].user.firstName +
                                                         " " +
@@ -172,7 +188,7 @@ const Page = () => {
                                             </span>
                                         )}
                                         {group.members?.length > 1 && (
-                                            <span className="h-10 w-10 bg-rose-500 bg-opacity-50 rounded-full flex items-center justify-center text-rose-700 font-semibold z-20 -ml-2">
+                                            <span className="h-10 w-10 bg-rose-500 bg-opacity-50 rounded-full flex items-center justify-center text-rose-700 font-semibold z-20 -ml-2 uppercase">
                                                 {extractInitials(
                                                     group.members[1].user.firstName +
                                                         " " +
@@ -181,7 +197,7 @@ const Page = () => {
                                             </span>
                                         )}
                                         {group.members?.length > 2 && (
-                                            <span className="h-10 w-10 bg-emerald-500 bg-opacity-50 rounded-full flex items-center justify-center text-emerald-700 font-semibold z-30 -ml-2">
+                                            <span className="h-10 w-10 bg-emerald-500 bg-opacity-50 rounded-full flex items-center justify-center text-emerald-700 font-semibold z-30 -ml-2 uppercase">
                                                 {extractInitials(
                                                     group.members[2].user.firstName +
                                                         " " +
@@ -190,7 +206,9 @@ const Page = () => {
                                             </span>
                                         )}
                                         {group.members?.length > 3 && (
-                                            <p>+{group.members?.length - 3}</p>
+                                            <p className="self-center ml-1 text-lg font-medium">
+                                                +{group.members?.length - 3}
+                                            </p>
                                         )}
                                     </div>
                                 </Link>
@@ -200,85 +218,100 @@ const Page = () => {
             </section>
 
             <section>
-                <div className="flex items-center gap-12 mb-8">
+                <div className="flex items-center gap-12 mb-8 justify-between">
                     <h2 className="font-bold text-2xl">My Events</h2>
-                    {combinedEvents.length > 0 && <Link href="#">View all</Link>}
+                    {combinedEvents.length > 0 && (
+                        <Link href={`/dashboard/${id}/events`}>View all</Link>
+                    )}
                 </div>
 
                 <div className="flex items-center justify-center md:justify-start gap-8 flex-wrap">
                     {combinedEvents.length > 0 &&
-                        combinedEvents?.map((event, index) => (
-                            <div
-                                key={event.id}
-                                className="bg-white py-4 px-6 rounded-lg rounded-l-none shadow-md space-y-4 border-l-4 w-[24rem]"
-                                style={{
-                                    borderLeftColor: `${randomChristmasColors[index]}`,
-                                }}
-                            >
-                                <p className="font-semibold text-2xl">{event.title}</p>
-                                <div className="flex items-center gap-4">
-                                    <Image
-                                        src="/images/Christian.jpg"
-                                        alt="Christian Enyia"
-                                        className="rounded-full h-12 w-12"
-                                        width={48}
-                                        height={48}
-                                    />
-                                    <p className="text-black flex flex-nowrap gap-1 items-center text-xl">
-                                        {event?.createdBy}{" "}
-                                        <span className="text-primary-light-opaque text-base">
-                                            (organizer)
-                                        </span>
-                                    </p>
-                                </div>
-                                <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4 max-w-fit w-full">
-                                    <CalendarDays size={24} color="#000" />
-                                    <div className="flex items-center gap-2">
-                                        <p className="whitespace-nowrap">
-                                            {convertDateFormat(event.startDate)}
-                                        </p>
-                                        <span> - </span>
-                                        <p className="whitespace-nowrap">
-                                            {convertDateFormat(event.endDate)}
+                        combinedEvents?.map((event, index) => {
+                            const singleEvent = event.node;
+                            return (
+                                <Link
+                                    key={singleEvent.id}
+                                    href={`/dashboard/${id}/events/${singleEvent.id}`}
+                                    className="bg-white py-4 px-6 rounded-lg rounded-l-none shadow-md space-y-4 border-l-4 w-[24rem]"
+                                    style={{
+                                        borderLeftColor: `${randomChristmasColors[index]}`,
+                                    }}
+                                >
+                                    <p className="font-semibold text-2xl">{singleEvent.title}</p>
+                                    <div className="flex items-center gap-4">
+                                        <Image
+                                            src={
+                                                singleEvent?.organizer?.profileImgUrl ||
+                                                "/images/santa.png"
+                                            }
+                                            alt={singleEvent?.description}
+                                            className="rounded-full h-12 w-12"
+                                            width={48}
+                                            height={48}
+                                        />
+                                        <p className="text-black flex flex-nowrap gap-1 items-center text-xl">
+                                            {singleEvent?.organizer?.firstName}{" "}
+                                            {singleEvent?.organizer?.lastName}
+                                            <span className="text-primary-light-opaque text-base">
+                                                (organizer)
+                                            </span>
                                         </p>
                                     </div>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <div className="flex">
-                                        {event.participants?.length > 0 && (
-                                            <span className="h-10 w-10 bg-sky-500 bg-opacity-50 rounded-full flex items-center justify-center text-sky-700 font-semibold z-10">
-                                                {extractInitials(
-                                                    event.participants[0].user.firstName +
-                                                        " " +
-                                                        event.participants[0].user.lastName,
-                                                )}
-                                            </span>
-                                        )}
-                                        {event.participants?.length > 1 && (
-                                            <span className="h-10 w-10 bg-rose-500 bg-opacity-50 rounded-full flex items-center justify-center text-rose-700 font-semibold z-20 -ml-2">
-                                                {extractInitials(
-                                                    event.participants[1].user.firstName +
-                                                        " " +
-                                                        event.participants[1].user.lastName,
-                                                )}
-                                            </span>
-                                        )}
-                                        {event.participants?.length > 2 && (
-                                            <span className="h-10 w-10 bg-emerald-500 bg-opacity-50 rounded-full flex items-center justify-center text-emerald-700 font-semibold z-30 -ml-2">
-                                                {extractInitials(
-                                                    event.participants[2].user.firstName +
-                                                        " " +
-                                                        event.participants[2].user.lastName,
-                                                )}
-                                            </span>
+                                    <div className="border border-primary-gray1 px-4 py-2 rounded-sm text-primary-light-opaque flex items-center gap-4 max-w-fit w-full">
+                                        <CalendarDays size={24} color="#000" />
+                                        <div className="flex items-center gap-2">
+                                            <p className="whitespace-nowrap">
+                                                {convertDateFormat(singleEvent.startDate)}
+                                            </p>
+                                            <span> - </span>
+                                            <p className="whitespace-nowrap">
+                                                {convertDateFormat(singleEvent.endDate)}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-1">
+                                        <div className="flex">
+                                            {singleEvent.participants?.length > 0 && (
+                                                <span className="h-10 w-10 bg-sky-500 bg-opacity-50 rounded-full flex items-center justify-center text-sky-700 font-semibold z-10 uppercase">
+                                                    {extractInitials(
+                                                        singleEvent.participants[0].user.firstName +
+                                                            " " +
+                                                            singleEvent.participants[0].user
+                                                                .lastName,
+                                                    )}
+                                                </span>
+                                            )}
+                                            {singleEvent.participants?.length > 1 && (
+                                                <span className="h-10 w-10 bg-rose-500 bg-opacity-50 rounded-full flex items-center justify-center text-rose-700 font-semibold z-20 -ml-2 uppercase">
+                                                    {extractInitials(
+                                                        singleEvent.participants[1].user.firstName +
+                                                            " " +
+                                                            singleEvent.participants[1].user
+                                                                .lastName,
+                                                    )}
+                                                </span>
+                                            )}
+                                            {singleEvent.participants?.length > 2 && (
+                                                <span className="h-10 w-10 bg-emerald-500 bg-opacity-50 rounded-full flex items-center justify-center text-emerald-700 font-semibold z-30 -ml-2 uppercase">
+                                                    {extractInitials(
+                                                        singleEvent.participants[2].user.firstName +
+                                                            " " +
+                                                            singleEvent.participants[2].user
+                                                                .lastName,
+                                                    )}
+                                                </span>
+                                            )}
+                                        </div>
+                                        {singleEvent?.participants?.length > 3 && (
+                                            <p className="self-center text-lg font-medium">
+                                                +{singleEvent?.participants?.length - 3}
+                                            </p>
                                         )}
                                     </div>
-                                    {event?.participants?.length > 3 && (
-                                        <p>+{event?.participants?.length - 3}</p>
-                                    )}
-                                </div>
-                            </div>
-                        ))}
+                                </Link>
+                            );
+                        })}
                 </div>
             </section>
             {showGroupInviteModal && <JoinGroupModal />}

@@ -28,6 +28,7 @@ import { isAfter } from "date-fns";
 const EventDetails = () => {
     const { eventId } = useParams();
     const { data, isLoading } = useGetEventById(eventId as string);
+    const participantsData = data?.participants?.pageEdges;
 
     const router = useRouter();
 
@@ -122,7 +123,7 @@ const EventDetails = () => {
                         <DialogTrigger asChild>
                             <Button>Add Participant</Button>
                         </DialogTrigger>
-                        <AddParticipants groupId={data?.groupId} eventData={data} />
+                        <AddParticipants eventData={data} />
                     </Dialog>
                 </div>
                 <div className="flex flex-row w-full justify-between items-center gap-4">
@@ -139,10 +140,10 @@ const EventDetails = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {data?.participants.map((participant: ParticipantType) => {
-                        const { user } = participant;
+                    {participantsData?.map((participant: ParticipantType) => {
+                        const { user } = participant.node;
                         return (
-                            <TableRow key={participant?.id}>
+                            <TableRow key={user.id}>
                                 <TableCell>
                                     {user?.firstName} {user?.lastName}
                                 </TableCell>

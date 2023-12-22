@@ -47,7 +47,7 @@ const JoinGroupModal = () => {
                             </Avatar>
                         </div>
                         <div className="flex flex-col items-center justify-center gap-1">
-                            <p className="font-bold text-[1.4rem]">Welcome to {data?.name} </p>
+                            <p className="font-bold text-[1.4rem]">Join {data?.name} </p>
                             <p className="font-medium mb-6">
                                 {" "}
                                 By {data?.owner?.firstName} {data?.owner?.lastName}{" "}
