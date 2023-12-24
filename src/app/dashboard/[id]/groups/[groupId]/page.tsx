@@ -4,12 +4,15 @@ import { convertDateFormat, reformData } from "@/lib/utils";
 import { useGetGroupById } from "@/services/queries/groups";
 import { MoveLeft } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import GroupTable from "../../../../../components/groups/group-table";
 
 const GroupDetails = () => {
     const router = useRouter();
     const { groupId } = useParams();
+    const [filters, setFilters] = useState<any>({
+        size: 10,
+    });
     const { data, isLoading, isSuccess } = useGetGroupById(groupId as string);
 
     const memoizedData = useMemo(() => {
@@ -96,7 +99,7 @@ const GroupDetails = () => {
                         </div>
                     </div>
                     <div className="mt-20">
-                        <GroupTable groupId={groupId} />
+                        <GroupTable groupId={groupId} filters={filters} setFilters={setFilters} />
                     </div>
                 </section>
             )}
