@@ -14,16 +14,18 @@ import EyeIcon from "../../../public/icons/eye";
 import ViewMemberDetails from "./view-member-modal";
 import LoadingSpinner from "@/components/ui/spinner";
 import InviteMembers from "./invite-members-modal";
+import TablePagination from "../ui/table-pagination";
 
 interface Props {
-    groupId: any;
+    groupId: string | string[];
+    filters: any;
+    setFilters: React.Dispatch<React.SetStateAction<any>>;
 }
 
-const GroupTable = ({ groupId }: Props) => {
+const GroupTable = ({ groupId, filters, setFilters }: Props) => {
     const [memberDetails, setMemberDetails] = useState({});
-    const [filters, setFilters] = useState<any>({});
+    const [count, setCount] = useState(0);
     const [debouncedTerm] = useDebounce(filters.term, 500);
-    const [selectedPageSize, setSelectedPageSize] = useState(10);
     const [open, setOpen] = useState(false);
 
     const {
@@ -32,7 +34,8 @@ const GroupTable = ({ groupId }: Props) => {
         isSuccess: memberSuccess,
     } = useGetGroupMembers(groupId as string, {
         ...(debouncedTerm && { term: debouncedTerm }),
-        ...{ ...filters, size: selectedPageSize },
+        ...(filters.size && { size: filters.size }),
+        ...(filters.cursor && { cursor: filters.cursor }),
     });
 
     const memoizedData = useMemo(() => {
@@ -105,7 +108,7 @@ const GroupTable = ({ groupId }: Props) => {
                             paddingLeft: "2rem",
                         }}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            //   setCount(0);
+                            setCount(0);
                             setFilters((prevState: any) => {
                                 const { cursor, ...otherPrevState } = prevState;
                                 return {
@@ -152,7 +155,31 @@ const GroupTable = ({ groupId }: Props) => {
                         highlightOnHover
                     />
 
-                    <hr />
+                    <TablePagination
+                        totalCount={membersData?.totalCount!}
+                        nextLoad={membersData?.pageCursors.next?.cursor}
+                        previous={membersData?.pageCursors.previous?.cursor}
+                        count={count}
+                        setCount={setCount}
+                        filters={filters}
+                        setFilters={setFilters}
+                        handleNextLoad={() => {
+                            const next = membersData?.pageCursors.next;
+                            if (!next) return;
+                            setFilters((prevState: any) => ({
+                                ...prevState,
+                                cursor: next.cursor,
+                            }));
+                        }}
+                        handlePreviousLoad={() => {
+                            const previous = membersData?.pageCursors.previous;
+                            if (!previous) return;
+                            setFilters((prevState: any) => ({
+                                ...prevState,
+                                cursor: previous.cursor,
+                            }));
+                        }}
+                    />
                 </div>
             )}
         </div>

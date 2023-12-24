@@ -44,7 +44,8 @@ export const howItWorksData = [
     {
         index: 4,
         title: "Get paired",
-        description: "When the event starts, event participants can get paired anonymously",
+        description:
+            "When the event starts, event participants can get paired anonymously - You gift a present to whomever you're 'matched' with.",
         image: "/images/get-paired.svg",
         backgroundImage: "/images/get-paired-bg.svg",
     },
