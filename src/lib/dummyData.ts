@@ -1,19 +1,19 @@
 export const faqData = [
     {
         question: "What is Surprise Santa?",
-        answer: "Surprise Santa is a Christmas tradition. It involves a group of people exchanging gifts with each other, but not knowing who is giving them a gift. This is done by randomly assigning each person in the group another person to give a gift to. This is done anonymously, so the person receiving the gift doesn't know who it is from. The person giving the gift doesn't know who they are giving a gift to either. This is why it is called Surprise Santa.",
+        answer: "Surprise Santa is a Christmas tradition. It involves an anonymous exchange of gifts amongst members of a group. This is achieved by randomly assigning each donor a beneficiary. PS: You are not supposed to let your beneficiary know you are his or her donor. This is why it is called Surprise Santa.",
     },
     {
-        question: "How do I create an event?",
-        answer: "You can create an event by clicking on the create event button in the event section of your dashboard. You can then fill in the details of the event and submit.",
+        question: "How do I get started?",
+        answer: "Firstly, you have to create an account and get authenticated. Then you would have to create a group and invite members via email to join your group. When members join your group, you can then proceed to create an event and add members of the group to that event.",
     },
     {
         question: "How many people can participate?",
-        answer: "You can have as many people as you want in your event. However, we recommend that you have at least 3 people in your event.",
+        answer: "You can have as many people as you want in your event. However, we recommend that you have at least 3 people in your event. Please note that only members of a group can participate in an event",
     },
     {
-        question: "How can I invite people to my event?",
-        answer: "You can invite individuals to your event by adding them as participants from a group you've already created.",
+        question: "Can I add participants to an event after it has started?",
+        answer: "No. You cannot add participants while an event is active, i.e., the event has started.",
     },
 ];
 
