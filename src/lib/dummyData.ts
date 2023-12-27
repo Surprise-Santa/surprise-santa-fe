@@ -5,7 +5,7 @@ export const faqData = [
     },
     {
         question: "How do I create an event?",
-        answer: "You can create an event by clicking on the create event button on your dashboard. You can then fill in the details of the event and submit.",
+        answer: "You can create an event by clicking on the create event button in the event section of your dashboard. You can then fill in the details of the event and submit.",
     },
     {
         question: "How many people can participate?",
@@ -13,7 +13,7 @@ export const faqData = [
     },
     {
         question: "How can I invite people to my event?",
-        answer: "You can invite people to your event by sharing the event link with them. You can find the event link on the event page.",
+        answer: "You can invite individuals to your event by adding them as participants from a group you've already created.",
     },
 ];
 
