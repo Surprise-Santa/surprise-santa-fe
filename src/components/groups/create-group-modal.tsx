@@ -30,7 +30,7 @@ const CreateGroup = ({ setOpen }: Props) => {
             description: "",
         },
     } as { resolver: Resolver<GroupType> });
-    const { handleSubmit, control } = formHook;
+    const { handleSubmit, control, reset } = formHook;
 
     const submit: SubmitHandler<GroupType> = async (data: GroupType) => {
         const result = await createGroup(data);
@@ -73,7 +73,12 @@ const CreateGroup = ({ setOpen }: Props) => {
 
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline" type="button" className="w-max mr-4">
+                            <Button
+                                variant="outline"
+                                type="button"
+                                className="w-max mr-4"
+                                onClick={() => reset()}
+                            >
                                 Cancel
                             </Button>
                         </DialogClose>

@@ -13,12 +13,14 @@ import { useGetAllGroups, useGetOwnGroups } from "@/services/queries/groups";
 import NoDataImage from "public/images/no-data-icon.png";
 import CreateGroup from "../../../../components/groups/create-group-modal";
 import GroupCard from "../../../../components/groups/group-card";
+import JoinGroupWithCode from "../../../../components/groups/join-group-with-code";
 
 const Groups = () => {
     const { id } = useParams();
     const [displayAllGroupScrollbar, setDisplayAllGroupScrollbar] = useState(false);
     const [displayOtherGroupScrollbar, setDisplayOtherGroupScrollbar] = useState(false);
     const [open, setOpen] = useState(false);
+    const [openJoinGroup, setOpenJoinGroup] = useState(false);
     const {
         data: allGroups,
         isLoading: allGroupsLoading,
@@ -50,14 +52,25 @@ const Groups = () => {
 
     return (
         <section>
-            <Dialog open={open} onOpenChange={setOpen}>
-                <DialogTrigger asChild>
-                    <div className="flex justify-end align-end mb-4">
-                        <Button type="button">Create Group</Button>
-                    </div>
-                </DialogTrigger>
-                <CreateGroup setOpen={setOpen} />
-            </Dialog>
+            <div className="flex gap-4 justify-end">
+                <Dialog open={open} onOpenChange={setOpen}>
+                    <DialogTrigger asChild>
+                        <div className="flex justify-end align-end mb-4">
+                            <Button type="button">Create Group</Button>
+                        </div>
+                    </DialogTrigger>
+                    <CreateGroup setOpen={setOpen} />
+                </Dialog>
+
+                <Dialog open={openJoinGroup} onOpenChange={setOpenJoinGroup}>
+                    <DialogTrigger asChild>
+                        <div className="flex justify-end align-end mb-4">
+                            <Button type="button">Join Group</Button>
+                        </div>
+                    </DialogTrigger>
+                    <JoinGroupWithCode setOpen={setOpenJoinGroup} />
+                </Dialog>
+            </div>
             <div className="flex flex-col lg:flex-row gap-2 justify-between transition-all duration-300 ease-in-out">
                 <div
                     className={`w-[100%] lg:w-[47%] h-[28rem] relative border-2 border-primary-gray mt-4 rounded-xl p-6 overflow-y-auto ${
