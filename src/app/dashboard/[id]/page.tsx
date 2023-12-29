@@ -63,7 +63,7 @@ const Page = () => {
                 <div className="space-y-4 p-4 order-1 md:order-2 w-full">
                     <p>Active Events</p>
                     <div className="flex flex-col gap-6">
-                        {activeEvents.length > 0 ? (
+                        {activeEvents?.length > 0 ? (
                             activeEvents.map((event) => {
                                 const singleEvent = event.node;
                                 return (
@@ -102,7 +102,7 @@ const Page = () => {
                 <div className="space-y-4 p-4 order-2 md:order-3 w-full">
                     <p>Upcoming Events</p>
                     <div className="flex flex-col gap-6">
-                        {upcomingEvents.length > 0 ? (
+                        {upcomingEvents?.length > 0 ? (
                             upcomingEvents.map((event) => {
                                 const singleEvent = event.node;
                                 return (
@@ -141,7 +141,7 @@ const Page = () => {
             </section>
 
             <section>
-                {ownGroups.length > 0 && (
+                {ownGroups?.length > 0 && (
                     <div className="flex items-center gap-12 mb-8 justify-between">
                         <h2 className="font-bold text-2xl">My Groups</h2>
                         {totalGroupsCount && totalGroupsCount > 0 ? (
@@ -220,17 +220,17 @@ const Page = () => {
             </section>
 
             <section>
-                {combinedEvents.length > 0 && (
+                {combinedEvents?.length > 0 && (
                     <div className="flex items-center gap-12 mb-8 justify-between">
                         <h2 className="font-bold text-2xl">My Events</h2>
-                        {combinedEvents.length > 0 && (
+                        {combinedEvents?.length > 0 && (
                             <Link href={`/dashboard/${id}/events`}>View all</Link>
                         )}
                     </div>
                 )}
 
                 <div className="flex items-center justify-center md:justify-start gap-8 flex-wrap">
-                    {combinedEvents.length > 0 &&
+                    {combinedEvents?.length > 0 &&
                         combinedEvents?.map((event, index) => {
                             const singleEvent = event.node;
                             return (
