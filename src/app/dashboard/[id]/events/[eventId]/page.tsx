@@ -1,7 +1,7 @@
 "use client";
 import { MoveLeft } from "lucide-react";
 import LoadingSpinner from "@/components/ui/spinner";
-import { convertDateFormat } from "@/lib/utils";
+import { convertDateFormat, reformData } from "@/lib/utils";
 import { useGetEventById } from "@/services/queries/events";
 import { useParams, useRouter } from "next/navigation";
 
@@ -24,13 +24,31 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "@/services/axios";
 import { urls } from "@/services/urls";
 import { isAfter } from "date-fns";
+import TablePagination from "@/components/ui/table-pagination";
+import { useMemo, useState } from "react";
+import { useDebounce } from "use-debounce";
 
 const EventDetails = () => {
     const { eventId } = useParams();
-    const { data, isLoading } = useGetEventById(eventId as string);
-    const participantsData = data?.participants?.pageEdges;
-
+    const [filters, setFilters] = useState<any>({
+        size: 10,
+    });
+    const [debouncedTerm] = useDebounce(filters.term, 500);
+    const [count, setCount] = useState(0);
     const router = useRouter();
+
+    const { data, isLoading, isSuccess } = useGetEventById(eventId as string, {
+        ...(debouncedTerm && { term: debouncedTerm }),
+        ...(filters.size && { size: filters.size }),
+        ...(filters.cursor && { cursor: filters.cursor }),
+    });
+
+    const participantsData = data?.participants;
+
+    const memoizedData = useMemo(() => {
+        if (isSuccess) return reformData(data?.participants);
+        return [];
+    }, [data, isSuccess]);
 
     const { data: matchData, isLoading: isMatchDataLoading } = useQuery(
         ["getMatch", eventId],
@@ -127,7 +145,24 @@ const EventDetails = () => {
                     </Dialog>
                 </div>
                 <div className="flex flex-row w-full justify-between items-center gap-4">
-                    <Input type="text" placeholder="Search participants" /> <Button>Search</Button>
+                    <Input
+                        type="text"
+                        placeholder="Search participants"
+                        style={{
+                            padding: ".45rem",
+                            paddingLeft: "2rem",
+                        }}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            setCount(0);
+                            setFilters((prevState: any) => {
+                                const { cursor, ...otherPrevState } = prevState;
+                                return {
+                                    ...otherPrevState,
+                                    term: e.target.value,
+                                };
+                            });
+                        }}
+                    />
                 </div>
             </div>
 
@@ -140,20 +175,45 @@ const EventDetails = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {participantsData?.map((participant: ParticipantType) => {
-                        const { user } = participant.node;
+                    {memoizedData?.map((participant: any) => {
                         return (
-                            <TableRow key={user.id}>
+                            <TableRow key={participant.userid}>
                                 <TableCell>
-                                    {user?.firstName} {user?.lastName}
+                                    {participant?.user?.firstName} {participant?.user?.lastName}
                                 </TableCell>
-                                <TableCell>{user?.email}</TableCell>
-                                <TableCell>{user?.gender}</TableCell>
+                                <TableCell>{participant?.user?.email}</TableCell>
+                                <TableCell>{participant?.user?.gender}</TableCell>
                             </TableRow>
                         );
                     })}
                 </TableBody>
             </Table>
+
+            <TablePagination
+                totalCount={participantsData?.totalCount!}
+                nextLoad={participantsData?.pageCursors.next?.cursor}
+                previous={participantsData?.pageCursors.previous?.cursor}
+                count={count}
+                setCount={setCount}
+                filters={filters}
+                setFilters={setFilters}
+                handleNextLoad={() => {
+                    const next = participantsData?.pageCursors.next;
+                    if (!next) return;
+                    setFilters((prevState: any) => ({
+                        ...prevState,
+                        cursor: next.cursor,
+                    }));
+                }}
+                handlePreviousLoad={() => {
+                    const previous = participantsData?.pageCursors.previous;
+                    if (!previous) return;
+                    setFilters((prevState: any) => ({
+                        ...prevState,
+                        cursor: previous.cursor,
+                    }));
+                }}
+            />
         </main>
     );
 };
