@@ -15,6 +15,7 @@ import ViewMemberDetails from "./view-member-modal";
 import LoadingSpinner from "@/components/ui/spinner";
 import InviteMembers from "./invite-members-modal";
 import TablePagination from "../ui/table-pagination";
+import { Input } from "../ui/input";
 
 interface Props {
     groupId: string | string[];
@@ -62,11 +63,6 @@ const GroupTable = ({ groupId, filters, setFilters }: Props) => {
             cell: (row: any) => <div>{row.user?.email ?? "N/A"}</div>,
         },
         {
-            name: "Phone",
-            width: "18rem",
-            cell: (row: any) => <div>{row.user?.phone ?? "N/A"}</div>,
-        },
-        {
             name: "Date Joined",
             cell: (row: any) => {
                 return <div>{convertDateFormat(row?.createdAt)}</div>;
@@ -98,13 +94,11 @@ const GroupTable = ({ groupId, filters, setFilters }: Props) => {
             <h1 className="font-bold text-[1.4rem]">Members</h1>
             <div className="flex justify-between gap-10  my-10  flex-wrap">
                 <div style={{ position: "relative" }}>
-                    <input
-                        type="search"
+                    <Input
+                        type="text"
                         placeholder="Search"
                         style={{
-                            border: "2px solid #d9d9d9",
                             padding: ".45rem",
-                            borderRadius: ".5rem",
                             paddingLeft: "2rem",
                         }}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
