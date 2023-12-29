@@ -95,7 +95,7 @@ const Page = () => {
                                 );
                             })
                         ) : (
-                            <p>No Upcoming Events</p>
+                            <p>No Active Events</p>
                         )}
                     </div>
                 </div>
@@ -141,12 +141,14 @@ const Page = () => {
             </section>
 
             <section>
-                <div className="flex items-center gap-12 mb-8 justify-between">
-                    <h2 className="font-bold text-2xl">My Groups</h2>
-                    {totalGroupsCount && totalGroupsCount > 0 ? (
-                        <Link href={`/dashboard/${id}/groups`}>View all</Link>
-                    ) : null}
-                </div>
+                {ownGroups.length > 0 && (
+                    <div className="flex items-center gap-12 mb-8 justify-between">
+                        <h2 className="font-bold text-2xl">My Groups</h2>
+                        {totalGroupsCount && totalGroupsCount > 0 ? (
+                            <Link href={`/dashboard/${id}/groups`}>View all</Link>
+                        ) : null}
+                    </div>
+                )}
 
                 <div className="flex items-center justify-center md:justify-start gap-8 flex-wrap">
                     {ownGroups &&
@@ -218,12 +220,14 @@ const Page = () => {
             </section>
 
             <section>
-                <div className="flex items-center gap-12 mb-8 justify-between">
-                    <h2 className="font-bold text-2xl">My Events</h2>
-                    {combinedEvents.length > 0 && (
-                        <Link href={`/dashboard/${id}/events`}>View all</Link>
-                    )}
-                </div>
+                {combinedEvents.length > 0 && (
+                    <div className="flex items-center gap-12 mb-8 justify-between">
+                        <h2 className="font-bold text-2xl">My Events</h2>
+                        {combinedEvents.length > 0 && (
+                            <Link href={`/dashboard/${id}/events`}>View all</Link>
+                        )}
+                    </div>
+                )}
 
                 <div className="flex items-center justify-center md:justify-start gap-8 flex-wrap">
                     {combinedEvents.length > 0 &&

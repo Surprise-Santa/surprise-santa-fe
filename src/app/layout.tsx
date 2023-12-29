@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: "Surprise Santa",
     description: "A surpise santa app for your friends and colleagues",
     alternates: {
-        canonical: "https://secret-santa-supreme.vercel.app/",
+        canonical: "https://www.surprisesanta.org/",
         languages: {
             "en-US": "/en-US",
         },
