@@ -54,7 +54,7 @@ const AddParticipants = ({ eventData }: { eventData: any }) => {
     };
 
     return (
-        <DialogContent className="sm:max-w-[40rem] sm:max-h-[60rem] overflow-y-auto">
+        <DialogContent className="sm:max-w-[40rem] h-auto overflow-y-auto">
             <DialogHeader>
                 <DialogTitle>Add Participants</DialogTitle>
             </DialogHeader>
